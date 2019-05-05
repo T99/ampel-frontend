@@ -1,0 +1,295 @@
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:18 PM -- October 08th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+
+// Colors
+	
+	/*
+	 * Colors here, in the form:
+	 * $color: #FFFFFF;
+	 */
+
+	// Base Colors
+		
+		$plainWhite:					#FFFFFF;
+		$plainBlack:					#000000;
+		$ampelGreen:					#A1C06C;
+		$ampelDarkGrey:					#808080;
+
+	// Gradients
+
+		$ampelStandardGradient: linear-gradient(45deg, $ampelGreen, #6CC0AB);
+		$ampelHeaderGradient: linear-gradient(15deg, $ampelGreen, #7AC06C);
+		$ampelFooterGradient: linear-gradient(165deg, $ampelGreen, #7AC06C);
+
+	// Login Modal Colors
+
+		// Input Colors
+			
+			$inputBackgroundInactive:	#F0F0F080;
+			$inputBackgroundActive:		#F0F0F0;
+			$signinInactiveColor:		#AAAAAA;
+			$signinActiveColor:			#353535;
+
+	// Popup Modal Colors
+
+		$popupModalHeaderBackground: #EAEAEA;
+
+// Misc. Variables
+	
+	$textSizeStandard:		18px;
+	$textSizeHeader:		26px;
+	$textSizeSuperHeader:	24px;
+	
+// Mix-ins & Functions
+	
+	/*
+	 * Mix-ins here, in the form:
+	 * @mixin mixin-name(parameters) { ... }
+	 */
+
+	/*
+	 * Example: @include flex-container("down", "top", "left", "nowrap");
+	 *
+	 * 1st Arg:		-- Main Axis --
+	 * 	- "down":	Defines the main axis as vertical.
+	 *  - "across":	Defines the main axis as horizontal.
+	 *
+	 * 2nd Arg:		-- Vertical Centering --
+	 * 	- "top":	Aligns items in the flexbox to the upper edge.
+	 * 	- "center":	Vertically centers items in the flexbox.
+	 * 	- "bottom":	Aligns items in the flexbox to the lower edge.
+	 *
+	 * 3rd Arg:		-- Horizontal Centering --
+	 * 	- "left":	Aligns items in the flexbox to the left edge.
+	 * 	- "center":	Horizontally centers items in the flexbox.
+	 * 	- "right":	Aligns items in the flexbox to the right edge.
+	 *
+	 * 4th Arg:		-- Wrapping --
+	 * 	- "nowrap":	Does not wrap items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+	 * 	- "wrap":	Wraps items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+	 */
+	@mixin flex-container($direction, $verticalCentering, $horizontalCentering, $wrapping) {
+		
+		display: flex;
+		
+		@if($direction == "down") {
+			
+			flex-direction: column;
+			
+			@if($verticalCentering == "top") {
+				
+				justify-content: flex-start;
+				
+			} @else if($verticalCentering == "bottom") {
+				
+				justify-content: flex-end;
+				
+			} @else if ($verticalCentering == "center"){
+				
+				justify-content: center;
+				
+			} @else {
+				
+				@error "The 'flex-container' mix-in recieved an invalid parameter for '$verticalCentering', of '" + $verticalCentering + "', where it should have recieved 'top', 'bottom', or 'center'."
+				
+			}
+			
+			@if($horizontalCentering == "left") {
+				
+				align-items: flex-start;
+				
+			} @else if($horizontalCentering == "right") {
+				
+				align-items: flex-end;
+				
+			} @else if ($horizontalCentering == "center") {
+				
+				align-items: center;
+				
+			} @else {
+				
+				@error "The 'flex-container' mix-in recieved an invalid parameter for '$horizontalCentering', of '" + $horizontalCentering + "', where it should have recieved 'left', 'right', or 'center'."
+				
+			}
+			
+		} @else {
+			
+			flex-direction: row;
+			
+			@if($verticalCentering == "top") {
+				
+				align-items: flex-start;
+				
+			} @else if($verticalCentering == "bottom") {
+				
+				align-items: flex-end;
+				
+			} @else if ($verticalCentering == "center") {
+				
+				align-items: center;
+				
+			} @else {
+				
+				@error "The 'flex-container' mix-in recieved an invalid parameter for '$verticalCentering', of '" + $verticalCentering + "', where it should have recieved 'top', 'bottom', or 'center'."
+				
+			}
+			
+			@if($horizontalCentering == "left") {
+				
+				justify-content: flex-start;
+				
+			} @else if($horizontalCentering == "right") {
+				
+				justify-content: flex-end;
+				
+			} @else if ($horizontalCentering == "center") {
+				
+				justify-content: center;
+				
+			} @else {
+				
+				@error "The 'flex-container' mix-in recieved an invalid parameter for '$horizontalCentering', of '" + $horizontalCentering + "', where it should have recieved 'left', 'right', or 'center'."
+				
+			}
+			
+		}
+		
+		@if($wrapping == "wrap") {
+			
+			flex-wrap: wrap;
+			
+		} @else if ($wrapping == "nowrap") {
+			
+			flex-wrap: nowrap;
+			
+		} @else {
+			
+			@error "The 'flex-container' mix-in recieved an invalid parameter for '$wrapping', of '" + $wrapping + "', where it should have recieved 'wrap' or 'nowrap'."
+			
+		}
+		
+	}
+	
+	@mixin flex-scaling($grow, $shrink) {
+		
+		flex: {
+			
+			grow: $grow;
+			shrink: $shrink;
+			
+		}
+		
+	}
+
+	@mixin disable-selection() {
+		
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		-webkit-user-drag: none;
+		
+	}
+	
+	@mixin disable-selection-and-drag() {
+		
+		@include disable-selection;
+		pointer-events: none;
+		
+	}
+	
+	@mixin selection-colors($foreground, $background) {
+		
+		&::selection {
+			
+			// Coloring
+			color: $foreground;
+			background-color: $background;
+			
+		}
+		
+		&::-moz-selection {
+			
+			// Coloring
+			color: $foreground;
+			background-color: $background;
+			
+		}
+		
+	}
+	
+	@mixin force-gpu-rendering() {
+		
+		//-webkit-transform: translate3d(0, 0, 0);
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		
+	}
+
+	@function fractionalPercentage($numerator, $denominator) {
+	
+		@return ($numerator * (100% / $denominator));
+	
+	}
+	
+// Fonts
+	
+	/*
+	 * Google Font Imports (fonts.google.com)
+	 *	- Font names.
+	 */
+	@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900|Raleway:100,200,300,400,500,600,700,800,900'); // TODO - Remember to trim font weights.
+
+	@font-face {
+		font-family: "Avenir Next";
+		font-weight: normal;
+		font-style: normal;
+		
+		src:	url("../fonts/avenirnext/AvenirNext-Regular.svg") format("svg"),
+				url("../fonts/avenirnext/AvenirNext-Regular.ttf") format("ttf"),
+				url("../fonts/avenirnext/AvenirNext-Regular.woff") format("woff"),
+				url("../fonts/avenirnext/AvenirNext-Regular.woff2") format("woff2")
+		
+	}
+	
+	@font-face {
+		font-family: "Avenir Next";
+		font-weight: normal;
+		font-style: italic;
+		
+		src:	url("../fonts/avenirnext/AvenirNext-Italic.svg") format("svg"),
+				url("../fonts/avenirnext/AvenirNext-Italic.ttf") format("ttf"),
+				url("../fonts/avenirnext/AvenirNext-Italic.woff") format("woff"),
+				url("../fonts/avenirnext/AvenirNext-Italic.woff2") format("woff2")
+		
+	}
+	
+	@font-face {
+		font-family: "Avenir Next";
+		font-weight: bold;
+		font-style: normal;
+		
+		src:	url("../fonts/avenirnext/AvenirNext-Bold.svg") format("svg"),
+				url("../fonts/avenirnext/AvenirNext-Bold.ttf") format("ttf"),
+				url("../fonts/avenirnext/AvenirNext-Bold.woff") format("woff"),
+				url("../fonts/avenirnext/AvenirNext-Bold.woff2") format("woff2")
+		
+	}
+	
+	@font-face {
+		font-family: "Avenir Next";
+		font-weight: bold;
+		font-style: italic;
+		
+		src:	url("../fonts/avenirnext/AvenirNext-BoldItalic.svg") format("svg"),
+				url("../fonts/avenirnext/AvenirNext-BoldItalic.ttf") format("ttf"),
+				url("../fonts/avenirnext/AvenirNext-BoldItalic.woff") format("woff"),
+				url("../fonts/avenirnext/AvenirNext-BoldItalic.woff2") format("woff2")
+		
+	}

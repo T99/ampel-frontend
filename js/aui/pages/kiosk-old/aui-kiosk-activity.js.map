@@ -1,0 +1,1 @@
+{"version":3,"file":"aui-kiosk-activity.js","sourceRoot":"","sources":["../../../ts/aui/pages/kiosk-old/aui-kiosk-activity.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAGH,OAAO,eAAe,MAAM,yBAAyB,CAAC;AAGtD;;;;;;GAMG;AACH,MAAM,gBAAgB;IAIrB,YAAmB,MAAgB;QAElC,IAAI,CAAC,SAAS,GAAG,IAAI,eAAe,CAAC,MAAM,CAAC,CAAC;IAE9C,CAAC;IAEM,KAAK;IAIZ,CAAC;CAED;AAED,eAAe,gBAAgB,CAAC"}

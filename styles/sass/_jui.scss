@@ -1,0 +1,617 @@
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:58 PM -- December 12th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+
+html, body {
+	
+	overflow: hidden;
+	
+}
+
+.jui-element {
+
+
+
+}
+
+.jui-leaf {
+
+
+
+}
+
+.jui-content-leaf {
+
+
+
+}
+
+.jui-text-leaf {
+
+
+
+}
+
+.jui-control-leaf {
+
+
+
+}
+
+.jui-button-leaf {
+
+
+
+}
+
+.jui-container {
+
+
+
+}
+
+.jui-single-container {
+
+
+
+}
+
+.jui-alignment-container {
+	
+	// Display & Box Model
+	display: flex;
+	flex-direction: column;
+	
+	&.jui-alignment-upper-left {
+		
+		justify-content: flex-start;
+		align-items: flex-start;
+		
+	}
+	
+	&.jui-alignment-top {
+		
+		justify-content: flex-start;
+		align-items: center;
+		
+	}
+	
+	&.jui-alignment-upper-right {
+		
+		justify-content: flex-start;
+		align-items: flex-end;
+		
+	}
+	
+	&.jui-alignment-left {
+		
+		justify-content: center;
+		align-items: flex-start;
+		
+	}
+	
+	&.jui-alignment-center {
+		
+		justify-content: center;
+		align-items: center;
+		
+	}
+	
+	&.jui-alignment-right {
+		
+		justify-content: center;
+		align-items: flex-end;
+		
+	}
+	
+	&.jui-alignment-lower-left {
+		
+		justify-content: flex-end;
+		align-items: flex-start;
+		
+	}
+	
+	&.jui-alignment-bottom {
+		
+		justify-content: flex-end;
+		align-items: center;
+		
+	}
+	
+	&.jui-alignment-lower-right {
+		
+		justify-content: flex-end;
+		align-items: flex-end;
+		
+	}
+	
+}
+
+.jui-page {
+	
+	// Display & Box Model
+	height: 100%;	// I was, at one point, a 'vh' value.
+	width: 100%;	// I was, at one point, a 'vh' value.
+	flex-grow: 0;
+	flex-shrink: 0;
+	
+}
+
+.jui-overlay {
+	
+	// Positioning
+	position: fixed;
+	
+	// Misc.
+	pointer-events: none;
+	
+	&.jui-overlay-alignment-upper-left {
+		
+		// Positioning
+		top: 0px;
+		left: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-top {
+		
+		// Display & Box Model
+		width: 100vw;
+		
+		// Positioning
+		top: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-upper-right {
+		
+		top: 0px;
+		right: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-left {
+		
+		// Display & Box Model
+		height: 100vh;
+		
+		// Positioning
+		top: 0px;
+		left: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-center {
+		
+		// Display & Box Model
+		height: 100vh;
+		width: 100vw;
+		
+	}
+	
+	&.jui-overlay-alignment-right {
+		
+		// Display & Box Model
+		height: 100vh;
+		
+		// Positioning
+		top: 0px;
+		right: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-lower-left {
+		
+		// Positioning
+		bottom: 0px;
+		left: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-bottom {
+		
+		// Display & Box Model
+		width: 100vw;
+		
+		// Positioning
+		bottom: 0px;
+		
+	}
+	
+	&.jui-overlay-alignment-lower-right {
+		
+		// Positioning
+		bottom: 0px;
+		right: 0px;
+		
+	}
+	
+	* {
+		
+		pointer-events: auto;
+		
+	}
+	
+}
+
+.jui-scroll-container {
+	
+	&.scroll-x {
+		
+		// Display & Box Model
+		overflow-x: scroll;
+		
+	}
+	
+	&.scroll-y {
+		
+		overflow-y: scroll;
+		
+	}
+	
+}
+
+.jui-multi-container {
+
+
+
+}
+
+.jui-flow-container {
+	
+	display: flex;
+	
+	&.jui-flex-wrapping-rule-no-wrap {
+		
+		flex-wrap: nowrap;
+		
+	}
+	
+	&.jui-flex-wrapping-rule-wrap {
+		
+		flex-wrap: wrap;
+		
+	}
+	
+	&.jui-flex-wrapping-rule-wrap-reverse {
+		
+		flex-wrap: wrap-reverse;
+		
+	}
+	
+	&.jui-direction-to-top {
+		
+		flex-direction: column-reverse;
+		
+		&.jui-alignment-upper-left {
+			
+			justify-content: flex-end;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-top {
+			
+			justify-content: flex-end;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-upper-right {
+			
+			justify-content: flex-end;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-left {
+			
+			justify-content: center;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-center {
+			
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-right {
+			
+			justify-content: center;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-lower-left {
+			
+			justify-content: flex-start;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-bottom {
+			
+			justify-content: flex-start;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-lower-right {
+			
+			justify-content: flex-start;
+			align-items: flex-end;
+			
+		}
+		
+	}
+	
+	&.jui-direction-to-bottom {
+		
+		flex-direction: column;
+		
+		&.jui-alignment-upper-left {
+			
+			justify-content: flex-start;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-top {
+			
+			justify-content: flex-start;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-upper-right {
+			
+			justify-content: flex-start;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-left {
+			
+			justify-content: center;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-center {
+			
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-right {
+			
+			justify-content: center;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-lower-left {
+			
+			justify-content: flex-end;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-bottom {
+			
+			justify-content: flex-end;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-lower-right {
+			
+			justify-content: flex-end;
+			align-items: flex-end;
+			
+		}
+		
+	}
+	
+	&.jui-direction-to-right {
+		
+		flex-direction: row;
+		
+		&.jui-alignment-upper-left {
+			
+			justify-content: flex-start;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-top {
+			
+			justify-content: center;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-upper-right {
+			
+			justify-content: flex-end;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-left {
+			
+			justify-content: flex-start;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-center {
+			
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-right {
+			
+			justify-content: flex-end;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-lower-left {
+			
+			justify-content: flex-start;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-bottom {
+			
+			justify-content: center;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-lower-right {
+			
+			justify-content: flex-end;
+			align-items: flex-end;
+			
+		}
+		
+	}
+	
+	&.jui-direction-to-left {
+		
+		flex-direction: row-reverse;
+		
+		&.jui-alignment-upper-left {
+			
+			justify-content: flex-end;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-top {
+			
+			justify-content: center;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-upper-right {
+			
+			justify-content: flex-start;
+			align-items: flex-start;
+			
+		}
+		
+		&.jui-alignment-left {
+			
+			justify-content: flex-end;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-center {
+			
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-right {
+			
+			justify-content: flex-start;
+			align-items: center;
+			
+		}
+		
+		&.jui-alignment-lower-left {
+			
+			justify-content: flex-end;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-bottom {
+			
+			justify-content: center;
+			align-items: flex-end;
+			
+		}
+		
+		&.jui-alignment-lower-right {
+			
+			justify-content: flex-start;
+			align-items: flex-end;
+			
+		}
+		
+	}
+	
+}
+
+.jui-grid-container {
+
+	display: grid;
+	
+}
+
+.jui-stack-container {
+	
+	// Positioning
+	position: relative;
+	
+	& > .jui-alignment-container {
+	
+		// Display & Box Model
+		height: 100%;
+		width: 100%;
+		
+		// Positioning
+		position: absolute;
+	
+	}
+
+}
+
+.jui-world {
+	
+	// Display & Box Model
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	
+}
+
+.jui-horizontal-container {
+
+
+
+}
+
+.jui-vertical-container {
+
+
+
+}
+
+.jui-table-container {
+
+
+
+}
+
+.jui-list-container {
+
+
+
+}

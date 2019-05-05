@@ -1,0 +1,19 @@
+{
+	
+	"compilerOptions": {
+		
+		"target": "es6",
+		"sourceMap": true,
+		"noEmitOnError": true,
+		"outDir": "../"
+		//"strictNullChecks": true <-- Enable this eventually.
+		
+	},
+	
+	"exclude": [
+		
+		"node_modules"
+		
+	]
+	
+}

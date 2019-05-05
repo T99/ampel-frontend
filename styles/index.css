@@ -1,0 +1,744 @@
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:58 PM -- December 12th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:18 PM -- October 08th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	1:01 PM -- February 10th, 2019.
+ *	Website: dashboard.ampelfeedback.com
+ */
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900|Raleway:100,200,300,400,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900|Raleway:100,200,300,400,500,600,700,800,900");
+* {
+  margin: 0;
+  padding: 0; }
+
+button, input {
+  -webkit-appearance: none; }
+
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:18 PM -- October 08th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+/*
+ * Colors here, in the form:
+ * $color: #FFFFFF;
+ */
+/*
+ * Mix-ins here, in the form:
+ * @mixin mixin-name(parameters) { ... }
+ */
+/*
+ * Example: @include flex-container("down", "top", "left", "nowrap");
+ *
+ * 1st Arg:		-- Main Axis --
+ * 	- "down":	Defines the main axis as vertical.
+ *  - "across":	Defines the main axis as horizontal.
+ *
+ * 2nd Arg:		-- Vertical Centering --
+ * 	- "top":	Aligns items in the flexbox to the upper edge.
+ * 	- "center":	Vertically centers items in the flexbox.
+ * 	- "bottom":	Aligns items in the flexbox to the lower edge.
+ *
+ * 3rd Arg:		-- Horizontal Centering --
+ * 	- "left":	Aligns items in the flexbox to the left edge.
+ * 	- "center":	Horizontally centers items in the flexbox.
+ * 	- "right":	Aligns items in the flexbox to the right edge.
+ *
+ * 4th Arg:		-- Wrapping --
+ * 	- "nowrap":	Does not wrap items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+ * 	- "wrap":	Wraps items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+ */
+/*
+ * Google Font Imports (fonts.google.com)
+ *	- Font names.
+ */
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/avenirnext/AvenirNext-Regular.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Regular.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Regular.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Regular.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: normal;
+  font-style: italic;
+  src: url("../fonts/avenirnext/AvenirNext-Italic.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Italic.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Italic.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Italic.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: bold;
+  font-style: normal;
+  src: url("../fonts/avenirnext/AvenirNext-Bold.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Bold.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Bold.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Bold.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: bold;
+  font-style: italic;
+  src: url("../fonts/avenirnext/AvenirNext-BoldItalic.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-BoldItalic.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-BoldItalic.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-BoldItalic.woff2") format("woff2"); }
+html, body {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow: hidden; }
+
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:58 PM -- December 12th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+html, body {
+  overflow: hidden; }
+
+.jui-alignment-container {
+  display: flex;
+  flex-direction: column; }
+  .jui-alignment-container.jui-alignment-upper-left {
+    justify-content: flex-start;
+    align-items: flex-start; }
+  .jui-alignment-container.jui-alignment-top {
+    justify-content: flex-start;
+    align-items: center; }
+  .jui-alignment-container.jui-alignment-upper-right {
+    justify-content: flex-start;
+    align-items: flex-end; }
+  .jui-alignment-container.jui-alignment-left {
+    justify-content: center;
+    align-items: flex-start; }
+  .jui-alignment-container.jui-alignment-center {
+    justify-content: center;
+    align-items: center; }
+  .jui-alignment-container.jui-alignment-right {
+    justify-content: center;
+    align-items: flex-end; }
+  .jui-alignment-container.jui-alignment-lower-left {
+    justify-content: flex-end;
+    align-items: flex-start; }
+  .jui-alignment-container.jui-alignment-bottom {
+    justify-content: flex-end;
+    align-items: center; }
+  .jui-alignment-container.jui-alignment-lower-right {
+    justify-content: flex-end;
+    align-items: flex-end; }
+
+.jui-page {
+  height: 100%;
+  width: 100%;
+  flex-grow: 0;
+  flex-shrink: 0; }
+
+.jui-overlay {
+  position: fixed;
+  pointer-events: none; }
+  .jui-overlay.jui-overlay-alignment-upper-left {
+    top: 0px;
+    left: 0px; }
+  .jui-overlay.jui-overlay-alignment-top {
+    width: 100vw;
+    top: 0px; }
+  .jui-overlay.jui-overlay-alignment-upper-right {
+    top: 0px;
+    right: 0px; }
+  .jui-overlay.jui-overlay-alignment-left {
+    height: 100vh;
+    top: 0px;
+    left: 0px; }
+  .jui-overlay.jui-overlay-alignment-center {
+    height: 100vh;
+    width: 100vw; }
+  .jui-overlay.jui-overlay-alignment-right {
+    height: 100vh;
+    top: 0px;
+    right: 0px; }
+  .jui-overlay.jui-overlay-alignment-lower-left {
+    bottom: 0px;
+    left: 0px; }
+  .jui-overlay.jui-overlay-alignment-bottom {
+    width: 100vw;
+    bottom: 0px; }
+  .jui-overlay.jui-overlay-alignment-lower-right {
+    bottom: 0px;
+    right: 0px; }
+  .jui-overlay * {
+    pointer-events: auto; }
+
+.jui-scroll-container.scroll-x {
+  overflow-x: scroll; }
+.jui-scroll-container.scroll-y {
+  overflow-y: scroll; }
+
+.jui-flow-container {
+  display: flex; }
+  .jui-flow-container.jui-flex-wrapping-rule-no-wrap {
+    flex-wrap: nowrap; }
+  .jui-flow-container.jui-flex-wrapping-rule-wrap {
+    flex-wrap: wrap; }
+  .jui-flow-container.jui-flex-wrapping-rule-wrap-reverse {
+    flex-wrap: wrap-reverse; }
+  .jui-flow-container.jui-direction-to-top {
+    flex-direction: column-reverse; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-upper-left {
+      justify-content: flex-end;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-top {
+      justify-content: flex-end;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-upper-right {
+      justify-content: flex-end;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-left {
+      justify-content: center;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-center {
+      justify-content: center;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-right {
+      justify-content: center;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-lower-left {
+      justify-content: flex-start;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-bottom {
+      justify-content: flex-start;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-top.jui-alignment-lower-right {
+      justify-content: flex-start;
+      align-items: flex-end; }
+  .jui-flow-container.jui-direction-to-bottom {
+    flex-direction: column; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-upper-left {
+      justify-content: flex-start;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-top {
+      justify-content: flex-start;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-upper-right {
+      justify-content: flex-start;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-left {
+      justify-content: center;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-center {
+      justify-content: center;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-right {
+      justify-content: center;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-lower-left {
+      justify-content: flex-end;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-bottom {
+      justify-content: flex-end;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-bottom.jui-alignment-lower-right {
+      justify-content: flex-end;
+      align-items: flex-end; }
+  .jui-flow-container.jui-direction-to-right {
+    flex-direction: row; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-upper-left {
+      justify-content: flex-start;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-top {
+      justify-content: center;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-upper-right {
+      justify-content: flex-end;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-left {
+      justify-content: flex-start;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-center {
+      justify-content: center;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-right {
+      justify-content: flex-end;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-lower-left {
+      justify-content: flex-start;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-bottom {
+      justify-content: center;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-right.jui-alignment-lower-right {
+      justify-content: flex-end;
+      align-items: flex-end; }
+  .jui-flow-container.jui-direction-to-left {
+    flex-direction: row-reverse; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-upper-left {
+      justify-content: flex-end;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-top {
+      justify-content: center;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-upper-right {
+      justify-content: flex-start;
+      align-items: flex-start; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-left {
+      justify-content: flex-end;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-center {
+      justify-content: center;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-right {
+      justify-content: flex-start;
+      align-items: center; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-lower-left {
+      justify-content: flex-end;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-bottom {
+      justify-content: center;
+      align-items: flex-end; }
+    .jui-flow-container.jui-direction-to-left.jui-alignment-lower-right {
+      justify-content: flex-start;
+      align-items: flex-end; }
+
+.jui-grid-container {
+  display: grid; }
+
+.jui-stack-container {
+  position: relative; }
+  .jui-stack-container > .jui-alignment-container {
+    height: 100%;
+    width: 100%;
+    position: absolute; }
+
+.jui-world {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	1:46 PM -- December 14th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+/*
+ *	Created by Trevor Sears <trevorsears.main@gmail.com>.
+ *	4:18 PM -- October 08th, 2018.
+ *	Website: dashboard.ampelfeedback.com
+ */
+/*
+ * Colors here, in the form:
+ * $color: #FFFFFF;
+ */
+/*
+ * Mix-ins here, in the form:
+ * @mixin mixin-name(parameters) { ... }
+ */
+/*
+ * Example: @include flex-container("down", "top", "left", "nowrap");
+ *
+ * 1st Arg:		-- Main Axis --
+ * 	- "down":	Defines the main axis as vertical.
+ *  - "across":	Defines the main axis as horizontal.
+ *
+ * 2nd Arg:		-- Vertical Centering --
+ * 	- "top":	Aligns items in the flexbox to the upper edge.
+ * 	- "center":	Vertically centers items in the flexbox.
+ * 	- "bottom":	Aligns items in the flexbox to the lower edge.
+ *
+ * 3rd Arg:		-- Horizontal Centering --
+ * 	- "left":	Aligns items in the flexbox to the left edge.
+ * 	- "center":	Horizontally centers items in the flexbox.
+ * 	- "right":	Aligns items in the flexbox to the right edge.
+ *
+ * 4th Arg:		-- Wrapping --
+ * 	- "nowrap":	Does not wrap items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+ * 	- "wrap":	Wraps items to new columns (vertical flexbox) or new rows (horizontal flexbox).
+ */
+/*
+ * Google Font Imports (fonts.google.com)
+ *	- Font names.
+ */
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/avenirnext/AvenirNext-Regular.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Regular.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Regular.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Regular.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: normal;
+  font-style: italic;
+  src: url("../fonts/avenirnext/AvenirNext-Italic.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Italic.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Italic.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Italic.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: bold;
+  font-style: normal;
+  src: url("../fonts/avenirnext/AvenirNext-Bold.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-Bold.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-Bold.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-Bold.woff2") format("woff2"); }
+@font-face {
+  font-family: "Avenir Next";
+  font-weight: bold;
+  font-style: italic;
+  src: url("../fonts/avenirnext/AvenirNext-BoldItalic.svg") format("svg"), url("../fonts/avenirnext/AvenirNext-BoldItalic.ttf") format("ttf"), url("../fonts/avenirnext/AvenirNext-BoldItalic.woff") format("woff"), url("../fonts/avenirnext/AvenirNext-BoldItalic.woff2") format("woff2"); }
+input::-moz-focus-outer {
+  border: none; }
+
+.aui-splash-container {
+  width: 525px;
+  box-shadow: 0px 0px 10px 0px #000000;
+  border-radius: 2px;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  background: linear-gradient(45deg, #A1C06C, #6CC0AB); }
+  .aui-splash-container .jui-image-leaf {
+    width: 50%; }
+  .aui-splash-container .aui-text-label {
+    text-align: center; }
+    .aui-splash-container .aui-text-label::selection {
+      color: #83C090;
+      background-color: #FFFFFF; }
+    .aui-splash-container .aui-text-label::-moz-selection {
+      color: #83C090;
+      background-color: #FFFFFF; }
+  .aui-splash-container .aui-text-input-module {
+    width: 75%; }
+  .aui-splash-container .jui-scroll-container {
+    margin-bottom: 1.5vh; }
+  .aui-splash-container > .aui-button {
+    align-self: flex-end;
+    margin-right: 12.5%; }
+  .aui-splash-container > .aui-text-input-module:not(:last-child), .aui-splash-container > .aui-button:not(:last-child) {
+    margin-bottom: 1.5vh; }
+
+.aui-text-label {
+  color: #FFFFFF;
+  font-family: 'Work Sans', sans-serif; }
+
+.aui-kiosk-text-label {
+  color: #FFFFFF;
+  font-family: 'Avenir Next';
+  font-size: 3.5em;
+  text-align: center; }
+
+.aui-button {
+  height: 2.5em;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  outline: none;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  background: #F0F0F080;
+  transition: box-shadow 0.5s ease-out, transform 0.5s ease-out, border-color 0.5s ease-out;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  font-weight: 400; }
+  .aui-button:hover, .aui-button:focus {
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+    transform: scale(1.01);
+    border-color: rgba(0, 0, 0, 0.66); }
+  .aui-button::-moz-focus-inner {
+    border: none; }
+
+.aui-kiosk-button {
+  border: none;
+  border-radius: 8px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: #A0C064;
+  background: white;
+  font-family: 'Avenir Next', sans-serif;
+  font-size: 1.35em;
+  font-weight: bold; }
+
+.aui-question-element {
+  height: 100%;
+  width: 100%;
+  flex-shrink: 0; }
+
+.aui-free-response-question > .jui-flow-container {
+  height: 100%;
+  width: 50%;
+  border-radius: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: white; }
+  @media (orientation: portrait) {
+    .aui-free-response-question > .jui-flow-container {
+      width: 90%; } }
+  .aui-free-response-question > .jui-flow-container > .jui-flow-container {
+    width: 100%;
+    border: 1px solid #A1C06C;
+    border-radius: 5px; }
+    .aui-free-response-question > .jui-flow-container > .jui-flow-container .aui-text-label {
+      flex-grow: 1;
+      padding: 10px;
+      color: #A1C06C;
+      background: transparent;
+      text-align: center;
+      cursor: pointer; }
+      .aui-free-response-question > .jui-flow-container > .jui-flow-container .aui-text-label.selected {
+        color: white;
+        background: #A1C06C; }
+  .aui-free-response-question > .jui-flow-container .jui-text-area-leaf {
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    margin-top: 2.5vh;
+    background: transparent;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.25em;
+    resize: none; }
+  .aui-free-response-question > .jui-flow-container .jui-canvas-leaf {
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 2.5vh;
+    background: transparent; }
+
+.aui-multiple-choice-question .jui-scroll-container, .aui-sata-question .jui-scroll-container {
+  width: 100%; }
+  .aui-multiple-choice-question .jui-scroll-container .jui-flow-container, .aui-sata-question .jui-scroll-container .jui-flow-container {
+    width: 100%; }
+    .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box {
+      width: 50%;
+      border-radius: 5px;
+      justify-content: space-between;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      margin: 15px;
+      background: white;
+      cursor: pointer; }
+      @media (orientation: portrait) {
+        .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box {
+          width: 90%; } }
+      .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box::-moz-focus-inner, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box::-moz-focus-inner {
+        border: none; }
+      .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box .aui-text-label, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box .aui-text-label {
+        color: black;
+        font-size: 1.5em;
+        font-weight: 500; }
+      .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box .jui-single-selector-leaf, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box .jui-single-selector-leaf {
+        height: 20px;
+        width: 20px;
+        border: 2px solid #A1C06C;
+        border-radius: 4px;
+        pointer-events: none; }
+        .aui-multiple-choice-question .jui-scroll-container .jui-flow-container .aui-selectable-box .jui-single-selector-leaf:checked, .aui-sata-question .jui-scroll-container .jui-flow-container .aui-selectable-box .jui-single-selector-leaf:checked {
+          background: grey; }
+
+.aui-slider-question .jui-stack-container, .aui-nps-question .jui-stack-container {
+  height: 100%;
+  width: 100%; }
+  .aui-slider-question .jui-stack-container .jui-alignment-container, .aui-nps-question .jui-stack-container .jui-alignment-container {
+    height: 100%; }
+    .aui-slider-question .jui-stack-container .jui-alignment-container .jui-image-leaf, .aui-nps-question .jui-stack-container .jui-alignment-container .jui-image-leaf {
+      max-height: 100%; }
+    .aui-slider-question .jui-stack-container .jui-alignment-container .jui-slider-leaf, .aui-nps-question .jui-stack-container .jui-alignment-container .jui-slider-leaf {
+      width: 71vh;
+      transform: rotate(-90deg);
+      background: transparent; }
+      .aui-slider-question .jui-stack-container .jui-alignment-container .jui-slider-leaf::-moz-range-thumb, .aui-nps-question .jui-stack-container .jui-alignment-container .jui-slider-leaf::-moz-range-thumb {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background: url("/img/question-types/slider/knob-rasterized.png");
+        background-size: contain;
+        cursor: pointer; }
+      .aui-slider-question .jui-stack-container .jui-alignment-container .jui-slider-leaf::-webkit-slider-thumb, .aui-nps-question .jui-stack-container .jui-alignment-container .jui-slider-leaf::-webkit-slider-thumb {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background: url("/img/question-types/slider/knob-rasterized.png");
+        background-size: contain;
+        cursor: pointer;
+        -webkit-appearance: none; }
+
+.aui-stoplight-question .jui-svg-leaf {
+  height: 100%;
+  width: auto;
+  padding: 2%; }
+
+.aui-true-false-question .jui-flow-container {
+  height: 90%; }
+  .aui-true-false-question .jui-flow-container img {
+    height: 50%;
+    flex-shrink: 1; }
+
+.aui-text-input-module {
+  height: 2.5em;
+  width: 90%;
+  flex-direction: row-reverse;
+  border: 1px solid black;
+  border-radius: 2px;
+  background: #F0F0F080;
+  transition: box-shadow 0.5s ease-out, transform 0.5s ease-out, border-color 0.5s ease-out; }
+  .aui-text-input-module:hover, .aui-text-input-module:focus-within {
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+    transform: scale(1.01);
+    border-color: rgba(0, 0, 0, 0.66); }
+  .aui-text-input-module > .jui-svg-leaf {
+    height: 1.5em;
+    width: 5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color: #AAAAAA; }
+  .aui-text-input-module > .jui-text-field-leaf {
+    width: 90%;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 10px;
+    background: transparent;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    font-weight: 400; }
+    .aui-text-input-module > .jui-text-field-leaf::placeholder {
+      color: #AAAAAA;
+      font-style: italic; }
+
+.aui-contact-capture-input-module {
+  justify-content: flex-start; }
+  .aui-contact-capture-input-module .aui-text-label {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 2px;
+    font-size: 1.35em; }
+  .aui-contact-capture-input-module .jui-text-field-leaf {
+    border: none;
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 1.35em; }
+    .aui-contact-capture-input-module .jui-text-field-leaf::placeholder {
+      color: #AAAAAA;
+      font-style: italic; }
+
+.aui-structure-selector-module .jui-scroll-container {
+  width: 75%;
+  height: 25vh;
+  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.6); }
+  .aui-structure-selector-module .jui-scroll-container .jui-vertical-container .aui-text-label {
+    padding: 15px;
+    text-align: left;
+    cursor: pointer; }
+    .aui-structure-selector-module .jui-scroll-container .jui-vertical-container .aui-text-label:nth-of-type(2n) {
+      background: rgba(255, 255, 255, 0.2); }
+.aui-structure-selector-module .aui-structure-selector-button-container {
+  width: 75%;
+  justify-content: space-between !important;
+  margin-left: 12.5%;
+  margin-right: 12.5%; }
+
+.aui-activity-selector-module .aui-text-label {
+  margin-bottom: 40px;
+  font-size: 1.25em;
+  font-weight: 400; }
+.aui-activity-selector-module .activity-button {
+  width: 75%; }
+.aui-activity-selector-module .aui-activity-selector-button-container {
+  width: 75%;
+  justify-content: space-between !important;
+  margin-top: 40px;
+  margin-left: 12.5%;
+  margin-right: 12.5%; }
+
+.aui-splash-page {
+  background: linear-gradient(-45deg, #547EB4, #7194C1); }
+
+.aui-kiosk-page-old {
+  background: linear-gradient(-45deg, #A1C06C, #9FC05B); }
+  .aui-kiosk-page-old > .jui-flow-container {
+    height: 100%;
+    width: 100%;
+    justify-content: space-between !important; }
+    .aui-kiosk-page-old > .jui-flow-container > .jui-alignment-container {
+      height: 10%;
+      width: 85%; }
+    .aui-kiosk-page-old > .jui-flow-container .aui-kiosk-folder-element {
+      height: 80%;
+      width: 100%;
+      will-change: transform; }
+    .aui-kiosk-page-old > .jui-flow-container .kiosk-button-container {
+      height: 10%; }
+      .aui-kiosk-page-old > .jui-flow-container .kiosk-button-container .aui-kiosk-button {
+        height: 65%;
+        margin-left: 0.5em;
+        margin-right: 0.5em; }
+
+.aui-kiosk-page {
+  background: linear-gradient(-45deg, #A1C06C, #9FC05B); }
+  .aui-kiosk-page > .jui-flow-container {
+    height: 100%;
+    width: 100%;
+    align-items: stretch !important; }
+    .aui-kiosk-page > .jui-flow-container .inquiry-text-container {
+      height: 16.66667%; }
+      .aui-kiosk-page > .jui-flow-container .inquiry-text-container .aui-kiosk-text-label {
+        height: 100%; }
+    .aui-kiosk-page > .jui-flow-container .question-container {
+      height: 75%; }
+    .aui-kiosk-page > .jui-flow-container .button-container {
+      height: 8.33333%; }
+
+.aui-kiosk-thank-you-page {
+  background: linear-gradient(-45deg, #A1C06C, #9FC05B); }
+  .aui-kiosk-thank-you-page .jui-stack-container {
+    height: 100%;
+    width: 100%; }
+    .aui-kiosk-thank-you-page .jui-stack-container .aui-kiosk-text-label {
+      height: 80%;
+      width: 50%;
+      font-weight: bold;
+      font-size: 4.25em;
+      text-align: center; }
+    .aui-kiosk-thank-you-page .jui-stack-container .jui-image-leaf {
+      width: 30vw; }
+
+.aui-contact-capture-page {
+  background: linear-gradient(-45deg, #A1C06C, #9FC05B); }
+  .aui-contact-capture-page > .jui-flow-container {
+    width: 60%; }
+    .aui-contact-capture-page > .jui-flow-container > .aui-text-label {
+      width: 100%;
+      margin-bottom: 1.5em;
+      font-size: 2.6em;
+      text-align: center; }
+    .aui-contact-capture-page > .jui-flow-container .jui-grid-container {
+      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-gap: 20px; }
+      .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module {
+        align-items: stretch; }
+        .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-first-name {
+          grid-column-start: 1;
+          grid-column-end: 2; }
+        .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-last-name {
+          grid-column-start: 2;
+          grid-column-end: 3; }
+        .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-email {
+          grid-column-start: 1;
+          grid-column-end: 3; }
+        .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-phone {
+          grid-column-start: 1;
+          grid-column-end: 3; }
+        @media (orientation: portrait) {
+          .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-first-name {
+            grid-column-start: 1;
+            grid-column-end: 3; }
+          .aui-contact-capture-page > .jui-flow-container .jui-grid-container .aui-contact-capture-input-module.cc-last-name {
+            grid-column-start: 1;
+            grid-column-end: 3; } }
+
+.aui-notification .jui-flow-container {
+  max-width: 80%; }
+  .aui-notification .jui-flow-container .aui-text-label {
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 5px;
+    margin-bottom: 2vh;
+    color: #afafaf;
+    background: #323232;
+    text-align: center; }
+
+/*# sourceMappingURL=index.css.map */
