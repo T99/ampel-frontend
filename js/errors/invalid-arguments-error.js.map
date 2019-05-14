@@ -1,1 +1,0 @@
-{"version":3,"file":"invalid-arguments-error.js","sourceRoot":"","sources":["../ts/errors/invalid-arguments-error.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH;;;;;;GAMG;AACH,MAAM,qBAAsB,SAAQ,KAAK;IAExC;;;;OAIG;IACH,YAAmB,OAAgB;QAElC,KAAK,CAAC,OAAO,CAAC,CAAC;IAEhB,CAAC;CAED;AAED,eAAe,qBAAqB,CAAC"}

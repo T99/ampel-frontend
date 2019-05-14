@@ -1,1 +1,0 @@
-{"version":3,"file":"jui-unit-descriptor.js","sourceRoot":"","sources":["../../../ts/jui/descriptors/units/jui-unit-descriptor.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH;;;;;;GAMG;AACH,MAAe,iBAAiB;IAI/B,YAAsB,SAAiB;QAEtC,IAAI,CAAC,SAAS,GAAG,SAAS,CAAC;IAE5B,CAAC;IAEM,WAAW;QAEjB,OAAO,IAAI,CAAC,SAAS,CAAC;IAEvB,CAAC;CAED;AAED,eAAe,iBAAiB,CAAC"}

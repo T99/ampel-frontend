@@ -1,1 +1,0 @@
-{"version":3,"file":"malformed-pattern-error.js","sourceRoot":"","sources":["../ts/errors/malformed-pattern-error.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH;;;;;;GAMG;AACH,MAAM,qBAAsB,SAAQ,KAAK;IAExC;;OAEG;IACH,YAAmB,OAAe;QAEjC,KAAK,CAAC,OAAO,CAAC,CAAC;IAEhB,CAAC;CAED;AAED,eAAe,qBAAqB,CAAC"}
