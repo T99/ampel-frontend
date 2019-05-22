@@ -4,7 +4,6 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSStructure from "../../interfaces/ts-structure.js";
 import TSIQueue from "../../interfaces/queue/ts-i-queue.js";
 
 /**
@@ -39,6 +38,25 @@ class TSQueue<E = any> implements TSIQueue<E> {
 	public peek(): E {
 		
 		return this.internalArray[0];
+		
+	}
+	
+	public shuffle(iterations: number = 1): void {
+		
+		for (let count: number = 0; count < iterations; count++) {
+			
+			let elements: E[] = this.toArray();
+			this.clear();
+			
+			while (elements.length !== 0) {
+				
+				let random: number = Math.floor(Math.random() * elements.length);
+				let element: E = elements.removeIndex(random);
+				this.enqueue(element);
+				
+			}
+			
+		}
 		
 	}
 	

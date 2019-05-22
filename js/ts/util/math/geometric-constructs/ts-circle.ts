@@ -5,6 +5,7 @@
  */
 
 import TSPoint from "./ts-point.js";
+import TSLineSegment from "./ts-line-segment.js";
 
 /**
  *
@@ -29,6 +30,16 @@ class TSCircle {
 	public static createDirectly(x: number, y: number, radius: number): TSCircle {
 		
 		return new TSCircle(new TSPoint(x, y), radius);
+		
+	}
+	
+	public static createWithTwoPoints(point1: TSPoint, point2: TSPoint, radius: number): [ TSCircle, TSCircle ] {
+		
+		let resultTuple: [ TSCircle, TSCircle ] = [ undefined, undefined ];
+		
+		let connection: TSLineSegment = new TSLineSegment(point1, point2);
+		
+		return resultTuple;
 		
 	}
 	
@@ -77,6 +88,31 @@ class TSCircle {
 	public getArea(): number {
 		
 		return (Math.PI * Math.pow(this.getRadius(), 2));
+		
+	}
+	
+	public getPointAtAngle(radians: number): TSPoint {
+		
+		return (TSLineSegment.createWithSinglePoint(
+			this.getCenterPoint().getX(),
+			this.getCenterPoint().getY(),
+			this.getRadius(),
+			radians
+		)).getEndingPoint();
+		
+	}
+	
+	public getArcLength(radians: number): number {
+		
+		return (this.getCircumference() * (Math.abs(radians) / (2 * Math.PI)));
+		
+	}
+	
+	public containsPoint(point: TSPoint): boolean {
+		
+		let connection: TSLineSegment = new TSLineSegment(this.getCenterPoint(), point);
+		
+		return (connection.getLength() <= this.getRadius());
 		
 	}
 	

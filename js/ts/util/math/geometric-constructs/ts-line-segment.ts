@@ -92,6 +92,20 @@ class TSLineSegment {
 	
 	}
 	
+	public getMidpoint(): TSPoint {
+		
+		let sX: number = this.getStartingPoint().getX();
+		let sY: number = this.getStartingPoint().getY();
+		let eX: number = this.getEndingPoint().getX();
+		let eY: number = this.getEndingPoint().getY();
+		
+		return new TSPoint(
+			sX + ((eX - sX) / 2),
+			sY + ((eY - sY) / 2)
+		);
+		
+	}
+	
 	public toString(): string {
 		
 		return "[" + this.startingPoint.toString() + " --> " + this.endingPoint.toString() + "]";

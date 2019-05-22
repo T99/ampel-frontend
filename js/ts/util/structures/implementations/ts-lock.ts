@@ -4,8 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUINotifier from "../../jui/action/jui-notifier.js";
-import JUISubscription from "../../jui/action/jui-subscription.js";
+import JUINotifier from "../../../jui/action/jui-notifier.js";
+import JUISubscription from "../../../jui/action/jui-subscription.js";
 
 /**
  * An object-based lock.
