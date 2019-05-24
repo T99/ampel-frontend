@@ -8,6 +8,7 @@ import AlphanumericalGenerator from "../../../../../helpers/alphanumerical-gener
 import JUIEditableTextLeaf from "./jui-editable-text-leaf.js";
 import JUIInputMask from "../../../../input-masks/jui-input-mask.js";
 import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
+import JUIElement from "../../../jui-element.js";
 
 type Verification = {
 	
@@ -25,7 +26,7 @@ type Verification = {
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUITextFieldLeaf extends JUIEditableTextLeaf {
+class JUITextFieldLeaf extends JUIElement<HTMLInputElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -34,10 +35,6 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-text-field-leaf";
 	
-	private inputElement: HTMLInputElement;
-	
-	private inputMask: JUIInputMask;
-	
 	private verifiers: Map<string, Verification> = new Map();
 	
 	public constructor(isTextHidden: boolean = false) {
@@ -45,23 +42,20 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 		super(JUIControlLeafType.INPUT);
 		this.addClasses(this.TYPE_IDENTITY);
 		
-		this.inputElement = JUIControlLeafType.INPUT.create();
-		// this.getWrapper().addStackedChild(this.inputElement);
-		
 		this.setIsTextHidden(isTextHidden);
 		
 	}
 	
 	public getContent(): string {
 		
-		return this.inputElement.value;
+		return this.getHTMLElement().value;
 		
 	}
 	
 	public setContent(content: string): string {
 		
 		let displaced: string = this.getContent();
-		this.inputElement.value = content;
+		this.getHTMLElement().value = content;
 		return displaced;
 		
 	}
@@ -73,7 +67,7 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	 */
 	public setHint(hint: string): void {
 		
-		this.inputElement.placeholder = hint;
+		this.getHTMLElement().placeholder = hint;
 		
 	}
 	
@@ -85,14 +79,14 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	 */
 	public setIsTextHidden(isTextHidden: boolean): void {
 		
-		if (isTextHidden) this.inputElement.type = "password";
-		else this.inputElement.type = "text";
+		if (isTextHidden) this.getHTMLElement().type = "password";
+		else this.getHTMLElement().type = "text";
 		
 	}
 	
 	public isTextHidden(): boolean {
 		
-		return (this.inputElement.type === "password");
+		return (this.getHTMLElement().type === "password");
 		
 	}
 	
@@ -128,36 +122,36 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	
 	public setType(type: string): void {
 		
-		this.inputElement.type = type;
+		this.getHTMLElement().type = type;
 		
 	}
 	
-	public applyInputMask(mask: JUIInputMask): void {
-		
-		if (this.hasInputMask()) {
-			
-			throw new Error("ERR | Attempted to add a second input mask to an already masked input.");
-			
-		} else this.inputMask = mask.create(this);
-		
-	}
-	
-	public hasInputMask(): boolean {
-		
-		return (this.inputMask !== undefined);
-		
-	}
-	
-	public removeInputMask(): void {
-	
-		if (this.hasInputMask()) {
-			
-			this.inputMask.removeMask();
-			this.inputMask = undefined;
-			
-		}
-	
-	}
+	// public applyInputMask(mask: JUIInputMask): void {
+	//
+	// 	if (this.hasInputMask()) {
+	//
+	// 		throw new Error("ERR | Attempted to add a second input mask to an already masked input.");
+	//
+	// 	} else this.inputMask = mask.create(this);
+	//
+	// }
+	//
+	// public hasInputMask(): boolean {
+	//
+	// 	return (this.inputMask !== undefined);
+	//
+	// }
+	//
+	// public removeInputMask(): void {
+	//
+	// 	if (this.hasInputMask()) {
+	//
+	// 		this.inputMask.removeMask();
+	// 		this.inputMask = undefined;
+	//
+	// 	}
+	//
+	// }
 	
 }
 
