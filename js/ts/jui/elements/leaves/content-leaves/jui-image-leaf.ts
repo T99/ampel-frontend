@@ -4,18 +4,17 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContentLeaf from "../jui-content-leaf.js";
-import JUIContentLeafType from "../../../types/leaves/jui-content-leaf-type.js";
-import JUIImageLeafType from "../../../types/leaves/content-leaves/jui-image-leaf-type.js";
+import JUIElement from "../../jui-element.js";
+import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A {@link JUIElement} that displays an image.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUIImageLeaf extends JUIContentLeaf<HTMLImageElement> {
+class JUIImageLeaf extends JUIElement<HTMLImageElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -27,7 +26,7 @@ class JUIImageLeaf extends JUIContentLeaf<HTMLImageElement> {
 	// DOC-ME [12/14/18 @ 9:51 AM] - Documentation required!
 	public constructor(imageURI: string) {
 		
-		super(JUIImageLeafType.IMG.toString() as unknown as JUIContentLeafType);
+		super(JUIContentLeafType.IMG);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 		this.setSource(imageURI);
@@ -38,6 +37,12 @@ class JUIImageLeaf extends JUIContentLeaf<HTMLImageElement> {
 	public setSource(imageURI: string): void {
 		
 		this.getHTMLElement().src = imageURI;
+		
+	}
+	
+	public getSource(): string {
+		
+		return this.getHTMLElement().src;
 		
 	}
 	

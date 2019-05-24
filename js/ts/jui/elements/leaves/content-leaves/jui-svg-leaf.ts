@@ -5,23 +5,22 @@
  */
 
 import InvalidArgumentsError from "../../../../errors/invalid-arguments-error.js";
-import JUIContentLeaf from "../jui-content-leaf.js";
-import JUIContentLeafType from "../../../types/leaves/jui-content-leaf-type.js";
-import JUISVGLeafType from "../../../types/leaves/content-leaves/jui-svg-leaf-type.js";
 import JUISVGGeometry from "./svg-element-leaves/jui-svg-geometry.js";
 import JUIIdentityContainer from "../../../../helpers/jui-identity-container.js";
 import JUIIdentityMap from "../../../../helpers/jui-identity-map.js";
 import JUIMasterIdentityMap from "../../../../helpers/jui-master-identity-map.js";
+import JUIElement from "../../jui-element.js";
+import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A {@link JUIElement} that displays an SVG (scalable vector graphic).
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
  */
 class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<SVGGraphicsElement>>
-	extends JUIContentLeaf<SVGSVGElement> implements JUIIdentityContainer {
+	extends JUIElement<SVGSVGElement> implements JUIIdentityContainer {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -52,7 +51,7 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 	
 	public constructor(svgURI?: string) {
 		
-		super(JUISVGLeafType.SVG.toString() as unknown as JUIContentLeafType);
+		super(JUIContentLeafType.SVG);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 		// if (this.hasContainer()) this.childGeometry = this.getContainer().children.getChildMap(this);
@@ -120,13 +119,13 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 		// if (geometry.hasContainer(this)) return geometry.getID();
 		// else if (geometry.hasContainer()) throw new JUIContainerDichotomyError();
 		// else {
-		//	
+		//
 		// 	this.getHTMLElement().appendChild(geometry.getHTMLElement());
 		// 	geometry.setContainer(this);
 		// 	return this.children.add(geometry);
-		//	
+		//
 		// }
-			
+		
 	}
 	
 	/**

@@ -4,12 +4,10 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIVideoLeafType from "../../../types/leaves/content-leaves/jui-video-leaf-type.js";
-import JUIContentLeafType from "../../../types/leaves/jui-content-leaf-type.js";
-import JUIContentLeaf from "../jui-content-leaf.js";
+import JUIElement from "../../jui-element.js";
+import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
 
-// DOC-ME [12/14/18 @ 11:53 AM] - Documentation required!
-class JUIVideoLeaf extends JUIContentLeaf {
+class JUIVideoLeaf extends JUIElement<HTMLVideoElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -18,10 +16,9 @@ class JUIVideoLeaf extends JUIContentLeaf {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-video-leaf";
 	
-	// DOC-ME [12/14/18 @ 9:40 AM] - Documentation required!
-	public constructor(/* videoType: JUIVideoLeafType */) {
+	public constructor() {
 		
-		super(JUIVideoLeafType.VIDEO.toString() as unknown as JUIContentLeafType);
+		super(JUIContentLeafType.VIDEO);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 	}

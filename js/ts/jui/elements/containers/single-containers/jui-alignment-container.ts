@@ -5,13 +5,13 @@
  */
 
 import JUISingleContainer from "../jui-single-container.js";
-import JUIContainerType from "../../types/jui-container-type.js";
-import JUIAlignment from "../../descriptors/jui-alignment.js";
-import JUIContainerable from "../../jui-containerable.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
+import JUIAlignment from "../../../descriptors/jui-alignment.js";
+import JUIContainerable from "../../../jui-containerable.js";
 
 /**
  * A container that aligns a singular child within itself.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -28,7 +28,7 @@ class JUIAlignmentContainer<T extends JUIContainerable> extends JUISingleContain
 	private alignment: JUIAlignment;
 	
 	// DOC-ME [12/8/18 @ 3:44 PM] - Documentation required!
-	public constructor(alignment: JUIAlignment, containerType?: JUIContainerType) {
+	public constructor(alignment: JUIAlignment, containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		this.alignment = alignment;

@@ -4,9 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContentLeaf from "../jui-content-leaf.js";
-import JUIContentLeafType from "../../../types/leaves/jui-content-leaf-type.js";
-import JUITextLeafType from "../../../types/leaves/content-leaves/jui-text-leaf-type.js";
+import JUIElement from "../../jui-element.js";
+import JUITextLeafType from "../../../types/content-leaves/jui-text-leaf-type.js";
 
 /**
  * A {@link JUIElement} that displays text.
@@ -15,7 +14,7 @@ import JUITextLeafType from "../../../types/leaves/content-leaves/jui-text-leaf-
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUITextLeaf extends JUIContentLeaf<HTMLElement> {
+class JUITextLeaf extends JUIElement<HTMLElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -25,9 +24,9 @@ class JUITextLeaf extends JUIContentLeaf<HTMLElement> {
 	public readonly TYPE_IDENTITY: string = "jui-text-leaf";
 	
 	// DOC-ME [12/14/18 @ 9:52 AM] - Documentation required!
-	public constructor(content: string, textType?: JUITextLeafType) {
+	public constructor(content: string, textType: JUITextLeafType = JUITextLeafType.P) {
 		
-		super((textType ? textType : JUITextLeafType.P).toString() as unknown as JUIContentLeafType);
+		super(textType);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 		this.setText(content);

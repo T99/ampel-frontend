@@ -5,13 +5,12 @@
  */
 
 import JUIContainer from "./jui-container.js";
-import JUIContainerType from "../types/jui-container-type.js";
-import JUIContainerable from "../jui-containerable.js";
-import JUIElement from "./jui-element.js";
+import JUIContainerType from "../../types/jui-container-type.js";
+import JUIContainerable from "../../jui-containerable.js";
 
 /**
  * A {@link JUIContainer} that only holds a single element.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -32,10 +31,10 @@ abstract class JUISingleContainer<T extends JUIContainerable> extends JUIContain
 	
 	/**
 	 * Initializes a new JUISingleContainer, given a {@link JUIContainerType}.
-	 * 
+	 *
 	 * @param {JUIContainerType} containerType
 	 */
-	protected constructor(containerType?: JUIContainerType) {
+	protected constructor(containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		this.addClasses(this.TYPE_IDENTITY);
@@ -57,7 +56,7 @@ abstract class JUISingleContainer<T extends JUIContainerable> extends JUIContain
 	
 	/**
 	 * Removes and returns the child of this JUISingleContainer if it has one, otherwise this method returns null.
-	 * 
+	 *
 	 * @returns The JUIContainerable that was removed from this JUISingleContainer or null if no child was present.
 	 */
 	public removeChild(): T {
@@ -71,7 +70,7 @@ abstract class JUISingleContainer<T extends JUIContainerable> extends JUIContain
 	
 	/**
 	 * Returns the JUIContainerable child of this JUISingleContainer if it has one, otherwise this method returns null.
-	 * 
+	 *
 	 * @returns The JUIContainerable child of this JUISingleContainer or null if no child was present.
 	 */
 	public getChild(): T {

@@ -5,12 +5,12 @@
  */
 
 import JUISVGGeometry from "./jui-svg-geometry.js";
-import JUISVGGeometryType from "../../../../types/leaves/content-leaves/jui-svg-geometry-type.js";
 import JUIAlignment from "../../../../descriptors/jui-alignment.js";
+import JUISVGGeometryElementType from "../../../../types/content-leaves/jui-svg-geometry-element-type.js";
 
 /**
- * 
- * 
+ *
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -26,7 +26,7 @@ class JUISVGCircle extends JUISVGGeometry<SVGCircleElement> {
 	
 	public constructor(radius: number, xOrigin: number, yOrigin: number) {
 		
-		super(JUISVGGeometryType.CIRCLE);
+		super(JUISVGGeometryElementType.CIRCLE);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 		this.setRadius(radius);

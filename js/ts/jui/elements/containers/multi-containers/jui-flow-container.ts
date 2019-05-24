@@ -4,16 +4,16 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "../../types/jui-container-type.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIDirection from "../../descriptors/jui-direction.js";
-import JUIAlignment from "../../descriptors/jui-alignment.js";
-import JUIFlexWrappingRule from "../../descriptors/jui-flex-wrapping-rule.js";
-import JUIContainerable from "../../jui-containerable.js";
+import JUIDirection from "../../../descriptors/jui-direction.js";
+import JUIAlignment from "../../../descriptors/jui-alignment.js";
+import JUIFlexWrappingRule from "../../../descriptors/jui-flex-wrapping-rule.js";
+import JUIContainerable from "../../../jui-containerable.js";
 
 /**
  * A {@link JUIMultiContainer} in which content flows in accordance to a given direction, alignment, and wrapping style.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -37,7 +37,7 @@ class JUIFlowContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	
 	// DOC-ME [12/17/18 @ 1:06 AM] - Documentation required!
 	public constructor(direction: JUIDirection, alignment: JUIAlignment, wrappingRule?: JUIFlexWrappingRule,
-					   containerType?: JUIContainerType) {
+					   containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		
@@ -54,7 +54,7 @@ class JUIFlowContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	
 	/**
 	 * Returns the direction that content flows inside this JUIFlowContainer as a {@link JUIDirection}.
-	 * 
+	 *
 	 * @returns {JUIDirection} The direction that content flows inside this JUIFlowContainer.
 	 */
 	public getDirection(): JUIDirection {
@@ -65,7 +65,7 @@ class JUIFlowContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	
 	/**
 	 * Attempts to set the content direction of this JUIFlowContainer to a given {@link JUIDirection}.
-	 * 
+	 *
 	 * @param {JUIDirection} direction The direction to set for this JUIFlowContainer.
 	 * @returns {boolean} true if the given direction was possible (and therefore applied).
 	 */
@@ -83,7 +83,7 @@ class JUIFlowContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	
 	/**
 	 * Returns the alignment of the contents of this JUIFlowContainer as a {@link JUIAlignment}.
-	 * 
+	 *
 	 * @returns {JUIAlignment} The alignment of the contents of this JUIFlowContainer.
 	 */
 	public getAlignment(): JUIAlignment {
@@ -94,7 +94,7 @@ class JUIFlowContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	
 	/**
 	 * Attempts to set the content alignment of this JUIFlowContainer to a given {@link JUIAlignment}.
-	 * 
+	 *
 	 * @param {JUIAlignment} alignment The alignment to set for this JUIFlowContainer.
 	 * @returns {boolean} true if the given alignment was possible (and therefore applied).
 	 */

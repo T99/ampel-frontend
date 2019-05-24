@@ -4,11 +4,11 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIControlLeaf from "../../jui-control-leaf.js";
-import JUIControlLeafType from "../../../../types/leaves/jui-control-leaf-type.js";
+import JUIElement from "../../../jui-element.js";
+import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
 
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
-abstract class JUISelectorLeaf extends JUIControlLeaf {
+abstract class JUISelectorLeaf extends JUIElement {
 	
 	/**
 	 * A String that represents the identity of this type.

@@ -4,13 +4,13 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../jui-containerable.js";
+import JUIContainerable from "../../../jui-containerable.js";
 import JUISingleContainer from "../jui-single-container.js";
-import JUIContainerType from "../../types/jui-container-type.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
 
 /**
  * A container that scrolls over the content of a singular child.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -29,7 +29,7 @@ class JUIScrollContainer<T extends JUIContainerable> extends JUISingleContainer<
 	private scrollY: boolean = false;
 	
 	// DOC-ME [12/8/18 @ 3:44 PM] - Documentation required!
-	public constructor(scrollY?: boolean, scrollX?: boolean, containerType?: JUIContainerType) {
+	public constructor(scrollY?: boolean, scrollX?: boolean, containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		

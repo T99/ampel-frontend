@@ -4,9 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "../../types/jui-container-type.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIContainerable from "../../jui-containerable.js";
+import JUIContainerable from "../../../jui-containerable.js";
 
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
 class JUIHorizontalContainer<T extends JUIContainerable = JUIContainerable> extends JUIMultiContainer<T> {
@@ -15,7 +15,7 @@ class JUIHorizontalContainer<T extends JUIContainerable = JUIContainerable> exte
 	public readonly TYPE_IDENTITY: string = "jui-horizontal-container";
 	
 	// DOC-ME [12/8/18 @ 4:53 PM] - Documentation required!
-	public constructor(containerType?: JUIContainerType) {
+	public constructor(containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		this.addClasses(this.TYPE_IDENTITY);

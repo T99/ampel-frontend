@@ -5,7 +5,7 @@
  */
 
 import JUISelectorLeaf from "../jui-selector-leaf.js";
-import JUIControlLeafType from "../../../../../types/leaves/jui-control-leaf-type.js";
+import JUIControlLeafType from "../../../../../types/control-leaves/jui-control-leaf-type.js";
 
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
 class JUIDropdownSelectorLeaf extends JUISelectorLeaf {

@@ -4,12 +4,10 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIControlLeaf from "../jui-control-leaf.js";
-import JUIControlLeafType from "../../../types/leaves/jui-control-leaf-type.js";
-import JUITextFieldLeafType from "../../../types/leaves/control-leaves/jui-text-field-leaf-type.js";
-import AlphanumericalGenerator from "../../../../helpers/alphanumerical-generator.js";
-import JUIControlComponent from "../../../control/jui-control-component.js";
-import JUIKeyboardEvent from "../../../action/events/jui-keyboard-event.js";
+import AlphanumericalGenerator from "../../../../../helpers/alphanumerical-generator.js";
+import JUIEditableTextLeaf from "./jui-editable-text-leaf.js";
+import JUIInputMask from "../../../../input-masks/jui-input-mask.js";
+import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
 
 type Verification = {
 	
@@ -20,8 +18,14 @@ type Verification = {
 	
 };
 
-// DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
-class JUITextFieldLeaf extends JUIControlLeaf<HTMLInputElement> implements JUIControlComponent {
+/**
+ * DOC-ME [5/19/19 @ 12:36 AM] - Documentation required!
+ *
+ * @author Trevor Sears <trevorsears.main@gmail.com>
+ * @version v0.1.0
+ * @since v0.1.0
+ */
+class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -30,30 +34,34 @@ class JUITextFieldLeaf extends JUIControlLeaf<HTMLInputElement> implements JUICo
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-text-field-leaf";
 	
-	private isTextHidden: boolean = false;
+	private inputElement: HTMLInputElement;
+	
+	private inputMask: JUIInputMask;
 	
 	private verifiers: Map<string, Verification> = new Map();
 	
-	// DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
-	public constructor(isTextHidden?: boolean) {
+	public constructor(isTextHidden: boolean = false) {
 		
-		super(JUITextFieldLeafType.INPUT.toString() as unknown as JUIControlLeafType);
+		super(JUIControlLeafType.INPUT);
 		this.addClasses(this.TYPE_IDENTITY);
 		
-		if (isTextHidden) this.setIsTextHidden(isTextHidden);
+		this.inputElement = JUIControlLeafType.INPUT.create();
+		// this.getWrapper().addStackedChild(this.inputElement);
+		
+		this.setIsTextHidden(isTextHidden);
 		
 	}
 	
 	public getContent(): string {
 		
-		return this.element.value;
+		return this.inputElement.value;
 		
 	}
 	
 	public setContent(content: string): string {
 		
 		let displaced: string = this.getContent();
-		this.element.value = content;
+		this.inputElement.value = content;
 		return displaced;
 		
 	}
@@ -65,7 +73,7 @@ class JUITextFieldLeaf extends JUIControlLeaf<HTMLInputElement> implements JUICo
 	 */
 	public setHint(hint: string): void {
 		
-		this.getHTMLElement().placeholder = hint;
+		this.inputElement.placeholder = hint;
 		
 	}
 	
@@ -77,19 +85,14 @@ class JUITextFieldLeaf extends JUIControlLeaf<HTMLInputElement> implements JUICo
 	 */
 	public setIsTextHidden(isTextHidden: boolean): void {
 		
-		if (this.isTextHidden !== isTextHidden) {
-			
-			this.isTextHidden = isTextHidden;
-			if (this.isTextHidden) this.getHTMLElement().type = "password";
-			else this.getHTMLElement().type = "text";
-			
-		}
+		if (isTextHidden) this.inputElement.type = "password";
+		else this.inputElement.type = "text";
 		
 	}
 	
-	public getIsTextHidden(): boolean {
+	public isTextHidden(): boolean {
 		
-		return this.isTextHidden;
+		return (this.inputElement.type === "password");
 		
 	}
 	
@@ -123,16 +126,37 @@ class JUITextFieldLeaf extends JUIControlLeaf<HTMLInputElement> implements JUICo
 		
 	}
 	
-	public getComponentValue(): any {
+	public setType(type: string): void {
 		
-		return this.getContent();
+		this.inputElement.type = type;
 		
 	}
 	
-	public validateComponent(): boolean {
+	public applyInputMask(mask: JUIInputMask): void {
 		
-		return this.checkValidity();
+		if (this.hasInputMask()) {
+			
+			throw new Error("ERR | Attempted to add a second input mask to an already masked input.");
+			
+		} else this.inputMask = mask.create(this);
 		
+	}
+	
+	public hasInputMask(): boolean {
+		
+		return (this.inputMask !== undefined);
+		
+	}
+	
+	public removeInputMask(): void {
+	
+		if (this.hasInputMask()) {
+			
+			this.inputMask.removeMask();
+			this.inputMask = undefined;
+			
+		}
+	
 	}
 	
 }

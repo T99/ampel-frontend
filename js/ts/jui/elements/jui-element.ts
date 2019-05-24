@@ -5,12 +5,12 @@
  */
 
 import JUIElementType from "../types/jui-element-type.js";
-import JUIContainer from "./jui-container.js";
+import JUIContainer from "./containers/jui-container.js";
 import JUIContainerable from "../jui-containerable.js";
 import JUIStyleCollection from "../styles/jui-style-collection.js";
 import JUIElementEventManager from "../action/managers/jui-element-event-manager.js";
-import TSLockingQueue from "../../structures/implementations/queue/ts-locking-queue.js";
-import TSLock from "../../structures/implementations/ts-lock.js";
+import TSLockingQueue from "../../util/structures/implementations/queue/ts-locking-queue.js";
+import TSLock from "../../util/structures/implementations/ts-lock.js";
 
 /**
  * The most basic form of an element, JUIElement serves as the base-most abstract implementation of an item that can
@@ -48,30 +48,9 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	// DOC-ME [12/8/18 @ 4:35 PM] - Documentation required!
 	protected constructor(elementType: JUIElementType) {
 		
-		switch (elementType) {
-			
-			case JUIElementType.SVG:
-			case JUIElementType.CIRCLE:
-			case JUIElementType.LINE:
-			case JUIElementType.PATH:
-			case JUIElementType.POLYGON:
-			case JUIElementType.RECT:
-			case JUIElementType.TEXT:
-			case JUIElementType.TEXTPATH: {
-				
-				this.element = document.createElementNS("http://www.w3.org/2000/svg", elementType.toString()) as unknown as E;
-				break;
-				
-			}
-			
-			default: {
-				
-				this.element = document.createElement(elementType.toString()) as unknown as E;
-				break;
-				
-			}
-			
-		}
+		if (elementType === undefined) console.trace("elementType was undefined");
+		
+		this.element = elementType.create() as unknown as E;
 		
 		this.eventManager = new JUIElementEventManager(this);
 		

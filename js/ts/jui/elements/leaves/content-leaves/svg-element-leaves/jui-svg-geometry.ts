@@ -4,20 +4,19 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContentLeaf from "../../jui-content-leaf.js";
-import JUISVGGeometryType from "../../../../types/leaves/content-leaves/jui-svg-geometry-type.js";
-import JUIContentLeafType from "../../../../types/leaves/jui-content-leaf-type.js";
 import JUIAlignment from "../../../../descriptors/jui-alignment.js";
 import JUIColor from "../../../../descriptors/colors/jui-color.js";
+import JUIElement from "../../../jui-element.js";
+import JUISVGGeometryElementType from "../../../../types/content-leaves/jui-svg-geometry-element-type.js";
 
 /**
- * 
- * 
+ *
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
  */
-abstract class JUISVGGeometry<E extends SVGGraphicsElement> extends JUIContentLeaf<E> {
+abstract class JUISVGGeometry<E extends SVGGraphicsElement> extends JUIElement<E> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -35,9 +34,9 @@ abstract class JUISVGGeometry<E extends SVGGraphicsElement> extends JUIContentLe
 	
 	protected fillOpacity: number;
 	
-	protected constructor(geometryType: JUISVGGeometryType) {
+	protected constructor(geometryType: JUISVGGeometryElementType) {
 		
-		super(geometryType.toString() as unknown as JUIContentLeafType);
+		super(geometryType);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 	}
@@ -55,7 +54,7 @@ abstract class JUISVGGeometry<E extends SVGGraphicsElement> extends JUIContentLe
 	
 	public setStrokeColor(strokeColor: JUIColor): void {
 		
-		/* 
+		/*
 		 * TODO [1/23/19 @ 4:52 PM]
 		 * 	These properties should be bindable and talk with a JUI CSS system rather than directly with the stylesheet.
 		 */

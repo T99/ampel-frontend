@@ -5,9 +5,9 @@
  */
 
 import JUIContainer from "./jui-container.js";
-import JUIContainerType from "../types/jui-container-type.js";
-import JUIElement from "./jui-element.js";
-import JUIContainerable from "../jui-containerable.js";
+import JUIContainerType from "../../types/jui-container-type.js";
+import JUIElement from "../jui-element.js";
+import JUIContainerable from "../../jui-containerable.js";
 
 /**
  * A {@link JUIContainer} that can hold multiple {@link JUIElement}s.
@@ -31,7 +31,7 @@ abstract class JUIMultiContainer<T extends JUIContainerable> extends JUIContaine
 	 *
 	 * @param {JUIContainerType} containerType
 	 */
-	protected constructor(containerType?: JUIContainerType) {
+	protected constructor(containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		this.addClasses(this.TYPE_IDENTITY);

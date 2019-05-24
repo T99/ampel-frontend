@@ -49,8 +49,6 @@ class JUIDrawingCanvasLeaf extends JUICanvasLeaf {
 				
 			} else if (this.brushDown) {
 				
-				console.log("Drawing in '" + this.context.strokeStyle + "'.");
-				
 				this.context.beginPath();
 				this.context.moveTo(this.previousX, this.previousY);
 				
@@ -69,13 +67,9 @@ class JUIDrawingCanvasLeaf extends JUICanvasLeaf {
 	
 	public setStrokeColor(strokeColor: JUIColor): JUIColor {
 		
-		console.log("Setting stroke color: " + strokeColor.getCSSString());
-		
 		let displaced: JUIColor = this.getStrokeColor();
 		this.strokeColor = strokeColor;
 		this.context.strokeStyle = this.strokeColor.getCSSString();
-		
-		console.log("this.context.strokeStyle -> " + this.context.strokeStyle);
 		
 		return displaced;
 		

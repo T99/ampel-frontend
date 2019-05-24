@@ -4,10 +4,10 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../jui-containerable.js";
+import JUIContainerable from "../../../jui-containerable.js";
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIContainerType from "../../types/jui-container-type.js";
-import JUIAlignment from "../../descriptors/jui-alignment.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
+import JUIAlignment from "../../../descriptors/jui-alignment.js";
 import JUIAlignmentContainer from "../single-containers/jui-alignment-container.js";
 
 /**
@@ -29,7 +29,7 @@ class JUIStackContainer<T extends JUIContainerable = JUIContainerable> extends J
 	private alignment: JUIAlignment;
 	
 	// DOC-ME [12/8/18 @ 3:44 PM] - Documentation required!
-	public constructor(alignment: JUIAlignment, containerType?: JUIContainerType) {
+	public constructor(alignment: JUIAlignment, containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		super(containerType);
 		this.alignment = alignment;

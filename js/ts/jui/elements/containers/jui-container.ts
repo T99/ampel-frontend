@@ -4,14 +4,14 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "../types/jui-container-type.js";
-import JUIElementType from "../types/jui-element-type.js";
-import JUIIdentityContainer from "../../helpers/jui-identity-container.js";
-import JUIIdentityMap from "../../helpers/jui-identity-map.js";
-import JUIElement from "./jui-element.js";
-import JUIMasterIdentityMap from "../../helpers/jui-master-identity-map.js";
-import JUIContainerDichotomyError from "../errors/jui-container-dichotomy-error.js";
-import JUIContainerable from "../jui-containerable.js";
+import JUIContainerType from "../../types/jui-container-type.js";
+import JUIElementType from "../../types/jui-element-type.js";
+import JUIIdentityContainer from "../../../helpers/jui-identity-container.js";
+import JUIIdentityMap from "../../../helpers/jui-identity-map.js";
+import JUIElement from "../jui-element.js";
+import JUIMasterIdentityMap from "../../../helpers/jui-master-identity-map.js";
+import JUIContainerDichotomyError from "../../errors/jui-container-dichotomy-error.js";
+import JUIContainerable from "../../jui-containerable.js";
 
 /**
  * Defines the most basic form of a container for {@link JUIElement}s. Provides protected methods for operating on the
@@ -51,9 +51,9 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 	 *
 	 * @param {JUIContainerType} containerType The JUIContainerType of this JUIContainer.
 	 */
-	protected constructor(containerType?: JUIContainerType) {
+	protected constructor(containerType: JUIContainerType = JUIContainerType.DIV) {
 		
-		super((containerType ? containerType : JUIContainerType.DIV).toString() as unknown as JUIElementType);
+		super(containerType);
 		this.addClasses(this.TYPE_IDENTITY);
 
 		if (this.hasContainer()) this.children = this.getContainer().children.getChildMap(this);
@@ -69,6 +69,24 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 	 * @returns {string} The ID of the newly created T.
 	 */
 	protected adoptChild(element: T, beforeElement?: T): string {
+		
+		if (element.hasContainer === undefined) {
+			
+			try {
+				
+				element.hasContainer(this);
+				
+			} catch (e) {
+				
+				let error: Error = e as Error;
+				
+				console.log(error);
+				
+				console.log(element);
+				
+			}
+			
+		}
 		
 		if (element.hasContainer(this)) return element.getID();
 		else if (element.hasContainer()) throw new JUIContainerDichotomyError();

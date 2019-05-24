@@ -4,9 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIControlLeaf from "../jui-control-leaf.js";
-import JUITextFieldLeafType from "../../../types/leaves/control-leaves/jui-text-field-leaf-type.js";
-import JUIControlLeafType from "../../../types/leaves/jui-control-leaf-type.js";
+import JUIElement from "../../../jui-element.js";
+import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
 
 /**
  *
@@ -15,7 +14,7 @@ import JUIControlLeafType from "../../../types/leaves/jui-control-leaf-type.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUITextAreaLeaf extends JUIControlLeaf<HTMLTextAreaElement> {
+class JUITextAreaLeaf extends JUIElement<HTMLTextAreaElement> {
 	
 	/**
 	 * A String that represents the identity of this type.

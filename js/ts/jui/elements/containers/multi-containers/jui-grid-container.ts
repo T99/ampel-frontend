@@ -4,9 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../jui-containerable.js";
+import JUIContainerable from "../../../jui-containerable.js";
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIContainerType from "../../types/jui-container-type.js";
+import JUIContainerType from "../../../types/jui-container-type.js";
 
 /**
  *
@@ -24,7 +24,7 @@ class JUIGridContainer<T extends JUIContainerable = JUIContainerable> extends JU
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-grid-container";
 	
-	public constructor(containerType?: JUIContainerType) {
+	public constructor(containerType: JUIContainerType = JUIContainerType.DIV) {
 	
 		super(containerType);
 		

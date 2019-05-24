@@ -4,18 +4,17 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContentLeaf from "../jui-content-leaf.js";
-import JUIContentLeafType from "../../../types/leaves/jui-content-leaf-type.js";
-import JUIAudioLeafType from "../../../types/leaves/content-leaves/jui-audio-leaf-type.js";
+import JUIElement from "../../jui-element.js";
+import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A {@link JUIElement} that plays audio in some capacity.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUIAudioLeaf extends JUIContentLeaf {
+class JUIAudioLeaf extends JUIElement<HTMLAudioElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -25,9 +24,9 @@ class JUIAudioLeaf extends JUIContentLeaf {
 	public readonly TYPE_IDENTITY: string = "jui-audio-leaf";
 	
 	// DOC-ME [12/14/18 @ 9:40 AM] - Documentation required!
-	public constructor(/* audioType: JUIAudioLeafType */) {
+	public constructor() {
 		
-		super(JUIAudioLeafType.AUDIO.toString() as unknown as JUIContentLeafType);
+		super(JUIContentLeafType.AUDIO);
 		this.addClasses(this.TYPE_IDENTITY);
 		
 	}
