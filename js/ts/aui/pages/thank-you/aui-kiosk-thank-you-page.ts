@@ -6,12 +6,11 @@
 
 import JUIPage from "../../../jui/jui-page.js";
 import JUIAlignment from "../../../jui/descriptors/jui-alignment.js";
-import JUIStackContainer from "../../../jui/elements/multi-containers/jui-stack-container.js";
+import JUIStackContainer from "../../../jui/elements/containers/multi-containers/jui-stack-container.js";
 import JUIImageLeaf from "../../../jui/elements/leaves/content-leaves/jui-image-leaf.js";
 import AUIKioskTextLabel from "../kiosk-old/aui-kiosk-text-label.js";
+import TSAwaitUtils from "../../../util/structures/implementations/ts-await-utils.js";
 import JUIWorld from "../../../jui/jui-world.js";
-import AFFolder from "../../../af-structures/structures/af-folder.js";
-import AUIKioskPageOld from "../kiosk-old/aui-kiosk-page-old.js";
 
 /**
  *
@@ -29,11 +28,11 @@ class AUIKioskThankYouPage extends JUIPage {
 	 */
 	public readonly TYPE_IDENTITY: string = "aui-kiosk-thank-you-page";
 	
-	private static readonly TIMEOUT: number = 5000;
+	private static readonly DEFAULT_TIMEOUT: number = 5000;
 	
 	private stackContainer: JUIStackContainer;
 	
-	public constructor(nextFolder: AFFolder) {
+	private constructor() {
 	
 		super();
 		this.addClasses(this.TYPE_IDENTITY);
@@ -44,13 +43,17 @@ class AUIKioskThankYouPage extends JUIPage {
 		this.stackContainer.addStackedChild(new AUIKioskTextLabel("Thanks for helping!"));
 		
 		this.setChild(this.stackContainer);
-		
-		setTimeout(() => {
-
-			JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(nextFolder));
-
-		}, AUIKioskThankYouPage.TIMEOUT);
 	
+	}
+	
+	public static async sayThankYou(wait: number = AUIKioskThankYouPage.DEFAULT_TIMEOUT): Promise<void> {
+		
+		let thankYouPage: AUIKioskThankYouPage = new AUIKioskThankYouPage();
+		
+		await JUIWorld.getInstance().goToPageRight(thankYouPage);
+		
+		await TSAwaitUtils.ms(wait);
+		
 	}
 	
 }
