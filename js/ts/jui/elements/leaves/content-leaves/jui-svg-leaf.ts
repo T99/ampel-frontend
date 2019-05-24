@@ -10,7 +10,7 @@ import JUIIdentityContainer from "../../../../helpers/jui-identity-container.js"
 import JUIIdentityMap from "../../../../helpers/jui-identity-map.js";
 import JUIMasterIdentityMap from "../../../../helpers/jui-master-identity-map.js";
 import JUIElement from "../../jui-element.js";
-import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
+import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A {@link JUIElement} that displays an SVG (scalable vector graphic).

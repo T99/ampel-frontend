@@ -5,7 +5,7 @@
  */
 
 import JUIElement from "../../jui-element.js";
-import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
+import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A {@link JUIElement} that plays audio in some capacity.

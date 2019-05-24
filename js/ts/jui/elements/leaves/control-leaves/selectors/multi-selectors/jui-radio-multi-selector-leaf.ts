@@ -6,7 +6,7 @@
 
 // DOC-ME [12/8/18 @ 4:51 PM] - Documentation required!
 import JUISelectorLeaf from "../jui-selector-leaf.js";
-import JUIControlLeafType from "../../../../../types/control-leaves/jui-control-leaf-type.js";
+import JUIControlLeafType from "../../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 class JUIRadioMultiSelectorLeaf extends JUISelectorLeaf {
 	

@@ -6,7 +6,7 @@
 
 import JUISVGGeometry from "./jui-svg-geometry.js";
 import JUIAlignment from "../../../../descriptors/jui-alignment.js";
-import JUISVGGeometryElementType from "../../../../types/content-leaves/jui-svg-geometry-element-type.js";
+import JUISVGGeometryElementType from "../../../../types/element-types/content-leaves/jui-svg-geometry-element-type.js";
 
 /**
  *

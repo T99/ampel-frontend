@@ -5,7 +5,7 @@
  */
 
 import JUIElement from "../../jui-element.js";
-import JUITextLeafType from "../../../types/content-leaves/jui-text-leaf-type.js";
+import JUITextLeafType from "../../../types/element-types/content-leaves/jui-text-leaf-type.js";
 
 /**
  * A {@link JUIElement} that displays text.

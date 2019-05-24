@@ -4,8 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "../../types/jui-container-type.js";
-import JUIElementType from "../../types/jui-element-type.js";
+import JUIContainerType from "../../types/element-types/jui-container-type.js";
+import JUIElementType from "../../types/element-types/jui-element-type.js";
 import JUIIdentityContainer from "../../../helpers/jui-identity-container.js";
 import JUIIdentityMap from "../../../helpers/jui-identity-map.js";
 import JUIElement from "../jui-element.js";

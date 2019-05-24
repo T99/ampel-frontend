@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElementType from "../types/jui-element-type.js";
+import JUIElementType from "../types/element-types/jui-element-type.js";
 import JUIContainer from "./containers/jui-container.js";
 import JUIContainerable from "../jui-containerable.js";
 import JUIStyleCollection from "../styles/jui-style-collection.js";

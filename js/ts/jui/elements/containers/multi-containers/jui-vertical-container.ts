@@ -5,7 +5,7 @@
  */
 
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIContainerType from "../../../types/jui-container-type.js";
+import JUIContainerType from "../../../types/element-types/jui-container-type.js";
 import JUIContainerable from "../../../jui-containerable.js";
 
 // DOC-ME [12/8/18 @ 4:53 PM] - Documentation required!

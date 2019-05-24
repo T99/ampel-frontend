@@ -7,7 +7,7 @@
 import JUITransition from "../../../animations/jui-transition.js";
 import JUINamedTransitionFunction from "../../../animations/transition-functions/jui-named-transition-function.js";
 import JUIElement from "../../jui-element.js";
-import JUIContentLeafType from "../../../types/content-leaves/jui-content-leaf-type.js";
+import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
  * A progress bar.

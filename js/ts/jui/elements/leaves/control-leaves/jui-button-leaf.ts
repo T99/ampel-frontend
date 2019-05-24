@@ -6,7 +6,7 @@
 
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
 import JUIElement from "../../jui-element.js";
-import JUIControlLeafType from "../../../types/control-leaves/jui-control-leaf-type.js";
+import JUIControlLeafType from "../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 class JUIButtonLeaf extends JUIElement<HTMLButtonElement> {
 	
