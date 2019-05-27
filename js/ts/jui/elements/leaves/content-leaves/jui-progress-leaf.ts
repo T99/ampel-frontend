@@ -6,7 +6,7 @@
 
 import JUITransition from "../../../animations/jui-transition.js";
 import JUINamedTransitionFunction from "../../../animations/transition-functions/jui-named-transition-function.js";
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
@@ -37,28 +37,28 @@ class JUIProgressLeaf extends JUIElement<HTMLProgressElement> {
 	
 	public getMaximumValue(): number {
 		
-		return this.getHTMLElement().max;
+		return this.getElement().max;
 		
 	}
 	
 	public setMaximumValue(maximumValue: number): number {
 		
 		let displaced: number = this.getMaximumValue();
-		this.getHTMLElement().max = maximumValue;
+		this.getElement().max = maximumValue;
 		return displaced;
 		
 	}
 	
 	public getCurrentValue(): number {
 		
-		return this.getHTMLElement().value;
+		return this.getElement().value;
 		
 	}
 	
 	public setCurrentValue(currentValue: number): number {
 		
 		let displaced: number = this.getCurrentValue();
-		this.getHTMLElement().value = currentValue;
+		this.getElement().value = currentValue;
 		return displaced;
 		
 	}

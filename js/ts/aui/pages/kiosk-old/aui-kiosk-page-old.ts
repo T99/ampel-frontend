@@ -7,14 +7,14 @@
 import JUIPage from "../../../jui/jui-page.js";
 import JUIAlignment from "../../../jui/descriptors/jui-alignment.js";
 import AUIKioskTextLabel from "./aui-kiosk-text-label.js";
-import JUIFlowContainer from "../../../jui/elements/multi-containers/jui-flow-container.js";
-import JUITextLeafType from "../../../jui/types/leaves/content-leaves/jui-text-leaf-type.js";
+import JUIFlowContainer from "../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../jui/descriptors/jui-direction.js";
 import AFFolder from "../../../af-structures/structures/af-folder.js";
 import AUIKioskFolderElement from "./aui-kiosk-folder-element.js";
 import AUIKioskButton from "./context-buttons/aui-kiosk-button.js";
 import AFQuestion from "../../../af-structures/structures/af-question.js";
-import JUIAlignmentContainer from "../../../jui/elements/single-containers/jui-alignment-container.js";
+import JUIAlignmentContainer from "../../../jui/elements/containers/single-containers/jui-alignment-container.js";
+import JUITextLeafType from "../../../jui/types/element-types/content-leaves/jui-text-leaf-type.js";
 
 /**
  * The page shown while in 'kiosk' mode.
@@ -98,11 +98,11 @@ class AUIKioskPageOld extends JUIPage {
 		let originalSize: number = 3.5;
 		
 		this.textElement.setText(inquiry);
-		this.textElement.getHTMLElement().style.fontSize = "3.5em";
+		this.textElement.getElement().style.fontSize = "3.5em";
 		
-		while (this.textElement.getHTMLElement().clientHeight > this.textElementWrapper.getHTMLElement().clientHeight) {
+		while (this.textElement.getElement().clientHeight > this.textElementWrapper.getElement().clientHeight) {
 			
-			this.textElement.getHTMLElement().style.fontSize = (originalSize -= 0.1) + "em";
+			this.textElement.getElement().style.fontSize = (originalSize -= 0.1) + "em";
 			
 		}
 		

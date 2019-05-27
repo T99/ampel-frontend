@@ -5,7 +5,7 @@
  */
 
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIControlLeafType from "../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 class JUIButtonLeaf extends JUIElement<HTMLButtonElement> {
@@ -25,7 +25,7 @@ class JUIButtonLeaf extends JUIElement<HTMLButtonElement> {
 		
 		super(JUIControlLeafType.INPUT);
 		this.addClasses(this.TYPE_IDENTITY);
-		this.getHTMLElement().setAttribute("type", "button");
+		this.getElement().setAttribute("type", "button");
 		
 		this.setText(buttonText);
 		
@@ -35,7 +35,7 @@ class JUIButtonLeaf extends JUIElement<HTMLButtonElement> {
 	public setText(buttonText: string): void {
 		
 		this.buttonText = buttonText;
-		this.getHTMLElement().value = buttonText;
+		this.getElement().value = buttonText;
 		
 	}
 	

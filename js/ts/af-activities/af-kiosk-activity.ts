@@ -8,10 +8,9 @@ import AUIKioskPage from "../aui/pages/kiosk/aui-kiosk-page.js";
 import TSArrayList from "../util/structures/implementations/list/ts-array-list.js";
 import AFFolder from "../af-structures/structures/af-folder.js";
 import AFQuestion from "../af-structures/structures/af-question.js";
-import AUIQuestion from "../aui/pages/kiosk/questions/aui-question.js";
 import JUIWorld from "../jui/jui-world.js";
 import AUIKioskThankYouPage from "../aui/pages/thank-you/aui-kiosk-thank-you-page.js";
-import AUIContactCapturePage from "../aui/pages/contact-capture/aui-contact-capture-page.js";
+import { AUIQuestion } from "../aui/pages/kiosk/questions/aui-question.js";
 
 /**
  *
@@ -31,6 +30,8 @@ class AFKioskActivity {
 	private questionList: TSArrayList<AFQuestion>;
 	
 	private currentQuestionIndex: number;
+	
+	private timeoutID: number;
 	
 	private constructor(folder: AFFolder) {
 		
@@ -60,52 +61,74 @@ class AFKioskActivity {
 	
 	private static async setupKioskPage(activity: AFKioskActivity): Promise<AUIKioskPage> {
 		
+		let initialQuestion: AUIQuestion = AUIQuestion.createForQuestion(activity.questionList.get(0));
+		
 		let kioskPage: AUIKioskPage = new AUIKioskPage(
-			AUIQuestion.createForQuestion(activity.questionList.get(0)),
+			initialQuestion,
 			activity.questionList.size()
 		);
 		
-		kioskPage.subscribeToBackButton((): void => console.log("Back button clicked."));
-		kioskPage.subscribeToSkipButton((): void => console.log("Skip button clicked."));
-		kioskPage.subscribeToDoneButton((): void => console.log("Done button clicked."));
-		
-		kioskPage.subscribeToDoneButton((): void => {
-			
-			if (activity.questionList.size() - 1 > activity.currentQuestionIndex) {
-				
-				kioskPage.nextQuestion(
-					AUIQuestion.createForQuestion(activity.questionList.get(++activity.currentQuestionIndex)),
-					activity.currentQuestionIndex + 1
-				);
-				
-			} else {
-				
-				// JUIWorld.getInstance().goToPageRight(new AUIContactCapturePage());
-				
-				AUIKioskThankYouPage.sayThankYou().then(() => {
-
-					activity.renew();
-
-				});
-				
-			}
-			
-		});
-		
-		kioskPage.subscribeToBackButton((): void => {
-			
-			if (activity.currentQuestionIndex > 0) {
-				
-				kioskPage.previousQuestion(
-					AUIQuestion.createForQuestion(activity.questionList.get(--activity.currentQuestionIndex)),
-					activity.currentQuestionIndex + 1
-				);
-				
-			}
-			
-		});
+		initialQuestion.getEventManager().QUESTION_INTERACTION_OCCURRED.subscribe(() => activity.interact());
+		initialQuestion.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => activity.goToNextQuestion());
+		kioskPage.subscribeToDoneButton((): any => activity.goToNextQuestion());
+		kioskPage.subscribeToBackButton((): any => activity.goToPreviousQuestion());
 		
 		return kioskPage;
+		
+	}
+	
+	private interact(): void {
+		
+		if (this.timeoutID !== undefined) clearTimeout(this.timeoutID);
+		
+		this.timeoutID = setTimeout((): void => {
+			
+			AUIKioskThankYouPage.sayThankYou().then(() => {
+				
+				this.renew();
+				
+			});
+			
+		}, 7000);
+		
+	}
+	
+	private async goToNextQuestion(): Promise<void> {
+		
+		if (this.questionList.size() - 1 > this.currentQuestionIndex) {
+			
+			let question: AUIQuestion = AUIQuestion.createForQuestion(this.questionList.get(++this.currentQuestionIndex));
+			let folderProgress: number = this.currentQuestionIndex + 1;
+			
+			question.getEventManager().QUESTION_INTERACTION_OCCURRED.subscribe(() => this.interact());
+			question.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => this.goToNextQuestion());
+			
+			await this.kioskPage.nextQuestion(question, folderProgress);
+			
+		} else {
+			
+			// JUIWorld.getInstance().goToPageRight(new AUIContactCapturePage());
+			
+			AUIKioskThankYouPage.sayThankYou().then(() => {
+				
+				this.renew();
+				
+			});
+			
+		}
+		
+	}
+	
+	private async goToPreviousQuestion(): Promise<void> {
+		
+		if (this.currentQuestionIndex > 0) {
+			
+			await this.kioskPage.previousQuestion(
+				AUIQuestion.createForQuestion(this.questionList.get(--this.currentQuestionIndex)),
+				this.currentQuestionIndex + 1
+			);
+			
+		}
 		
 	}
 	

@@ -6,11 +6,10 @@
 
 import JUISubscription from "./jui-subscription.js";
 import JUINotificationFilter from "./jui-notification-filter.js";
-import JUINotifierSource from "./events/sources/jui-notifier-source.js";
 
 /**
  * A source for notifications (events) that are distributed to multiple {@link JUISubscription}s (event handlers).
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0

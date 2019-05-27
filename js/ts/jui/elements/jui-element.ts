@@ -5,12 +5,13 @@
  */
 
 import JUIElementType from "../types/element-types/jui-element-type.js";
-import JUIContainer from "./containers/jui-container.js";
-import JUIContainerable from "../jui-containerable.js";
-import JUIStyleCollection from "../styles/jui-style-collection.js";
-import JUIElementEventManager from "../action/managers/jui-element-event-manager.js";
+import { JUIContainer } from "./containers/jui-container.js";
 import TSLockingQueue from "../../util/structures/implementations/queue/ts-locking-queue.js";
 import TSLock from "../../util/structures/implementations/ts-lock.js";
+import JUINotifier from "../action/jui-notifier.js";
+import JUIMouseEvent from "../action/events/jui-mouse-event.js";
+import JUIMouseEventType from "../action/events/types/jui-mouse-event-type.js";
+import { JUIContainerable } from "../jui-containerable.js";
 
 /**
  * The most basic form of an element, JUIElement serves as the base-most abstract implementation of an item that can
@@ -20,7 +21,7 @@ import TSLock from "../../util/structures/implementations/ts-lock.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-abstract class JUIElement<E extends Element = Element> implements JUIContainerable<E> {
+export abstract class JUIElement<E extends Element = Element> implements JUIContainerable<E> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -39,11 +40,11 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 */
 	protected container: JUIContainer;
 	
-	protected eventManager: JUIElementEventManager;
+	protected readonly events: JUIElement.JUIElementEvents;
 	
 	private transitionLockManager: TSLockingQueue = new TSLockingQueue();
 	
-	private styleCollection: JUIStyleCollection = new JUIStyleCollection(this);
+	// private styleCollection: JUIStyleCollection = new JUIStyleCollection(this);
 	
 	// DOC-ME [12/8/18 @ 4:35 PM] - Documentation required!
 	protected constructor(elementType: JUIElementType) {
@@ -52,9 +53,9 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 		
 		this.element = elementType.create() as unknown as E;
 		
-		this.eventManager = new JUIElementEventManager(this);
+		this.events = new JUIElement.JUIElementEvents(this);
 		
-		this.getHTMLElement()["jui"] = this;
+		this.getElement()["jui"] = this;
 		
 		this.addClasses(this.TYPE_IDENTITY);
 		
@@ -66,9 +67,15 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 *
 	 * @returns {HTMLElement} The DOM element that constitutes this JUIElement.
 	 */
-	public getHTMLElement(): E {
+	public getElement(): E {
 		
 		return this.element;
+		
+	}
+	
+	public static testMethod(): string {
+		
+		return "hi";
 		
 	}
 	
@@ -114,7 +121,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 */
 	public setID(id: string): void {
 		
-		this.getHTMLElement().id = id;
+		this.getElement().id = id;
 		
 	}
 	
@@ -126,7 +133,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 */
 	public getID(): string {
 		
-		return this.getHTMLElement().id;
+		return this.getElement().id;
 		
 	}
 	
@@ -140,7 +147,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 		for (let className of classNames) {
 			
 			if (this.hasClass(className)) return;
-			else this.getHTMLElement().classList.add(className);
+			else this.getElement().classList.add(className);
 			
 		}
 		
@@ -155,7 +162,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 		
 		for (let className of classNames) {
 			
-			if (this.hasClass(className)) this.getHTMLElement().classList.remove(className);
+			if (this.hasClass(className)) this.getElement().classList.remove(className);
 			
 		}
 		
@@ -169,7 +176,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 */
 	public hasClass(className: string): boolean {
 		
-		return this.getHTMLElement().classList.contains(className);
+		return this.getElement().classList.contains(className);
 		
 	}
 	
@@ -180,35 +187,35 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	 */
 	public allClasses(): string[] {
 		
-		return Array.from(this.getHTMLElement().classList);
+		return Array.from(this.getElement().classList);
 		
 	}
 	
 	public setFocusability(focusability: boolean): void {
 		
-		this.getHTMLElement()["tabIndex"] = (focusability ? 0 : -1);
+		this.getElement()["tabIndex"] = (focusability ? 0 : -1);
 		
 	}
 	
-	/**
-	 * The feature is not yet fully implemented.
-	 *
-	 * @returns {JUIStyleCollection}
-	 */
-	public getStyleCollection(): JUIStyleCollection {
-		
-		return this.styleCollection;
-		
-	}
+	// /**
+	//  * The feature is not yet fully implemented.
+	//  *
+	//  * @returns {JUIStyleCollection}
+	//  */
+	// public getStyleCollection(): JUIStyleCollection {
+	//
+	// 	return this.styleCollection;
+	//
+	// }
 	
 	/**
 	 * Returns the {@link JUIEventManager} for this JUIElement.
 	 *
 	 * @returns {JUIElementEventManager} The JUIEventManager for this JUIElement.
 	 */
-	public getEventManager(): JUIElementEventManager {
+	public getEventManager(): JUIElement.JUIElementEvents {
 		
-		return this.eventManager;
+		return this.events;
 		
 	}
 	
@@ -231,7 +238,7 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 			
 			this.container = undefined;
 			
-			return container.getHTMLElement().removeChild(this.element);
+			return container.getElement().removeChild(this.element);
 			
 		} else return undefined;
 		
@@ -239,4 +246,85 @@ abstract class JUIElement<E extends Element = Element> implements JUIContainerab
 	
 }
 
-export default JUIElement;
+export namespace JUIElement {
+	
+	export class JUIElementEvents implements JUIContainerable.JUIContainerableEvents {
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is clicked (mouse down + mouse up).
+		 */
+		public readonly ELEMENT_MOUSE_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is double clicked.
+		 */
+		public readonly ELEMENT_MOUSE_DOUBLE_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is right clicked.
+		 */
+		public readonly ELEMENT_MOUSE_RIGHT_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse is depressed over the element.
+		 */
+		public readonly ELEMENT_MOUSE_DOWN: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse is released over the element.
+		 */
+		public readonly ELEMENT_MOUSE_UP: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse enters the element.
+		 */
+		public readonly ELEMENT_MOUSE_ENTER: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse leaves the element.
+		 */
+		public readonly ELEMENT_MOUSE_LEAVE: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse moves while hovering the element.
+		 */
+		public readonly ELEMENT_MOUSE_MOVE: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is added to the page.
+		 */
+		public readonly ELEMENT_ADDED_TO_PAGE: JUINotifier<void>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is removed from the page.
+		 */
+		public readonly ELEMENT_REMOVED_FROM_PAGE: JUINotifier<void>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is added to a container, reporting the container to
+		 * which it was added.
+		 */
+		public readonly ELEMENT_ADDED_TO_CONTAINER: JUINotifier<JUIContainer>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is removed from a container, reporting the container
+		 * to which is was removed.
+		 */
+		public readonly ELEMENT_REMOVED_FROM_CONTAINER: JUINotifier<JUIContainer>;
+		
+		public constructor(element: JUIElement) {
+			
+			this.ELEMENT_MOUSE_CLICKED = JUIMouseEventType.MOUSE_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_DOUBLE_CLICKED = JUIMouseEventType.MOUSE_DOUBLE_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_RIGHT_CLICKED = JUIMouseEventType.MOUSE_RIGHT_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_DOWN = JUIMouseEventType.MOUSE_DOWN.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_UP = JUIMouseEventType.MOUSE_UP.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_ENTER = JUIMouseEventType.MOUSE_ENTER.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_LEAVE = JUIMouseEventType.MOUSE_LEAVE.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_MOVE = JUIMouseEventType.MOUSE_MOVE.getNotifierForEventType(element);
+		
+		}
+		
+	}
+	
+}

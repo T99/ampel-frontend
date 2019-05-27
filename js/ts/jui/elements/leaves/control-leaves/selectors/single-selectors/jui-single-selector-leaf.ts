@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../../../jui-element.js";
+import { JUIElement } from "../../../../jui-element.js";
 import JUIControlLeafType from "../../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 /**

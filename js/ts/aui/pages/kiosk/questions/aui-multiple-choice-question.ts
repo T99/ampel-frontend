@@ -4,20 +4,17 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AUIQuestionElement from "../../kiosk-old/question-types/aui-question-element.js";
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
-import JUIScrollContainer from "../../../../jui/elements/single-containers/jui-scroll-container.js";
-import AUITextLabel from "../../../global/aui-text-label.js";
-import JUIFlowContainer from "../../../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIScrollContainer from "../../../../jui/elements/containers/single-containers/jui-scroll-container.js";
+import JUIFlowContainer from "../../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
-import TSDate from "../../../../descriptors/time/ts-date.js";
-import AUIKioskFolderElement from "../../kiosk-old/aui-kiosk-folder-element.js";
 import AUISelectableBox from "../../kiosk-old/question-types/helper-elements/aui-selectable-box.js";
 import AFQuestionType from "../../../../af-structures/descriptors/af-question-type.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
-import AUIQuestion from "./aui-question.js";
+import { AUIQuestion } from "./aui-question.js";
+import JUINotifier from "../../../../jui/action/jui-notifier.js";
 
 /**
  *
@@ -26,7 +23,7 @@ import AUIQuestion from "./aui-question.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AUITextLabel>>> {
+export class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AUISelectableBox>>> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -39,17 +36,20 @@ class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowCo
 	
 	private verticalContainer: JUIFlowContainer<AUISelectableBox>;
 	
-	private currentlySelectedElement: AUITextLabel;
+	private currentlySelectedElement: AUISelectableBox;
 	
 	private currentlySelectedID: string;
+	
+	protected readonly events: AUIMultipleChoiceQuestion.AUIMultipleChoiceQuestionEvents;
 	
 	public constructor(question: AFQuestion) {
 		
 		super(question, new JUIScrollContainer(true, false));
 		
 		this.verticalContainer = new JUIFlowContainer<AUISelectableBox>(JUIDirection.TO_BOTTOM, JUIAlignment.CENTER);
+		this.events = new AUIMultipleChoiceQuestion.AUIMultipleChoiceQuestionEvents(this);
 		
-		this.element.setChild(this.verticalContainer);
+		this.getModuleElement().setChild(this.verticalContainer);
 		
 		for (let option of question.getOptions().entries()) {
 			
@@ -79,7 +79,7 @@ class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowCo
 			
 		}
 		
-		this.element.addClasses(this.TYPE_IDENTITY);
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
 		
 	}
 	
@@ -95,6 +95,28 @@ class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowCo
 		
 	}
 	
+	public getEventManager(): AUIMultipleChoiceQuestion.AUIMultipleChoiceQuestionEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default AUIMultipleChoiceQuestion;
+export namespace AUIMultipleChoiceQuestion {
+	
+	export class AUIMultipleChoiceQuestionEvents extends AUIQuestion.AUIQuestionEvents {
+		
+		public readonly QUESTION_FINALIZED: JUINotifier<void>;
+		
+		public readonly QUESTION_RESPONSE_READY: JUINotifier<AFResponse>;
+		
+		public constructor(element: AUIMultipleChoiceQuestion) {
+			
+			super(element);
+			
+		}
+		
+	}
+	
+}

@@ -7,12 +7,12 @@
 import JUINotifierSource from "./jui-notifier-source.js";
 import JUIEvent from "../jui-event.js";
 import JUINotifier from "../../jui-notifier.js";
-import JUIElement from "../../../elements/jui-element.js";
+import { JUIElement } from "../../../elements/jui-element.js";
 import JUIEventType from "../types/jui-event-type.js";
 
 /**
  * Serves as a standardized point-of-instantiation for {@link JUINotifier}s of {@link JUIEvent}s.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -39,7 +39,7 @@ class JUIEventNotifierSource<
 		
 		if (!this.isAttached()) {
 			
-			this.eventSource.getHTMLElement().addEventListener(
+			this.eventSource.getElement().addEventListener(
 				this.eventType.getDOMEventName(),
 				this.getListener
 			);
@@ -54,7 +54,7 @@ class JUIEventNotifierSource<
 		
 		if (this.isAttached()) {
 			
-			this.eventSource.getHTMLElement().removeEventListener(
+			this.eventSource.getElement().removeEventListener(
 				this.eventType.getDOMEventName(),
 				this.getListener
 			);

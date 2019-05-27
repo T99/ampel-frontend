@@ -4,8 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../../jui-element.js";
-import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
+import { JUIElement } from "../../../jui-element.js";
+import JUIControlLeafType from "../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 /**
  *
@@ -45,13 +45,13 @@ class JUITextAreaLeaf extends JUIElement<HTMLTextAreaElement> {
 	}
 	
 	/**
-	 * Sets the textual hint for this JUITextFieldLeaf.
+	 * Sets the textual hint for this JUIRichTextField.
 	 *
-	 * @param {string} hint The textual hint for this JUITextFieldLeaf.
+	 * @param {string} hint The textual hint for this JUIRichTextField.
 	 */
 	public setHint(hint: string): void {
 		
-		this.getHTMLElement().placeholder = hint;
+		this.getElement().placeholder = hint;
 		
 	}
 	

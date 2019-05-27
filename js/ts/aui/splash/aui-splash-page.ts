@@ -6,19 +6,17 @@
 
 import JUIPage from "../../jui/jui-page.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
-import JUIAlignmentContainer from "../../jui/elements/single-containers/jui-alignment-container.js";
+import JUIAlignmentContainer from "../../jui/elements/containers/single-containers/jui-alignment-container.js";
 import AUISignInModule from "./aui-sign-in-module.js";
-import JUIContainerable from "../../jui/jui-containerable.js";
+import { JUIContainerable } from "../../jui/jui-containerable.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import JUITransition from "../../jui/animations/jui-transition.js";
 import JUINamedTransitionFunction from "../../jui/animations/transition-functions/jui-named-transition-function.js";
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import AFClient from "../../af-structures/structures/af-client.js";
 import JUISubscription from "../../jui/action/jui-subscription.js";
 import AFOrganizationListing from "../../af-structures/structures/listings/af-organization-listing.js";
-import JUIWorld from "../../jui/jui-world.js";
 import AFOrganization from "../../af-structures/structures/af-organization.js";
-import AFFolderListing from "../../af-structures/structures/listings/af-folder-listing.js";
 import AFFolder from "../../af-structures/structures/af-folder.js";
 import AUIStructureSelectorModule from "./aui-structure-selector-module.js";
 import AFLocationListing from "../../af-structures/structures/listings/af-location-listing.js";
@@ -28,7 +26,7 @@ import AFDevice from "../../af-structures/structures/af-device.js";
 import AUIActivitySelectorModule from "./aui-activity-selector-module.js";
 import AUIUserActivity from "../global/aui-user-activity.js";
 import AUINotification from "../global/aui-notification.js";
-import AUIKioskPageOld from "../pages/kiosk-old/aui-kiosk-page-old.js";
+import AFKioskActivity from "../../af-activities/af-kiosk-activity.js";
 
 type SplashViewEnumeration = { [ splashView: string ]: SplashView };
 type SplashView = {
@@ -125,8 +123,6 @@ class AUISplashPage extends JUIPage {
 	
 	private folderSelectionSubscription: JUISubscription<AFFolder>;
 	
-	private activitySelectionSubscription: JUISubscription<AUIUserActivity>;
-	
 	private activeOrganizationListing: AFOrganizationListing;
 	
 	private activeLocationListing: AFLocationListing;
@@ -142,12 +138,12 @@ class AUISplashPage extends JUIPage {
 		let signInModule: AUISignInModule = new AUISignInModule();
 		
 		this.focusElement = AUISplashPage.containerizeSplashContainer(signInModule);
-		this.focusElement.getHTMLElement().style.flexShrink = "0";
+		this.focusElement.getElement().style.flexShrink = "0";
 		
 		this.innerFlowContainer.addChildren(this.focusElement);
 		
-		this.innerFlowContainer.getHTMLElement().style.height = "100%";
-		this.innerFlowContainer.getHTMLElement().style.width = "100%";
+		this.innerFlowContainer.getElement().style.height = "100%";
+		this.innerFlowContainer.getElement().style.width = "100%";
 		
 		this.signInSubscription = signInModule.subscribeToSignInNotifier((client: AFClient): any => this.proceedFromClient(client));
 		
@@ -161,8 +157,8 @@ class AUISplashPage extends JUIPage {
 		
 		alignmentContainer.setChild(element);
 		
-		alignmentContainer.getHTMLElement().style.height = "100%";
-		alignmentContainer.getHTMLElement().style.width = "100%";
+		alignmentContainer.getElement().style.height = "100%";
+		alignmentContainer.getElement().style.width = "100%";
 		
 		return alignmentContainer;
 		
@@ -181,7 +177,7 @@ class AUISplashPage extends JUIPage {
 			JUINamedTransitionFunction.EASE_IN_OUT,
 			(progress: number): void => {
 				
-				this.innerFlowContainer.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+				this.innerFlowContainer.getElement().style.transform = "translateX(" + progress + "vw)";
 				
 			},
 			[this.innerFlowContainer],
@@ -192,7 +188,7 @@ class AUISplashPage extends JUIPage {
 		transition.addPreAction(() => {
 			
 			this.focusElement = AUISplashPage.containerizeSplashContainer(element);
-			this.focusElement.getHTMLElement().style.flexShrink = "0";
+			this.focusElement.getElement().style.flexShrink = "0";
 			
 			if (directionIsRight) {
 				
@@ -213,7 +209,7 @@ class AUISplashPage extends JUIPage {
 		transition.play().then(() => {
 			
 			this.innerFlowContainer.removeChild(oldFocusElement.getID());
-			this.innerFlowContainer.getHTMLElement().style.transform = null;
+			this.innerFlowContainer.getElement().style.transform = null;
 			this.setAlignment(JUIAlignment.CENTER);
 			this.innerFlowContainer.setAlignment(JUIAlignment.CENTER);
 			
@@ -325,7 +321,8 @@ class AUISplashPage extends JUIPage {
 	
 	private async proceedFromDevice(device: AFDevice): Promise<void> {
 		
-		let signedInDevice: AFDevice = await session.getAmpelSession().setDevice(device.getID());
+		// let signedInDevice: AFDevice =
+		await session.getAmpelSession().setDevice(device.getID());
 		
 		// JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(signedInDevice.getDefaultFolder()));
 		await this.goToActivitySelector();
@@ -337,7 +334,8 @@ class AUISplashPage extends JUIPage {
 		switch (activity) {
 			
 			case AUIUserActivity.KIOSK:
-				JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(session.getAmpelSession().getDevice().getDefaultFolder()));
+				// JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(session.getAmpelSession().getDevice().getDefaultFolder()));
+				await AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder());
 				break;
 			
 			case AUIUserActivity.CONTACT_CAPTURE:
@@ -345,7 +343,8 @@ class AUISplashPage extends JUIPage {
 				break;
 			
 			case AUIUserActivity.KIOSK_THEN_CONTACT_CAPTURE:
-				new AUINotification("Attempted to start kiosk with contact capture mode, but this mode is not yet available...");
+				// new AUINotification("Attempted to start kiosk with contact capture mode, but this mode is not yet available...");
+				await AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder());
 				break;
 			
 			case AUIUserActivity.CONTACT_CAPTURE_THEN_KIOSK:
@@ -440,33 +439,33 @@ class AUISplashPage extends JUIPage {
 		
 	}
 	
-	private async goToFolderSelector(folderListing: AFFolderListing): Promise<void> {
-		
-		return new Promise<void>((resolve: () => void, reject: () => void): void => {
-			
-			let folderSelector: AUIStructureSelectorModule<AFFolder, AFFolderListing>
-				= new AUIStructureSelectorModule<AFFolder, AFFolderListing>(
-				folderListing,
-				"folder",
-				"Whoops! Looks like this organization doesn't have any folders! Try adding one, then head back here!"
-			);
-			
-			this.backButtonSubscription = folderSelector.subscribeToBackButtonNotifier(
-				(): any => this.goToDeviceSelector(this.activeDeviceListing)
-			);
-			
-			this.folderSelectionSubscription = folderSelector.subscribeToSelectionNotifier(
-				(folder: AFFolder): any => JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(folder))
-			);
-			
-			let transition: JUITransition = this.transitionTo(folderSelector, AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR);
-			this.cleanUpFromView(this.currentView);
-			this.currentView = AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR;
-			transition.getTransitionPromise().then((): any => resolve());
-			
-		});
-		
-	}
+	// private async goToFolderSelector(folderListing: AFFolderListing): Promise<void> {
+	//
+	// 	return new Promise<void>((resolve: () => void, reject: () => void): void => {
+	//
+	// 		let folderSelector: AUIStructureSelectorModule<AFFolder, AFFolderListing>
+	// 			= new AUIStructureSelectorModule<AFFolder, AFFolderListing>(
+	// 			folderListing,
+	// 			"folder",
+	// 			"Whoops! Looks like this organization doesn't have any folders! Try adding one, then head back here!"
+	// 		);
+	//
+	// 		this.backButtonSubscription = folderSelector.subscribeToBackButtonNotifier(
+	// 			(): any => this.goToDeviceSelector(this.activeDeviceListing)
+	// 		);
+	//
+	// 		this.folderSelectionSubscription = folderSelector.subscribeToSelectionNotifier(
+	// 			(folder: AFFolder): any => JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(folder))
+	// 		);
+	//
+	// 		let transition: JUITransition = this.transitionTo(folderSelector, AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR);
+	// 		this.cleanUpFromView(this.currentView);
+	// 		this.currentView = AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR;
+	// 		transition.getTransitionPromise().then((): any => resolve());
+	//
+	// 	});
+	//
+	// }
 	
 	private async goToActivitySelector(): Promise<void> {
 	
@@ -476,7 +475,7 @@ class AUISplashPage extends JUIPage {
 			(): any => this.goToDeviceSelector(this.activeDeviceListing)
 		);
 		
-		this.activitySelectionSubscription = activitySelector.subscribeToSelectionNotifier(
+		activitySelector.subscribeToSelectionNotifier(
 			(activity: AUIUserActivity): any => this.proceedFromActivity(activity)
 		);
 		

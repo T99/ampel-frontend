@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIControlLeafType from "../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 
 /**
@@ -23,7 +23,7 @@ class JUICanvasLeaf extends JUIElement<HTMLCanvasElement> {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-canvas-leaf";
 	
-	protected readonly context: CanvasRenderingContext2D = this.getHTMLElement().getContext("2d");
+	protected readonly context: CanvasRenderingContext2D = this.getElement().getContext("2d");
 	
 	public constructor() {
 		
@@ -34,11 +34,11 @@ class JUICanvasLeaf extends JUIElement<HTMLCanvasElement> {
 	
 	public correctSizing(): void {
 		
-		let heightString: string = getComputedStyle(this.getHTMLElement()).height;
-		let widthString: string = getComputedStyle(this.getHTMLElement()).width;
+		let heightString: string = getComputedStyle(this.getElement()).height;
+		let widthString: string = getComputedStyle(this.getElement()).width;
 		
-		this.getHTMLElement().height = parseFloat(heightString.substring(0, heightString.length - 2));
-		this.getHTMLElement().width = parseFloat(widthString.substring(0, widthString.length - 2));
+		this.getElement().height = parseFloat(heightString.substring(0, heightString.length - 2));
+		this.getElement().width = parseFloat(widthString.substring(0, widthString.length - 2));
 		
 	}
 	

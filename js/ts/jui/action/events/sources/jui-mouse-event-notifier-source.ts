@@ -8,11 +8,11 @@ import JUINotifier from "../../jui-notifier.js";
 import JUIMouseEvent from "../jui-mouse-event.js";
 import JUIEventNotifierSource from "./jui-event-notifier-source.js";
 import JUIMouseEventType from "../types/jui-mouse-event-type.js";
-import JUIElement from "../../../elements/jui-element.js";
+import { JUIElement } from "../../../elements/jui-element.js";
 
 /**
  * Serves as a standardized point-of-instantiation for {@link JUINotifier}s of {@link JUIMouseEvent}s.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0

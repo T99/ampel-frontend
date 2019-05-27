@@ -4,10 +4,10 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "./types/jui-container-type.js";
-import JUIAlignmentContainer from "./elements/single-containers/jui-alignment-container.js";
+import JUIContainerType from "./types/element-types/jui-container-type.js";
+import JUIAlignmentContainer from "./elements/containers/single-containers/jui-alignment-container.js";
 import JUIAlignment from "./descriptors/jui-alignment.js";
-import JUIContainerable from "./jui-containerable.js";
+import { JUIContainerable } from "./jui-containerable.js";
 
 /**
  * One full-viewport page within the {@link JUIWorld}.

@@ -5,13 +5,13 @@
  */
 
 import JUIContainerType from "../../types/element-types/jui-container-type.js";
-import JUIElementType from "../../types/element-types/jui-element-type.js";
 import JUIIdentityContainer from "../../../helpers/jui-identity-container.js";
 import JUIIdentityMap from "../../../helpers/jui-identity-map.js";
-import JUIElement from "../jui-element.js";
 import JUIMasterIdentityMap from "../../../helpers/jui-master-identity-map.js";
 import JUIContainerDichotomyError from "../../errors/jui-container-dichotomy-error.js";
-import JUIContainerable from "../../jui-containerable.js";
+import { JUIContainerable } from "../../jui-containerable.js";
+import { JUIElement } from "../jui-element.js";
+import JUINotifier from "../../action/jui-notifier.js";
 
 /**
  * Defines the most basic form of a container for {@link JUIElement}s. Provides protected methods for operating on the
@@ -22,7 +22,7 @@ import JUIContainerable from "../../jui-containerable.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> extends JUIElement<HTMLElement> implements
+export abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> extends JUIElement<HTMLElement> implements
 	JUIIdentityContainer {
 	
 	/**
@@ -43,6 +43,8 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 	 */
 	protected children: JUIIdentityMap<T>;
 	
+	protected readonly events: JUIContainer.JUIContainerEvents<T>;
+	
 	/**
 	 * A pass-through constructor that 'casts' the provided {@link JUIContainerType} to an {@link JUIElementType} and
 	 * passes the appropriate classes through to the super.
@@ -55,9 +57,11 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 		
 		super(containerType);
 		this.addClasses(this.TYPE_IDENTITY);
-
+		
 		if (this.hasContainer()) this.children = this.getContainer().children.getChildMap(this);
 		else this.children = JUIMasterIdentityMap.getInstance().getChildMap(this);
+		
+		this.events = new JUIContainer.JUIContainerEvents<T>(this);
 		
 	}
 	
@@ -92,8 +96,10 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 		else if (element.hasContainer()) throw new JUIContainerDichotomyError();
 		else {
 			
-			if (beforeElement === undefined) this.getHTMLElement().appendChild(element.getHTMLElement());
-			else this.getHTMLElement().insertBefore(element.getHTMLElement(), beforeElement.getHTMLElement());
+			if (beforeElement === undefined) this.getElement().appendChild(element.getElement());
+			else this.getElement().insertBefore(element.getElement(), beforeElement.getElement());
+			
+			this.getEventManager().CHILD_ADDED_TO_CONTAINER.notify(element);
 			
 			element.setContainer(this);
 			return this.children.add(element);
@@ -128,7 +134,7 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 	 */
 	protected orphanAllChildren(): boolean {
 		
-		let element: Element = this.getHTMLElement();
+		let element: Element = this.getElement();
 		
 		if (element.hasChildNodes()) {
 			
@@ -162,6 +168,31 @@ abstract class JUIContainer<T extends JUIContainerable = JUIContainerable> exten
 		
 	}
 	
+	public getEventManager(): JUIContainer.JUIContainerEvents<T> {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default JUIContainer;
+export namespace JUIContainer {
+	
+	export class JUIContainerEvents<T extends JUIContainerable> extends JUIElement.JUIElementEvents {
+		
+		public readonly CHILD_ADDED_TO_CONTAINER: JUINotifier<T>;
+		
+		public readonly CHILD_REMOVED_FROM_CONTAINER: JUINotifier<T>;
+		
+		public constructor(element: JUIContainer) {
+			
+			super(element);
+			
+			this.CHILD_ADDED_TO_CONTAINER = new JUINotifier<T>();
+			this.CHILD_REMOVED_FROM_CONTAINER = new JUINotifier<T>();
+			
+		}
+		
+	}
+	
+}

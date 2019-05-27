@@ -4,10 +4,12 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "./elements/jui-element.js";
-import JUIContainerable from "./jui-containerable.js";
-import JUIContainer from "./elements/jui-container.js";
-import TSLock from "../structures/implementations/ts-lock.js";
+import { JUIContainerable } from "./jui-containerable.js";
+import { JUIContainer } from "./elements/containers/jui-container.js";
+import TSLock from "../util/structures/implementations/ts-lock.js";
+import JUINotifier from "./action/jui-notifier.js";
+import JUIMouseEventType from "./action/events/types/jui-mouse-event-type.js";
+import JUIMouseEvent from "./action/events/jui-mouse-event.js";
 
 /**
  * An immutable
@@ -16,7 +18,7 @@ import TSLock from "../structures/implementations/ts-lock.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUIModule<T extends JUIElement<E>, E extends Element = Element> implements JUIContainerable<E> {
+export class JUIModule<T extends JUIContainerable<E>, E extends Element = Element> implements JUIContainerable<E> {
 	
 	// TODO [4/28/19 @ 3:28 PM] - JUIModules are now the exact same thing as JUIElements. Remove this class in favor of the other.
 	
@@ -27,7 +29,9 @@ class JUIModule<T extends JUIElement<E>, E extends Element = Element> implements
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-module";
 	
-	protected readonly element: T;
+	private readonly element: T;
+	
+	protected readonly events: JUIModule.JUIModuleEvents;
 	
 	public constructor(element: T) {
 		
@@ -36,96 +40,80 @@ class JUIModule<T extends JUIElement<E>, E extends Element = Element> implements
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 7:00 PM] - Documentation required!
-	public getHTMLElement(): E {
+	/**
+	 * Returns the JUIContainerable (T) that this JUIModule wraps.
+	 *
+	 * @returns {T} The JUIContainerable (T) that this JUIModule wraps.
+	 */
+	protected getModuleElement(): T {
 		
-		return this.element.getHTMLElement();
+		return this.element;
 		
 	}
 	
-	/**
-	 * Adds classes to this JUIModule's DOM element.
-	 *
-	 * @param {string[]} classNames The names of the classes to add to this JUIModule's DOM element.
-	 */
+	public getElement(): E {
+		
+		return this.element.getElement();
+		
+	}
+	
 	public addClasses(...classNames: string[]): void {
 		
 		for (let className of classNames) {
 			
 			if (this.hasClass(className)) return;
-			else this.getHTMLElement().classList.add(className);
+			else this.getElement().classList.add(className);
 			
 		}
 		
 	}
 	
-	/**
-	 * Removes classes from this JUIModule's DOM element.
-	 *
-	 * @param {string[]} classNames The names of the classes to remove from this JUIModule's DOM element.
-	 */
 	public removeClasses(...classNames: string[]): void {
 		
 		for (let className of classNames) {
 			
-			if (this.hasClass(className)) this.getHTMLElement().classList.remove(className);
+			if (this.hasClass(className)) this.getElement().classList.remove(className);
 			
 		}
 		
 	}
 	
-	/**
-	 * Returns true if this JUIModule's DOM element has the provided class.
-	 *
-	 * @param {string} className The name of the class to check for on this JUIModule's DOM element.
-	 * @returns {boolean} true if this JUIModule's DOM element has the provided class.
-	 */
 	public hasClass(className: string): boolean {
 		
-		return this.getHTMLElement().classList.contains(className);
+		return this.getElement().classList.contains(className);
 		
 	}
 	
-	/**
-	 * Returns a string array of all of the classes on this JUIModule's DOM element.
-	 *
-	 * @returns {string[]} A string array of all of the classes on this JUIModule's DOM element.
-	 */
 	public allClasses(): string[] {
 		
-		return Array.from(this.getHTMLElement().classList);
+		return Array.from(this.getElement().classList);
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:46 PM] - Documentation required!
 	public getID(): string {
 		
 		return this.element.getID();
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:45 PM] - Documentation required!
 	public setID(id: string): void {
 		
 		this.element.setID(id);
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:45 PM] - Documentation required!
 	public hasContainer(container?: JUIContainer): boolean {
 		
 		return this.element.hasContainer(container);
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:46 PM] - Documentation required!
 	public getContainer(): JUIContainer {
 		
 		return this.element.getContainer();
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:45 PM] - Documentation required!
 	public setContainer(container: JUIContainer): void {
 		
 		this.element.setContainer(container);
@@ -138,13 +126,99 @@ class JUIModule<T extends JUIElement<E>, E extends Element = Element> implements
 		
 	}
 	
-	// DOC-ME [12/18/18 @ 6:45 PM] - Documentation required!
 	public orphan(): void {
 		
 		this.element.orphan();
 		
 	}
 	
+	public getEventManager(): JUIModule.JUIModuleEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default JUIModule;
+export namespace JUIModule {
+	
+	export class JUIModuleEvents implements JUIContainerable.JUIContainerableEvents {
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is clicked (mouse down + mouse up).
+		 */
+		public readonly ELEMENT_MOUSE_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is double clicked.
+		 */
+		public readonly ELEMENT_MOUSE_DOUBLE_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the element is right clicked.
+		 */
+		public readonly ELEMENT_MOUSE_RIGHT_CLICKED: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse is depressed over the element.
+		 */
+		public readonly ELEMENT_MOUSE_DOWN: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse is released over the element.
+		 */
+		public readonly ELEMENT_MOUSE_UP: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse enters the element.
+		 */
+		public readonly ELEMENT_MOUSE_ENTER: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse leaves the element.
+		 */
+		public readonly ELEMENT_MOUSE_LEAVE: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever the mouse moves while hovering the element.
+		 */
+		public readonly ELEMENT_MOUSE_MOVE: JUINotifier<JUIMouseEvent>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is added to the page.
+		 */
+		public readonly ELEMENT_ADDED_TO_PAGE: JUINotifier<void>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is removed from the page.
+		 */
+		public readonly ELEMENT_REMOVED_FROM_PAGE: JUINotifier<void>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is added to a container, reporting the container to
+		 * which it was added.
+		 */
+		public readonly ELEMENT_ADDED_TO_CONTAINER: JUINotifier<JUIContainer>;
+		
+		/**
+		 * A {@link JUINotifier} dispatched whenever this element is removed from a container, reporting the container
+		 * to which is was removed.
+		 */
+		public readonly ELEMENT_REMOVED_FROM_CONTAINER: JUINotifier<JUIContainer>;
+		
+		public constructor(element: JUIModule<any, any>) {
+			
+			this.ELEMENT_MOUSE_CLICKED = JUIMouseEventType.MOUSE_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_DOUBLE_CLICKED = JUIMouseEventType.MOUSE_DOUBLE_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_RIGHT_CLICKED = JUIMouseEventType.MOUSE_RIGHT_CLICK.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_DOWN = JUIMouseEventType.MOUSE_DOWN.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_UP = JUIMouseEventType.MOUSE_UP.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_ENTER = JUIMouseEventType.MOUSE_ENTER.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_LEAVE = JUIMouseEventType.MOUSE_LEAVE.getNotifierForEventType(element);
+			this.ELEMENT_MOUSE_MOVE = JUIMouseEventType.MOUSE_MOVE.getNotifierForEventType(element);
+			
+		}
+	
+	}
+	
+}

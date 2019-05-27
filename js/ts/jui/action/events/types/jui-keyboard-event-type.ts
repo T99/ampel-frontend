@@ -6,14 +6,12 @@
 
 import JUIEventType from "./jui-event-type.js";
 import JUIKeyboardEvent from "../jui-keyboard-event.js";
-import JUIElement from "../../../elements/jui-element.js";
 import JUINotifier from "../../jui-notifier.js";
-import JUIMouseEvent from "../jui-mouse-event.js";
-import JUITextFieldLeaf from "../../../elements/leaves/control-leaves/jui-text-field-leaf.js";
+import JUIRawTextField from "../../../elements/leaves/control-leaves/text/jui-raw-text-field.js";
 
 /**
- * 
- * 
+ *
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -28,19 +26,17 @@ class JUIKeyboardEventType extends JUIEventType {
 	
 	private static keyboardEventMap: Map<string, JUIKeyboardEventType> = new Map<string, JUIKeyboardEventType>();
 	
-	private static keyboardEventDOMMap: Map<string, JUIKeyboardEventType> = new Map<string, JUIKeyboardEventType>();
-	
 	protected constructor(eventTypeName: string, eventTypeDOMName: string) {
 		
 		super(eventTypeName, eventTypeDOMName);
 		
 	}
 	
-	public getNotifierForEventType(eventSource: JUITextFieldLeaf): JUINotifier<JUIKeyboardEvent> {
+	public getNotifierForEventType(eventSource: JUIRawTextField): JUINotifier<JUIKeyboardEvent> {
 
 		let notifier: JUINotifier<JUIKeyboardEvent> = new JUINotifier<JUIKeyboardEvent>();
 
-		eventSource.getHTMLElement().addEventListener(
+		eventSource.getElement().addEventListener(
 			this.getDOMEventName(),
 			(event: KeyboardEvent) => notifier.notify(this.transcribeEvent(event))
 		);
@@ -52,7 +48,7 @@ class JUIKeyboardEventType extends JUIEventType {
 	public transcribeEvent(event: KeyboardEvent): JUIKeyboardEvent {
 		
 		return new JUIKeyboardEvent(
-			event.srcElement,
+			event.srcElement as Element,
 			JUIKeyboardEventType.getEventTypeForEventDOMName(event.type),
 			new Date(event.timeStamp),
 			event.key

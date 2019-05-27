@@ -4,12 +4,11 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIModule from "../../../../jui/jui-module.js";
+import { JUIModule } from "../../../../jui/jui-module.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
 import AFQuestionType from "../../../../af-structures/descriptors/af-question-type.js";
-import JUISubscription from "../../../../jui/action/jui-subscription.js";
 import JUINotifier from "../../../../jui/action/jui-notifier.js";
-import JUIElement from "../../../../jui/elements/jui-element.js";
+import { JUIElement } from "../../../../jui/elements/jui-element.js";
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
 import TSDate from "../../../../descriptors/time/ts-date.js";
@@ -21,13 +20,11 @@ import TSDate from "../../../../descriptors/time/ts-date.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-abstract class AUIQuestion<T extends JUIElement> extends JUIModule<T> {
+export abstract class AUIQuestion<T extends JUIElement = JUIElement> extends JUIModule<T> {
+	
+	public readonly TYPE_IDENTITY: string = "aui-question";
 	
 	private readonly question: AFQuestion;
-	
-	private responseNotifier: JUINotifier<any>;
-	
-	private interactionNotifier: JUINotifier<void>;
 	
 	private timeoutID: number;
 	
@@ -35,9 +32,15 @@ abstract class AUIQuestion<T extends JUIElement> extends JUIModule<T> {
 		
 		super(element);
 		
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
+		
 		this.question = question;
-		this.responseNotifier = new JUINotifier<any>();
-		this.interactionNotifier = new JUINotifier<void>();
+		
+	}
+	
+	public static createForQuestion(question: AFQuestion): AUIQuestion {
+		
+		return AFQuestionType.createQuestionElementFromQuestion(question);
 		
 	}
 	
@@ -59,11 +62,16 @@ abstract class AUIQuestion<T extends JUIElement> extends JUIModule<T> {
 	
 	protected interact(): void {
 		
+		this.getEventManager().QUESTION_INTERACTION_OCCURRED.notify();
+		
 		if (this.timeoutID !== undefined) clearTimeout(this.timeoutID);
 		
 		this.timeoutID = setTimeout((): void => {
 			
-			this.responseNotifier.notify(this.getResponse());
+			console.log("Question timeout has occurred.");
+			// TODO [5/27/19 @ 3:39 AM] - We do actually need to respond...
+			this.getEventManager().QUESTION_INTERACTION_TIMED_OUT.notify();
+			// this.getEventManager().QUESTION_RESPONSE_READY.notify(this.getResponse());
 			
 		}, this.getQuestionType().getTimeout());
 		
@@ -75,18 +83,31 @@ abstract class AUIQuestion<T extends JUIElement> extends JUIModule<T> {
 		
 	}
 	
-	public subscribeToResponse(handler: (response: any) => any): JUISubscription<any> {
-		
-		return this.responseNotifier.subscribe(handler);
-		
-	}
+	public abstract getEventManager(): AUIQuestion.AUIQuestionEvents;
 	
-	public subscribeToInteraction(handler: () => any): JUISubscription<void> {
+}
+
+export namespace AUIQuestion {
+	
+	export abstract class AUIQuestionEvents extends JUIModule.JUIModuleEvents {
 		
-		return this.interactionNotifier.subscribe(handler);
+		public abstract readonly QUESTION_FINALIZED: JUINotifier<void>;
+		
+		public abstract readonly QUESTION_RESPONSE_READY: JUINotifier<AFResponse>;
+		
+		public readonly QUESTION_INTERACTION_OCCURRED: JUINotifier<void>;
+		
+		public readonly QUESTION_INTERACTION_TIMED_OUT: JUINotifier<void>;
+		
+		protected constructor(element: AUIQuestion) {
+			
+			super(element);
+			
+			this.QUESTION_INTERACTION_OCCURRED = new JUINotifier<void>();
+			this.QUESTION_INTERACTION_TIMED_OUT = new JUINotifier<void>();
+			
+		}
 		
 	}
 	
 }
-
-export default AUIQuestion;

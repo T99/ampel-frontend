@@ -5,17 +5,16 @@
  */
 
 import JUINotifier from "../../jui/action/jui-notifier.js";
-import JUIModule from "../../jui/jui-module.js";
+import { JUIModule } from "../../jui/jui-module.js";
 import AUISplashContainer from "./aui-splash-container.js";
-import JUIMouseEvent from "../../jui/action/events/jui-mouse-event.js";
 import JUISubscription from "../../jui/action/jui-subscription.js";
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import AUIButton from "../global/aui-button.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
 import AUIUserActivity from "../global/aui-user-activity.js";
 import AUITextLabel from "../global/aui-text-label.js";
-import JUITextLeafType from "../../jui/types/leaves/content-leaves/jui-text-leaf-type.js";
+import JUITextLeafType from "../../jui/types/element-types/content-leaves/jui-text-leaf-type.js";
 
 /**
  *
@@ -34,7 +33,7 @@ class AUIActivitySelectorModule extends JUIModule<AUISplashContainer> {
 		
 		super(new AUISplashContainer());
 		
-		this.element.addClasses("aui-activity-selector-module");
+		this.getModuleElement().addClasses("aui-activity-selector-module");
 		
 		let headerText: AUITextLabel = new AUITextLabel("What would you like to do?", JUITextLeafType.H4);
 		
@@ -78,7 +77,7 @@ class AUIActivitySelectorModule extends JUIModule<AUISplashContainer> {
 		
 		buttonContainer.addChildren(backButton, selectionButton);
 		
-		this.element.addChildren(headerText, kioskButton, ccButton, ccKioskButton, kioskCCButton, buttonContainer);
+		this.getModuleElement().addChildren(headerText, kioskButton, ccButton, ccKioskButton, kioskCCButton, buttonContainer);
 		
 	}
 	

@@ -5,7 +5,7 @@
  */
 
 import JUIPage from "./jui-page.js";
-import JUIFlowContainer from "./elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "./elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "./descriptors/jui-direction.js";
 import JUIAlignment from "./descriptors/jui-alignment.js";
 import JUIFlexWrappingRule from "./descriptors/jui-flex-wrapping-rule.js";
@@ -47,7 +47,7 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 		this.addClasses(this.TYPE_IDENTITY);
 		this.setID(this.TYPE_IDENTITY);
 		
-		document.body.appendChild(this.getHTMLElement());
+		document.body.appendChild(this.getElement());
 		
 	}
 	
@@ -109,8 +109,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					JUINamedTransitionFunction.EASE_IN_OUT,
 					(progress: number): void => {
 						
-						oldPage.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
-						this.page.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+						oldPage.getElement().style.transform = "translateX(" + progress + "vw)";
+						this.page.getElement().style.transform = "translateX(" + progress + "vw)";
 						
 					},
 					[oldPage, this.page],
@@ -130,7 +130,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 				transition.addPostAction(() => {
 					
 					this.removeChild(oldPage.getID());
-					this.page.getHTMLElement().style.transform = "";
+					this.page.getElement().style.transform = "";
+					resolve();
 					
 				});
 				
@@ -162,8 +163,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					JUINamedTransitionFunction.EASE_IN_OUT,
 					(progress: number): void => {
 					
-						oldPage.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
-						this.page.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+						oldPage.getElement().style.transform = "translateX(" + progress + "vw)";
+						this.page.getElement().style.transform = "translateX(" + progress + "vw)";
 						
 					},
 					[oldPage, this.page],
@@ -183,7 +184,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 				transition.addPostAction(() => {
 					
 					this.removeChild(oldPage.getID());
-					this.page.getHTMLElement().style.transform = "translateX(0vw)";
+					this.page.getElement().style.transform = "translateX(0vw)";
+					resolve();
 					
 				});
 				
@@ -215,8 +217,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					JUINamedTransitionFunction.EASE_IN_OUT,
 					(progress: number): void => {
 						
-						oldPage.getHTMLElement().style.transform = "translateY(" + progress + "vh)";
-						this.page.getHTMLElement().style.transform = "translateY(" + progress + "vh)";
+						oldPage.getElement().style.transform = "translateY(" + progress + "vh)";
+						this.page.getElement().style.transform = "translateY(" + progress + "vh)";
 						
 					},
 					[oldPage, this.page],
@@ -236,7 +238,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 				transition.addPostAction(() => {
 					
 					this.removeChild(oldPage.getID());
-					this.page.getHTMLElement().style.transform = "translateX(0vw)";
+					this.page.getElement().style.transform = "translateX(0vw)";
+					resolve();
 					
 				});
 				
@@ -268,8 +271,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					JUINamedTransitionFunction.EASE_IN_OUT,
 					(progress: number): void => {
 						
-						oldPage.getHTMLElement().style.transform = "translateY(" + progress + "vh)";
-						this.page.getHTMLElement().style.transform = "translateY(" + progress + "vh)";
+						oldPage.getElement().style.transform = "translateY(" + progress + "vh)";
+						this.page.getElement().style.transform = "translateY(" + progress + "vh)";
 						
 					},
 					[oldPage, this.page],
@@ -289,7 +292,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 				transition.addPostAction(() => {
 					
 					this.removeChild(oldPage.getID());
-					this.page.getHTMLElement().style.transform = "translateX(0vw)";
+					this.page.getElement().style.transform = "translateX(0vw)";
+					resolve();
 					
 				});
 				

@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
@@ -36,13 +36,13 @@ class JUIImageLeaf extends JUIElement<HTMLImageElement> {
 	// DOC-ME [12/14/18 @ 4:23 PM] - Documentation required!
 	public setSource(imageURI: string): void {
 		
-		this.getHTMLElement().src = imageURI;
+		this.getElement().src = imageURI;
 		
 	}
 	
 	public getSource(): string {
 		
-		return this.getHTMLElement().src;
+		return this.getElement().src;
 		
 	}
 	

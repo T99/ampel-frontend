@@ -6,9 +6,8 @@
 
 import JUIEventType from "./jui-event-type.js";
 import JUIMouseEvent from "../jui-mouse-event.js";
-import JUIElement from "../../../elements/jui-element.js";
 import JUINotifier from "../../jui-notifier.js";
-import JUIEvent from "../jui-event.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  *
@@ -49,11 +48,11 @@ class JUIMouseEventType extends JUIEventType {
 		
 	}
 	
-	public getNotifierForEventType(eventSource: JUIElement): JUINotifier<JUIMouseEvent> {
+	public getNotifierForEventType(eventSource: JUIContainerable): JUINotifier<JUIMouseEvent> {
 
 		let notifier: JUINotifier<JUIMouseEvent> = new JUINotifier<JUIMouseEvent>();
 
-		eventSource.getHTMLElement().addEventListener(
+		eventSource.getElement().addEventListener(
 			this.getDOMEventName(),
 			(event: MouseEvent) => notifier.notify(this.transcribeEvent(event))
 		);
@@ -65,7 +64,7 @@ class JUIMouseEventType extends JUIEventType {
 	public transcribeEvent(event: MouseEvent): JUIMouseEvent {
 		
 		return new JUIMouseEvent(
-			event.srcElement,
+			event.srcElement as Element,
 			JUIMouseEventType.getEventTypeForEventDOMName(event.type),
 			new Date(event.timeStamp),
 			event

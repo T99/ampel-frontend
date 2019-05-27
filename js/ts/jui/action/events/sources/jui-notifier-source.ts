@@ -4,12 +4,11 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIEvent from "../jui-event.js";
 import JUINotifier from "../../jui-notifier.js";
 
 /**
  * Serves as a standardized point-of-instantiation for {@link JUINotifier}s of certain types.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0

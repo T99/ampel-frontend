@@ -4,9 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainer from "./jui-container.js";
+import { JUIContainer } from "./jui-container.js";
 import JUIContainerType from "../../types/element-types/jui-container-type.js";
-import JUIContainerable from "../../jui-containerable.js";
+import { JUIContainerable } from "../../jui-containerable.js";
 
 /**
  * A {@link JUIContainer} that only holds a single element.

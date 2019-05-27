@@ -4,8 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUITextLeaf from "../../../jui/elements/leaves/content-leaves/jui-text-leaf.js";
-import JUITextLeafType from "../../../jui/types/leaves/content-leaves/jui-text-leaf-type.js";
+import { JUITextLeaf} from "../../../jui/elements/leaves/content-leaves/jui-text-leaf.js";
+import JUITextLeafType from "../../../jui/types/element-types/content-leaves/jui-text-leaf-type.js";
 
 /**
  *
@@ -23,7 +23,7 @@ class AUIKioskTextLabel extends JUITextLeaf {
 	 */
 	public readonly TYPE_IDENTITY: string = "aui-kiosk-text-label";
 	
-	public constructor(content: string, textType?: JUITextLeafType) {
+	public constructor(content: string, textType: JUITextLeafType = JUITextLeafType.P) {
 		
 		super(content, textType);
 		this.addClasses(this.TYPE_IDENTITY);

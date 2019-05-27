@@ -4,10 +4,10 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIModule from "../../../../jui/jui-module.js";
-import JUISingleContainer from "../../../../jui/elements/jui-single-container.js";
-import JUIElement from "../../../../jui/elements/jui-element.js";
-import JUIAlignmentContainer from "../../../../jui/elements/single-containers/jui-alignment-container.js";
+import { JUIModule } from "../../../../jui/jui-module.js";
+import JUISingleContainer from "../../../../jui/elements/containers/jui-single-container.js";
+import { JUIElement } from "../../../../jui/elements/jui-element.js";
+import JUIAlignmentContainer from "../../../../jui/elements/containers/single-containers/jui-alignment-container.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
 import AUIKioskButton from "../context-buttons/aui-kiosk-button.js";
 import JUISubscription from "../../../../jui/action/jui-subscription.js";
@@ -41,13 +41,13 @@ abstract class AUIQuestionElement<T extends JUIElement = JUIElement> extends JUI
 		
 		super(new JUIAlignmentContainer(JUIAlignment.CENTER));
 		
-		this.element.addClasses("aui-question-element");
+		this.getModuleElement().addClasses("aui-question-element");
 		
 		this.contentElement = element;
 		
 		this.parentFolderElement = parentFolderElement;
 		
-		this.element.setChild(this.contentElement);
+		this.getModuleElement().setChild(this.contentElement);
 		
 		this.question = question;
 		

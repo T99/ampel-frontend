@@ -6,9 +6,9 @@
 
 import JUITransitionFunction from "./transition-functions/jui-transition-function.js";
 import JUINamedTransitionFunction from "./transition-functions/jui-named-transition-function.js";
-import JUIContainerable from "../jui-containerable.js";
-import TSLock from "../../structures/implementations/ts-lock.js";
-import TSActionQueue from "../../structures/implementations/queue/ts-action-queue.js";
+import { JUIContainerable } from "../jui-containerable.js";
+import TSLock from "../../util/structures/implementations/ts-lock.js";
+import TSActionQueue from "../../util/structures/implementations/queue/ts-action-queue.js";
 
 /**
  * Represents an asynchronous graphical transition.

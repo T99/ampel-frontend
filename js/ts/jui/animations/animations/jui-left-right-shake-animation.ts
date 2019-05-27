@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../jui-containerable.js";
+import { JUIContainerable } from "../../jui-containerable.js";
 import JUIAnimation from "../jui-animation.js";
 import JUIWobbleTransitionFunction from "../transition-functions/wobble/jui-wobble-transition-function.js";
 
@@ -26,7 +26,7 @@ class JUILeftRightShakeAnimation extends JUIAnimation {
 			new JUIWobbleTransitionFunction(4),
 			(progress: number): void => {
 				
-				element.getHTMLElement().style.transform = "translateX(" + (25 * progress) + "px)";
+				element.getElement().style.transform = "translateX(" + (25 * progress) + "px)";
 				
 			},
 			[element],
@@ -46,7 +46,7 @@ class JUILeftRightShakeAnimation extends JUIAnimation {
 	
 	protected async after(): Promise<void> {
 		
-		this.animatedElement.getHTMLElement().style.transform = "";
+		this.animatedElement.getElement().style.transform = "";
 		
 	}
 }

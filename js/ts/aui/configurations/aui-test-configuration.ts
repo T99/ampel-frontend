@@ -6,7 +6,7 @@
 
 import JUIPage from "../../jui/jui-page.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import JUIWorld from "../../jui/jui-world.js";
 import JUIImageLeaf from "../../jui/elements/leaves/content-leaves/jui-image-leaf.js";
@@ -32,8 +32,8 @@ class AUITestConfiguration {
 		let yesImage: JUIImageLeaf = new JUIImageLeaf("/img/question-types/true-false/yes-rasterized-cropped.png");
 		let noImage: JUIImageLeaf = new JUIImageLeaf("/img/question-types/true-false/no-rasterized-cropped.png");
 		
-		yesImage.getHTMLElement().style.height = "50%";
-		noImage.getHTMLElement().style.height = "50%";
+		yesImage.getElement().style.height = "50%";
+		noImage.getElement().style.height = "50%";
 		
 		container.addChildren(yesImage, noImage);
 		

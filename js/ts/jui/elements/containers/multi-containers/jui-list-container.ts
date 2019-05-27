@@ -6,7 +6,7 @@
 
 import JUIContainerType from "../../../types/element-types/jui-container-type.js";
 import JUIMultiContainer from "../jui-multi-container.js";
-import JUIContainerable from "../../../jui-containerable.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 // DOC-ME [12/9/18 @ 2:34 AM] - Documentation required!
 class JUIListContainer<T extends JUIContainerable> extends JUIMultiContainer<T> {

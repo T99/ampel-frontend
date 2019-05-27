@@ -4,8 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIControlLeafType from "../../../types/element-types/control-leaves/jui-control-leaf-type.js";
+import JUINotifier from "../../../action/jui-notifier.js";
 
 /**
  *
@@ -14,7 +15,7 @@ import JUIControlLeafType from "../../../types/element-types/control-leaves/jui-
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUISliderLeaf extends JUIElement<HTMLInputElement> {
+export class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -23,12 +24,14 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-slider-leaf";
 	
+	protected readonly events: JUISliderLeaf.JUISliderLeafEvents;
+	
 	// DOC-ME [3/23/19 @ 7:37 PM] - Documentation required!
 	public constructor(minimumValue: number, maximumValue: number, defaultValue?: number, stepValue?: number) {
 		
 		super(JUIControlLeafType.INPUT);
 		this.addClasses(this.TYPE_IDENTITY);
-		this.getHTMLElement().setAttribute("type", "range");
+		this.getElement().setAttribute("type", "range");
 		
 		this.setMinimumValue(minimumValue);
 		this.setMaximumValue(maximumValue);
@@ -42,7 +45,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 		
 		let displaced: number = this.getMinimumValue();
 		
-		this.getHTMLElement().min = minimumValue.toString();
+		this.getElement().min = minimumValue.toString();
 		
 		return displaced;
 	
@@ -51,7 +54,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	// DOC-ME [3/23/19 @ 7:37 PM] - Documentation required!
 	public getMinimumValue(): number {
 		
-		return parseInt(this.getHTMLElement().min);
+		return parseInt(this.getElement().min);
 		
 	}
 	
@@ -60,7 +63,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 		
 		let displaced: number = this.getMaximumValue();
 		
-		this.getHTMLElement().max = maximumValue.toString();
+		this.getElement().max = maximumValue.toString();
 		
 		return displaced;
 		
@@ -69,7 +72,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	// DOC-ME [3/23/19 @ 7:37 PM] - Documentation required!
 	public getMaximumValue(): number {
 		
-		return parseInt(this.getHTMLElement().max);
+		return parseInt(this.getElement().max);
 		
 	}
 	
@@ -78,7 +81,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 		
 		let displaced: number = this.getStepValue();
 		
-		this.getHTMLElement().step = (stepValue === 0 ? "any" : stepValue.toString());
+		this.getElement().step = (stepValue === 0 ? "any" : stepValue.toString());
 		
 		return displaced;
 		
@@ -87,7 +90,7 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	// DOC-ME [3/24/19 @ 2:33 PM] - Documentation required!
 	public getStepValue(): number {
 		
-		let displacedString: string = this.getHTMLElement().step;
+		let displacedString: string = this.getElement().step;
 		
 		return (displacedString === "any" ? 0 : parseInt(displacedString));
 		
@@ -96,9 +99,9 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	// DOC-ME [3/23/19 @ 7:36 PM] - Documentation required!
 	public setValue(value: number): number {
 		
-		let displaced: number = parseInt(this.getHTMLElement().value);
+		let displaced: number = parseInt(this.getElement().value);
 		
-		this.getHTMLElement().value = value.toString();
+		this.getElement().value = value.toString();
 		
 		return displaced;
 		
@@ -107,10 +110,47 @@ class JUISliderLeaf extends JUIElement<HTMLInputElement> {
 	// DOC-ME [3/23/19 @ 7:36 PM] - Documentation required!
 	public getValue(): number {
 		
-		return parseFloat(this.getHTMLElement().value);
+		return parseFloat(this.getElement().value);
+		
+	}
+	
+	public getEventManager(): JUISliderLeaf.JUISliderLeafEvents {
+		
+		return this.events;
 		
 	}
 	
 }
 
-export default JUISliderLeaf;
+export namespace JUISliderLeaf {
+	
+	export class JUISliderLeafEvents extends JUIElement.JUIElementEvents {
+		
+		public readonly ELEMENT_SLIDER_VALUE_CHANGED: JUINotifier<number>;
+		
+		public constructor(element: JUISliderLeaf) {
+			
+			super(element);
+			
+			this.ELEMENT_SLIDER_VALUE_CHANGED = new JUINotifier<number>();
+			
+			let previousValue: number = element.getValue();
+			
+			element.getElement().addEventListener("input", () => {
+				
+				let value: number = element.getValue();
+				
+				if (value !== previousValue) {
+					
+					this.ELEMENT_SLIDER_VALUE_CHANGED.notify(value);
+					previousValue = value;
+					
+				}
+				
+			});
+			
+		}
+		
+	}
+	
+}

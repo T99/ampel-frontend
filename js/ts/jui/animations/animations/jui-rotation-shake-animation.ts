@@ -5,8 +5,7 @@
  */
 
 import JUIAnimation from "../jui-animation.js";
-import JUIContainerable from "../../jui-containerable.js";
-import JUIWobbleTransitionFunction from "../transition-functions/wobble/jui-wobble-transition-function.js";
+import { JUIContainerable } from "../../jui-containerable.js";
 import JUIWobbleOutTransitionFunction from "../transition-functions/wobble/jui-wobble-out-transition-function.js";
 
 /**
@@ -27,7 +26,7 @@ class JUIRotationShakeAnimation extends JUIAnimation {
 			new JUIWobbleOutTransitionFunction(4),
 			(progress: number): void => {
 				
-				element.getHTMLElement().style.transform = "rotate(" + (5 * progress) + "deg)";
+				element.getElement().style.transform = "rotate(" + (5 * progress) + "deg)";
 				
 			},
 			[element],
@@ -47,7 +46,7 @@ class JUIRotationShakeAnimation extends JUIAnimation {
 	
 	protected async after(): Promise<void> {
 		
-		this.animatedElement.getHTMLElement().style.transform = "";
+		this.animatedElement.getElement().style.transform = "";
 		
 	}
 	

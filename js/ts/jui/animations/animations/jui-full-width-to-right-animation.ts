@@ -4,9 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../jui-containerable.js";
-import JUINamedTransitionFunction from "../transition-functions/jui-named-transition-function.js";
-import JUIAnimation from "../jui-animation.js";
+import { JUIContainerable } from "../../jui-containerable.js";
 
 /**
  * Transitions one (and optionally a second) element to the right by one full page width.
@@ -27,7 +25,7 @@ class JUIFullWidthToRightAnimation /*extends JUIAnimation*/ {
 			JUINamedTransitionFunction.EASE_IN_OUT,
 			(progress: number): void => {
 				
-				this.flowContainer.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+				this.flowContainer.getElement().style.transform = "translateX(" + progress + "vw)";
 				
 			},
 			0,

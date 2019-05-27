@@ -6,11 +6,11 @@
 
 import JUIEvent from "../jui-event.js";
 import JUINotifier from "../../jui-notifier.js";
-import JUIElement from "../../../elements/jui-element.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  * Enumerates possible {@link JUIEvent} types.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v
  * @since v
@@ -35,11 +35,11 @@ abstract class JUIEventType {
 		
 	}
 	
-	public getNotifierForEventType(eventSource: JUIElement): JUINotifier<JUIEvent> {
+	public getNotifierForEventType(eventSource: JUIContainerable): JUINotifier<JUIEvent> {
 
 		let notifier: JUINotifier<JUIEvent> = new JUINotifier<JUIEvent>();
 
-		eventSource.getHTMLElement().addEventListener(
+		eventSource.getElement().addEventListener(
 			this.getDOMEventName(),
 			(event: Event) => notifier.notify(this.transcribeEvent(event))
 		);
@@ -52,7 +52,7 @@ abstract class JUIEventType {
 
 		// TODO [1/28/19 @ 3:13 PM] - Find a fix for the following deprecated code.
 		return new JUIEvent(
-			event.srcElement,
+			event.srcElement as Element,
 			JUIEventType.getEventTypeForEventDOMName(event.type),
 			new Date(event.timeStamp)
 		);

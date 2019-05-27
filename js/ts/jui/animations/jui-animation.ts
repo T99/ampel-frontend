@@ -6,7 +6,7 @@
 
 import JUITransition from "./jui-transition.js";
 import JUITransitionFunction from "./transition-functions/jui-transition-function.js";
-import JUIContainerable from "../jui-containerable.js";
+import { JUIContainerable } from "../jui-containerable.js";
 
 abstract class JUIAnimation {
 	

@@ -5,11 +5,11 @@
  */
 
 import JUIIdentityMap from "./jui-identity-map.js";
-import JUIContainerable from "../jui/jui-containerable.js";
+import { JUIContainerable } from "../jui/jui-containerable.js";
 
 /**
- * The master {@link JUIIdentityMap}, all other IdentityMaps are children of this master map. 
- * 
+ * The master {@link JUIIdentityMap}, all other IdentityMaps are children of this master map.
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -32,7 +32,7 @@ class JUIMasterIdentityMap extends JUIIdentityMap<JUIContainerable> {
 	
 	/**
 	 * Returns the Singleton instance of the MasterIdentityMap.
-	 * 
+	 *
 	 * @returns {JUIIdentityMap<JUIContainerable>} The Singleton instance of the MasterIdentityMap.
 	 */
 	public static getInstance(): JUIMasterIdentityMap {

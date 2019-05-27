@@ -5,14 +5,14 @@
  */
 
 import AFQuestion from "../structures/af-question.js";
-import AUIStoplightQuestion from "../../aui/pages/kiosk/questions/aui-stoplight-question.js";
-import AUISliderQuestion from "../../aui/pages/kiosk/questions/aui-slider-question.js";
-import AUINPSQuestion from "../../aui/pages/kiosk/questions/aui-nps-question.js";
-import AUITrueFalseQuestion from "../../aui/pages/kiosk/questions/aui-true-false-question.js";
-import AUISATAQuestion from "../../aui/pages/kiosk/questions/aui-sata-question.js";
-import AUIMultipleChoiceQuestion from "../../aui/pages/kiosk/questions/aui-multiple-choice-question.js";
-import AUIFreeResponseQuestion from "../../aui/pages/kiosk/questions/aui-free-response-question.js";
-import AUIQuestion from "../../aui/pages/kiosk/questions/aui-question.js";
+import { AUINPSQuestion } from "../../aui/pages/kiosk/questions/aui-nps-question.js";
+import { AUITrueFalseQuestion } from "../../aui/pages/kiosk/questions/aui-true-false-question.js";
+import { AUISATAQuestion } from "../../aui/pages/kiosk/questions/aui-sata-question.js";
+import { AUIMultipleChoiceQuestion } from "../../aui/pages/kiosk/questions/aui-multiple-choice-question.js";
+import { AUIFreeResponseQuestion } from "../../aui/pages/kiosk/questions/aui-free-response-question.js";
+import { AUIQuestion } from "../../aui/pages/kiosk/questions/aui-question.js";
+import { AUIStoplightQuestion } from "../../aui/pages/kiosk/questions/aui-stoplight-question.js";
+import { AUISliderQuestion } from "../../aui/pages/kiosk/questions/aui-slider-question.js";
 
 /**
  * Enumerates the possible Ampel question types.
@@ -25,7 +25,7 @@ class AFQuestionType {
 	
 	public static readonly STOPLIGHT: AFQuestionType = new AFQuestionType(
 		0, "StopLight", 2000,
-		(question: AFQuestion): AUIQuestion<any> => new AUIStoplightQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUIStoplightQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -42,7 +42,7 @@ class AFQuestionType {
 	
 	public static readonly SLIDER: AFQuestionType = new AFQuestionType(
 		1, "Slider", 2500,
-		(question: AFQuestion): AUIQuestion<any> => new AUISliderQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUISliderQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -58,7 +58,7 @@ class AFQuestionType {
 	
 	public static readonly NPS: AFQuestionType = new AFQuestionType(
 		2, "NPS", 2500,
-		(question: AFQuestion): AUIQuestion<any> => new AUINPSQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUINPSQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -74,7 +74,7 @@ class AFQuestionType {
 	
 	public static readonly TRUE_FALSE: AFQuestionType = new AFQuestionType(
 		3, "TrueFalse", 2000,
-		(question: AFQuestion): AUIQuestion<any> => new AUITrueFalseQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUITrueFalseQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -87,7 +87,7 @@ class AFQuestionType {
 	
 	public static readonly SELECT_ALL_THAT_APPLY: AFQuestionType = new AFQuestionType(
 		4, "SelectAllThatApply", 3000,
-		(question: AFQuestion): AUIQuestion<any> => new AUISATAQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUISATAQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -103,7 +103,7 @@ class AFQuestionType {
 	
 	public static readonly MULTIPLE_CHOICE: AFQuestionType = new AFQuestionType(
 		5, "MultipleChoice", 3000,
-		(question: AFQuestion): AUIQuestion<any> => new AUIMultipleChoiceQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUIMultipleChoiceQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -116,7 +116,7 @@ class AFQuestionType {
 	
 	public static readonly FREE_RESPONSE: AFQuestionType = new AFQuestionType(
 		6, "FreeResponse", 4000,
-		(question: AFQuestion): AUIQuestion<any> => new AUIFreeResponseQuestion(question),
+		(question: AFQuestion): AUIQuestion => new AUIFreeResponseQuestion(question),
 		(response: any): boolean => {
 		
 		/*
@@ -140,12 +140,12 @@ class AFQuestionType {
 	
 	private validator: (response: any) => boolean;
 	
-	private constructorProxy: (question: AFQuestion) => AUIQuestion<any>;
+	private constructorProxy: (question: AFQuestion) => AUIQuestion;
 	
 	public constructor(typeNumber: number,
 					   typeString: string,
 					   timeout: number,
-					   constructorProxy: (question: AFQuestion) => AUIQuestion<any>,
+					   constructorProxy: (question: AFQuestion) => AUIQuestion,
 					   validator: (response: any) => boolean) {
 		
 		this.typeNumber = typeNumber;
@@ -185,7 +185,7 @@ class AFQuestionType {
 		
 	}
 	
-	public static createQuestionElementFromQuestion(question: AFQuestion): AUIQuestion<any> {
+	public static createQuestionElementFromQuestion(question: AFQuestion): AUIQuestion {
 		
 		return question.getType().constructorProxy(question);
 		
@@ -212,6 +212,13 @@ class AFQuestionType {
 	public getTimeout(): number {
 		
 		return this.timeout;
+		
+	}
+	
+	public createQuestionElement(question: AFQuestion): AUIQuestion {
+		
+		if (question.getType() === this) return this.constructorProxy(question);
+		else throw new Error("Attempted to create a question element with a mis-matching type.");
 		
 	}
 	

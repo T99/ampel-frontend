@@ -27,20 +27,20 @@ class JUIRadioSingleSelectorLeaf extends JUISingleSelectorLeaf {
 		super(startSelected);
 		this.addClasses(this.TYPE_IDENTITY);
 		
-		this.getHTMLElement().setAttribute("type", "radio");
+		this.getElement().setAttribute("type", "radio");
 	
 	}
 	
 	public isSelected(): boolean {
 		
-		return this.getHTMLElement().checked;
+		return this.getElement().checked;
 		
 	}
 	
 	public setSelected(isSelected: boolean): boolean {
 		
 		let displaced: boolean = this.isSelected();
-		this.getHTMLElement().checked = isSelected;
+		this.getElement().checked = isSelected;
 		return displaced;
 		
 	}

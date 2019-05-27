@@ -9,7 +9,7 @@ import JUISVGGeometry from "./svg-element-leaves/jui-svg-geometry.js";
 import JUIIdentityContainer from "../../../../helpers/jui-identity-container.js";
 import JUIIdentityMap from "../../../../helpers/jui-identity-map.js";
 import JUIMasterIdentityMap from "../../../../helpers/jui-master-identity-map.js";
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUIContentLeafType from "../../../types/element-types/content-leaves/jui-content-leaf-type.js";
 
 /**
@@ -78,15 +78,15 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 					
 					let svg: Element = xhr.responseXML.documentElement;
 					
-					this.getHTMLElement().innerHTML = svg.innerHTML;
+					this.getElement().innerHTML = svg.innerHTML;
 					
 					let attributes: NamedNodeMap = svg.attributes;
 					
-					for (let key of attributes) this.getHTMLElement().setAttribute(key.name, key.value);
+					for (let key of attributes) this.getElement().setAttribute(key.name, key.value);
 					
 					for (let geometry of this.childGeometry.valueSet()) {
 						
-						this.getHTMLElement().appendChild(geometry.getHTMLElement());
+						this.getElement().appendChild(geometry.getElement());
 						
 					}
 					
@@ -112,7 +112,7 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 		for (let element of geometry) {
 			
 			this.childGeometry.add(element);
-			this.element.appendChild(element.getHTMLElement());
+			this.element.appendChild(element.getElement());
 			
 		}
 		
@@ -120,7 +120,7 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 		// else if (geometry.hasContainer()) throw new JUIContainerDichotomyError();
 		// else {
 		//
-		// 	this.getHTMLElement().appendChild(geometry.getHTMLElement());
+		// 	this.getElement().appendChild(geometry.getElement());
 		// 	geometry.setContainer(this);
 		// 	return this.children.add(geometry);
 		//
@@ -133,7 +133,7 @@ class JUISVGLeaf<G extends JUISVGGeometry<SVGGraphicsElement> = JUISVGGeometry<S
 	 */
 	private reset(): void {
 		
-		let element: Element = this.getHTMLElement();
+		let element: Element = this.getElement();
 		if (element.hasChildNodes()) while (element.firstChild) element.removeChild(element.firstChild);
 		for (let attribute in JUISVGLeaf.SVG_ATTRIBUTES) element.removeAttribute(attribute);
 		

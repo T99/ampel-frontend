@@ -5,14 +5,15 @@
  */
 
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
-import JUISliderLeaf from "../../../../jui/elements/leaves/control-leaves/jui-slider-leaf.js";
+import { JUISliderLeaf } from "../../../../jui/elements/leaves/control-leaves/jui-slider-leaf.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
-import JUIStackContainer from "../../../../jui/elements/multi-containers/jui-stack-container.js";
+import JUIStackContainer from "../../../../jui/elements/containers/multi-containers/jui-stack-container.js";
 import JUIImageLeaf from "../../../../jui/elements/leaves/content-leaves/jui-image-leaf.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
 import TSBrowserIdentifier from "../../../../helpers/ts-browser-identifier.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
-import AUIQuestion from "./aui-question.js";
+import { AUIQuestion } from "./aui-question.js";
+import JUINotifier from "../../../../jui/action/jui-notifier.js";
 
 /**
  *
@@ -21,7 +22,7 @@ import AUIQuestion from "./aui-question.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
+export class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -36,16 +37,19 @@ class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
 	
 	private currentValue: number = AUISliderQuestion.DEFAULT_VALUE;
 	
+	protected readonly events: AUISliderQuestion.AUISliderQuestionEvents;
+	
 	public constructor(question: AFQuestion) {
 		
 		super(question, new JUIStackContainer(JUIAlignment.CENTER));
 		
+		this.events = new AUISliderQuestion.AUISliderQuestionEvents(this);
 		this.slider = new JUISliderLeaf(1, 10, AUISliderQuestion.DEFAULT_VALUE, 0);
 		
-		this.element.addStackedChild(new JUIImageLeaf("img/question-types/slider/slider-rasterized.png"));
-		this.element.addStackedChild(this.slider);
+		this.getModuleElement().addStackedChild(new JUIImageLeaf("img/question-types/slider/slider-rasterized.png"));
+		this.getModuleElement().addStackedChild(this.slider);
 		
-		this.slider.getHTMLElement().addEventListener("input", (event: any): void => {
+		this.slider.getElement().addEventListener("input", (event: any): void => {
 			
 			this.interact();
 			
@@ -58,14 +62,14 @@ class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
 		// Safari polyfill
 		if (TSBrowserIdentifier.isSafari()) {
 			
-			this.slider.getHTMLElement().addEventListener("click", (event: any): void => {
+			this.slider.getElement().addEventListener("click", (event: any): void => {
 				
 				this.interact();
 				
 				console.log("Enacting Safari click-to-change polyfill.");
 				
 				let bodyHeight: number = document.body.clientHeight;
-				let sliderHeight: number = this.slider.getHTMLElement().clientWidth;
+				let sliderHeight: number = this.slider.getElement().clientWidth;
 				let clickY: number = event.clientY;
 				
 				let sliderY: number = (clickY - ((bodyHeight - sliderHeight) / 2));
@@ -82,7 +86,7 @@ class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
 			
 		}
 		
-		this.element.addClasses(this.TYPE_IDENTITY);
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
 		
 	}
 	
@@ -98,6 +102,28 @@ class AUISliderQuestion extends AUIQuestion<JUIStackContainer> {
 		
 	}
 	
+	public getEventManager(): AUISliderQuestion.AUISliderQuestionEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default AUISliderQuestion;
+export namespace AUISliderQuestion {
+	
+	export class AUISliderQuestionEvents extends AUIQuestion.AUIQuestionEvents {
+		
+		public readonly QUESTION_FINALIZED: JUINotifier<void>;
+		
+		public readonly QUESTION_RESPONSE_READY: JUINotifier<AFResponse>;
+		
+		public constructor(element: AUISliderQuestion) {
+			
+			super(element);
+			
+		}
+		
+	}
+	
+}

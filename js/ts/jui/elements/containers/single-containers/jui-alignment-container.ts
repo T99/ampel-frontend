@@ -7,7 +7,7 @@
 import JUISingleContainer from "../jui-single-container.js";
 import JUIContainerType from "../../../types/element-types/jui-container-type.js";
 import JUIAlignment from "../../../descriptors/jui-alignment.js";
-import JUIContainerable from "../../../jui-containerable.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  * A container that aligns a singular child within itself.

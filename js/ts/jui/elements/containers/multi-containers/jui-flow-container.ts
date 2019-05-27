@@ -9,7 +9,7 @@ import JUIMultiContainer from "../jui-multi-container.js";
 import JUIDirection from "../../../descriptors/jui-direction.js";
 import JUIAlignment from "../../../descriptors/jui-alignment.js";
 import JUIFlexWrappingRule from "../../../descriptors/jui-flex-wrapping-rule.js";
-import JUIContainerable from "../../../jui-containerable.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  * A {@link JUIMultiContainer} in which content flows in accordance to a given direction, alignment, and wrapping style.

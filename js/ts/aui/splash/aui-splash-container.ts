@@ -4,16 +4,16 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
-import JUIContainerType from "../../jui/types/jui-container-type.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
+import JUIContainerType from "../../jui/types/element-types/jui-container-type.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
 import JUIFlexWrappingRule from "../../jui/descriptors/jui-flex-wrapping-rule.js";
-import JUIContainerable from "../../jui/jui-containerable.js";
+import { JUIContainerable } from "../../jui/jui-containerable.js";
 
 /**
  * A standard content container for AUI.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0

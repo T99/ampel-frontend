@@ -5,17 +5,15 @@
  */
 
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
-import AUIQuestionElement from "../../kiosk-old/question-types/aui-question-element.js";
-import JUISliderLeaf from "../../../../jui/elements/leaves/control-leaves/jui-slider-leaf.js";
-import JUIStackContainer from "../../../../jui/elements/multi-containers/jui-stack-container.js";
+import { JUISliderLeaf } from "../../../../jui/elements/leaves/control-leaves/jui-slider-leaf.js";
+import JUIStackContainer from "../../../../jui/elements/containers/multi-containers/jui-stack-container.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
 import JUIImageLeaf from "../../../../jui/elements/leaves/content-leaves/jui-image-leaf.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
-import TSDate from "../../../../descriptors/time/ts-date.js";
-import AUIKioskFolderElement from "../../kiosk-old/aui-kiosk-folder-element.js";
 import TSBrowserIdentifier from "../../../../helpers/ts-browser-identifier.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
-import AUIQuestion from "./aui-question.js";
+import { AUIQuestion } from "./aui-question.js";
+import JUINotifier from "../../../../jui/action/jui-notifier.js";
 
 /**
  *
@@ -24,7 +22,7 @@ import AUIQuestion from "./aui-question.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
+export class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -41,16 +39,19 @@ class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 	
 	private currentValue: number = AUINPSQuestion.DEFAULT_VALUE;
 	
+	protected readonly events: AUINPSQuestion.AUINPSQuestionEvents;
+	
 	public constructor(question: AFQuestion) {
 		
 		super(question, new JUIStackContainer(JUIAlignment.CENTER));
 		
 		this.slider = new JUISliderLeaf(1, 10, AUINPSQuestion.DEFAULT_VALUE, 0);
+		this.events = new AUINPSQuestion.AUINPSQuestionEvents(this);
 		
-		this.element.addStackedChild(new JUIImageLeaf("img/question-types/slider/slider-rasterized.png"));
-		this.element.addStackedChild(this.slider);
+		this.getModuleElement().addStackedChild(new JUIImageLeaf("img/question-types/slider/slider-rasterized.png"));
+		this.getModuleElement().addStackedChild(this.slider);
 		
-		this.slider.getHTMLElement().addEventListener("input", (event: any): void => {
+		this.slider.getElement().addEventListener("input", (event: any): void => {
 			
 			this.interact();
 			
@@ -60,7 +61,7 @@ class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 		
 		});
 		
-		this.slider.getHTMLElement().addEventListener("click", (event: any): void => {
+		this.slider.getElement().addEventListener("click", (event: any): void => {
 			
 			this.interact();
 			
@@ -70,7 +71,7 @@ class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 				console.log("Enacting Safari click-to-change polyfill.");
 				
 				let bodyHeight: number = document.body.clientHeight;
-				let sliderHeight: number = this.slider.getHTMLElement().clientWidth;
+				let sliderHeight: number = this.slider.getElement().clientWidth;
 				let clickY: number = event.clientY;
 				
 				let sliderY: number = (clickY - ((bodyHeight - sliderHeight) / 2));
@@ -92,7 +93,7 @@ class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 			
 		});
 		
-		this.element.addClasses(this.TYPE_IDENTITY);
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
 		
 	}
 	
@@ -108,6 +109,28 @@ class AUINPSQuestion extends AUIQuestion<JUIStackContainer> {
 		
 	}
 	
+	public getEventManager(): AUINPSQuestion.AUINPSQuestionEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default AUINPSQuestion;
+export namespace AUINPSQuestion {
+
+	export class AUINPSQuestionEvents extends AUIQuestion.AUIQuestionEvents {
+		
+		public readonly QUESTION_FINALIZED: JUINotifier<void>;
+		
+		public readonly QUESTION_RESPONSE_READY: JUINotifier<AFResponse>;
+		
+		public constructor(element: AUINPSQuestion) {
+			
+			super(element);
+			
+		}
+		
+	}
+
+}

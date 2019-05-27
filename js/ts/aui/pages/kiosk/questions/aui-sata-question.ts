@@ -6,16 +6,16 @@
 
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
-import JUIScrollContainer from "../../../../jui/elements/single-containers/jui-scroll-container.js";
-import JUIFlowContainer from "../../../../jui/elements/multi-containers/jui-flow-container.js";
-import AUITextLabel from "../../../global/aui-text-label.js";
+import JUIScrollContainer from "../../../../jui/elements/containers/single-containers/jui-scroll-container.js";
+import JUIFlowContainer from "../../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
-import TSArrayList from "../../../../structures/implementations/list/ts-array-list.js";
+import TSArrayList from "../../../../util/structures/implementations/list/ts-array-list.js";
 import AUISelectableBox from "../../kiosk-old/question-types/helper-elements/aui-selectable-box.js";
 import AFQuestionType from "../../../../af-structures/descriptors/af-question-type.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
-import AUIQuestion from "./aui-question.js";
+import { AUIQuestion } from "./aui-question.js";
+import JUINotifier from "../../../../jui/action/jui-notifier.js";
 
 /**
  *
@@ -24,7 +24,7 @@ import AUIQuestion from "./aui-question.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AUITextLabel>>> {
+export class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AUISelectableBox>>> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -39,6 +39,8 @@ class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AU
 	
 	private currentlySelected: TSArrayList<string>;
 	
+	protected readonly events: AUISATAQuestion.AUISATAQuestionEvents;
+	
 	public constructor(question: AFQuestion) {
 		
 		super(question, new JUIScrollContainer(true, false));
@@ -47,7 +49,9 @@ class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AU
 		
 		this.currentlySelected = new TSArrayList<string>();
 		
-		this.element.setChild(this.verticalContainer);
+		this.events = new AUISATAQuestion.AUISATAQuestionEvents(this);
+		
+		this.getModuleElement().setChild(this.verticalContainer);
 		
 		for (let option of question.getOptions().entries()) {
 			
@@ -80,7 +84,7 @@ class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AU
 			
 		}
 		
-		this.element.addClasses(this.TYPE_IDENTITY);
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
 	
 	}
 	
@@ -96,6 +100,28 @@ class AUISATAQuestion extends AUIQuestion<JUIScrollContainer<JUIFlowContainer<AU
 		
 	}
 	
+	public getEventManager(): AUISATAQuestion.AUISATAQuestionEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default AUISATAQuestion;
+export namespace AUISATAQuestion {
+	
+	export class AUISATAQuestionEvents extends AUIQuestion.AUIQuestionEvents {
+		
+		public readonly QUESTION_FINALIZED: JUINotifier<void>;
+		
+		public readonly QUESTION_RESPONSE_READY: JUINotifier<AFResponse>;
+		
+		public constructor(element: AUISATAQuestion) {
+			
+			super(element);
+			
+		}
+		
+	}
+	
+}

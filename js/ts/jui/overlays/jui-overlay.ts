@@ -4,13 +4,13 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerType from "../types/jui-container-type.js";
+import JUIContainerType from "../types/element-types/jui-container-type.js";
 import JUIOverlayState from "./jui-overlay-state.js";
 import JUIDirection from "../descriptors/jui-direction.js";
 import JUIAlignment from "../descriptors/jui-alignment.js";
-import JUIContainerable from "../jui-containerable.js";
-import JUIAlignmentContainer from "../elements/single-containers/jui-alignment-container.js";
-import JUIElement from "../elements/jui-element.js";
+import { JUIContainerable } from "../jui-containerable.js";
+import JUIAlignmentContainer from "../elements/containers/single-containers/jui-alignment-container.js";
+import { JUIElement } from "../elements/jui-element.js";
 import JUITransition from "../animations/jui-transition.js";
 import JUINamedTransitionFunction from "../animations/transition-functions/jui-named-transition-function.js";
 import JUISubscription from "../action/jui-subscription.js";
@@ -41,7 +41,7 @@ class JUIOverlay<C extends JUIContainerable = JUIElement> {
 	protected state: JUIOverlayState;
 	private isMouseHovering: boolean = false;
 	
-	public constructor(alignment: JUIAlignment, transitionDirection?: JUIDirection, containerType?: JUIContainerType) {
+	public constructor(alignment: JUIAlignment, transitionDirection?: JUIDirection, containerType: JUIContainerType = JUIContainerType.DIV) {
 		
 		this.container = new JUIAlignmentContainer(JUIAlignment.CENTER, containerType);
 		this.state = JUIOverlayState.HIDDEN;
@@ -205,7 +205,7 @@ class JUIOverlay<C extends JUIContainerable = JUIElement> {
 				JUINamedTransitionFunction.EASE_IN_OUT,
 				(progress: number): void => {
 					
-					this.container.getHTMLElement().style.transform = info.type + "(" + progress + info.unit + ")";
+					this.container.getElement().style.transform = info.type + "(" + progress + info.unit + ")";
 					
 				},
 				[this.container],
@@ -217,15 +217,15 @@ class JUIOverlay<C extends JUIContainerable = JUIElement> {
 				
 				this.state = JUIOverlayState.TRANSITIONING;
 				
-				this.container.getHTMLElement().style.transform = (info.type + "(" + info.beginValue + info.unit + ")");
+				this.container.getElement().style.transform = (info.type + "(" + info.beginValue + info.unit + ")");
 				
-				document.body.appendChild(this.container.getHTMLElement());
+				document.body.appendChild(this.container.getElement());
 				
 			});
 			
 			transition.addPostAction(() => {
 				
-				this.container.getHTMLElement().style.transform = "";
+				this.container.getElement().style.transform = "";
 				this.state = JUIOverlayState.VISIBLE;
 				
 			});
@@ -250,7 +250,7 @@ class JUIOverlay<C extends JUIContainerable = JUIElement> {
 				JUINamedTransitionFunction.EASE_IN_OUT,
 				(progress: number): void => {
 					
-					this.container.getHTMLElement().style.transform = info.type + "(" + progress + info.unit + ")";
+					this.container.getElement().style.transform = info.type + "(" + progress + info.unit + ")";
 					
 				},
 				[this.container],
@@ -262,16 +262,16 @@ class JUIOverlay<C extends JUIContainerable = JUIElement> {
 				
 				this.state = JUIOverlayState.TRANSITIONING;
 				
-				this.container.getHTMLElement().style.transform = (info.type + "(" + info.beginValue + info.unit + ")");
+				this.container.getElement().style.transform = (info.type + "(" + info.beginValue + info.unit + ")");
 				
-				document.body.appendChild(this.container.getHTMLElement());
+				document.body.appendChild(this.container.getElement());
 				
 			});
 			
 			transition.addPostAction(() => {
 				
-				this.container.getHTMLElement().style.transform = "";
-				document.body.removeChild(this.container.getHTMLElement());
+				this.container.getElement().style.transform = "";
+				document.body.removeChild(this.container.getElement());
 				this.state = JUIOverlayState.HIDDEN;
 			
 			});

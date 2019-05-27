@@ -5,9 +5,9 @@
  */
 
 import AUITextLabel from "../../global/aui-text-label.js";
-import JUITextFieldLeaf from "../../../jui/elements/leaves/control-leaves/jui-text-field-leaf.js";
-import JUIModule from "../../../jui/jui-module.js";
-import JUIFlowContainer from "../../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIRichTextField from "../../../jui/elements/leaves/control-leaves/text/jui-rich-text-field.js";
+import { JUIModule } from "../../../jui/jui-module.js";
+import JUIFlowContainer from "../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../jui/descriptors/jui-alignment.js";
 
@@ -28,24 +28,24 @@ class AUIContactCaptureInputModule extends JUIModule<JUIFlowContainer, HTMLEleme
 	public readonly TYPE_IDENTITY: string = "aui-contact-capture-input-module";
 	
 	private label: AUITextLabel;
-	private input: JUITextFieldLeaf;
+	private input: JUIRichTextField;
 	private validator: (content: string) => boolean;
 	
 	public constructor(label: string, hint?: string, validator?: (content: string) => boolean) {
 	
 		super(new JUIFlowContainer(JUIDirection.TO_BOTTOM, JUIAlignment.CENTER));
 		
-		this.element.addClasses(this.TYPE_IDENTITY);
+		this.getModuleElement().addClasses(this.TYPE_IDENTITY);
 		
 		this.label = new AUITextLabel(label);
-		this.input = new JUITextFieldLeaf();
+		this.input = new JUIRichTextField();
 		
 		if (hint !== undefined) this.input.setHint(hint);
 		if (validator !== undefined) {
 			
 			this.validator = validator;
 			
-			this.input.getHTMLElement().addEventListener("input", () => {
+			this.input.getElement().addEventListener("input", () => {
 				
 				if (this.validator(this.input.getContent())) this.input.removeClasses("invalid-content");
 				else this.input.addClasses("invalid-content");
@@ -54,9 +54,33 @@ class AUIContactCaptureInputModule extends JUIModule<JUIFlowContainer, HTMLEleme
 			
 		}
 		
-		this.element.addChildren(this.label, this.input);
+		this.getModuleElement().addChildren(this.label, this.input);
 	
 	}
+	
+	public setType(type: string): void {
+		
+		this.input.setType(type);
+		
+	}
+	
+	// public setInputMask(mask: JUIInputMask): void {
+	//
+	// 	this.input.applyInputMask(mask);
+	//
+	// }
+	//
+	// public hasInputMask(mask: JUIInputMask): boolean {
+	//
+	// 	return this.input.hasInputMask();
+	//
+	// }
+	//
+	// public removeInputMask(): void {
+	//
+	// 	this.input.removeInputMask();
+	//
+	// }
 	
 }
 

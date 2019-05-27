@@ -4,8 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../../jui-element.js";
+import { JUIElement } from "../../jui-element.js";
 import JUITextLeafType from "../../../types/element-types/content-leaves/jui-text-leaf-type.js";
+import JUINotifier from "../../../action/jui-notifier.js";
 
 /**
  * A {@link JUIElement} that displays text.
@@ -14,7 +15,7 @@ import JUITextLeafType from "../../../types/element-types/content-leaves/jui-tex
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUITextLeaf extends JUIElement<HTMLElement> {
+export class JUITextLeaf extends JUIElement<HTMLElement> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -23,11 +24,14 @@ class JUITextLeaf extends JUIElement<HTMLElement> {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-text-leaf";
 	
+	protected readonly events: JUITextLeaf.JUITextLeafEvents;
+	
 	// DOC-ME [12/14/18 @ 9:52 AM] - Documentation required!
 	public constructor(content: string, textType: JUITextLeafType = JUITextLeafType.P) {
 		
 		super(textType);
 		this.addClasses(this.TYPE_IDENTITY);
+		this.events = new JUITextLeaf.JUITextLeafEvents(this);
 		
 		this.setText(content);
 		
@@ -37,7 +41,8 @@ class JUITextLeaf extends JUIElement<HTMLElement> {
 	public setText(content: string): string {
 		
 		let displaced: string = this.getText();
-		this.getHTMLElement().innerText = content;
+		this.getElement().innerText = content;
+		this.getEventManager().ELEMENT_TEXT_CHANGED.notify(content);
 		return displaced;
 		
 	}
@@ -45,10 +50,32 @@ class JUITextLeaf extends JUIElement<HTMLElement> {
 	// DOC-ME [12/22/18 @ 4:07 PM] - Documentation required!
 	public getText(): string {
 		
-		return this.getHTMLElement().innerText;
+		return this.getElement().innerText;
+		
+	}
+	
+	public getEventManager(): JUITextLeaf.JUITextLeafEvents {
+		
+		return this.events;
 		
 	}
 	
 }
 
-export default JUITextLeaf;
+export namespace JUITextLeaf {
+	
+	export class JUITextLeafEvents extends JUIElement.JUIElementEvents {
+	
+		public readonly ELEMENT_TEXT_CHANGED: JUINotifier<string>;
+		
+		public constructor(element: JUITextLeaf) {
+			
+			super(element);
+			
+			this.ELEMENT_TEXT_CHANGED = new JUINotifier<string>();
+			
+		}
+	
+	}
+	
+}

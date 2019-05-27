@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIContainerable from "../../../jui-containerable.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 import JUISingleContainer from "../jui-single-container.js";
 import JUIContainerType from "../../../types/element-types/jui-container-type.js";
 

@@ -7,8 +7,9 @@
 import JUIInputMask from "../../../../input-masks/jui-input-mask.js";
 import JUIStackContainer from "../../../containers/multi-containers/jui-stack-container.js";
 import JUIAlignment from "../../../../descriptors/jui-alignment.js";
-import JUIElement from "../../../jui-element.js";
-import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
+import { JUIElement } from "../../../jui-element.js";
+import JUIControlLeafType from "../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
+import JUINotifier from "../../../../action/jui-notifier.js";
 
 /**
  *
@@ -17,15 +18,18 @@ import JUIControlLeafType from "../../../../types/control-leaves/jui-control-lea
  * @version v0.1.0
  * @since v0.1.0
  */
-abstract class JUIEditableTextLeaf extends JUIElement<HTMLElement> {
+export abstract class JUIEditableTextLeaf extends JUIElement<HTMLElement> {
 	
 	private wrapper: JUIStackContainer;
+	
+	protected readonly events: JUIEditableTextLeaf.JUIEditableTextLeafEvents;
 	
 	protected constructor(controlLeafType: JUIControlLeafType) {
 	
 		super(controlLeafType);
 		
 		this.wrapper = new JUIStackContainer(JUIAlignment.CENTER);
+		this.events = new JUIEditableTextLeaf.JUIEditableTextLeafEvents(this);
 	
 	}
 	
@@ -45,6 +49,30 @@ abstract class JUIEditableTextLeaf extends JUIElement<HTMLElement> {
 	
 	public abstract removeInputMask(): void;
 	
+	protected abstract getEditingNotifier(): JUINotifier<string>;
+	
+	public getEventManager(): JUIEditableTextLeaf.JUIEditableTextLeafEvents {
+
+		return this.events;
+
+	}
+	
 }
 
-export default JUIEditableTextLeaf;
+export namespace JUIEditableTextLeaf {
+
+	export class JUIEditableTextLeafEvents extends JUIElement.JUIElementEvents {
+
+		public readonly ELEMENT_TEXT_EDITED: JUINotifier<string>;
+
+		public constructor(element: JUIEditableTextLeaf) {
+
+			super(element);
+
+			this.ELEMENT_TEXT_EDITED = null;
+
+		}
+
+	}
+
+}
