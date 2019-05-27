@@ -4,10 +4,15 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AlphanumericalGenerator from "../../../../../helpers/alphanumerical-generator.js";
-import JUIEditableTextLeaf from "./jui-editable-text-leaf.js";
-import JUIInputMask from "../../../../input-masks/jui-input-mask.js";
-import JUIControlLeafType from "../../../../types/control-leaves/jui-control-leaf-type.js";
+import AlphanumericalGenerator from "../../../../../../helpers/alphanumerical-generator.js";
+import JUIInputMask from "../../../../../input-masks/jui-input-mask.js";
+import JUIControlLeafType from "../../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
+import { JUIModule } from "../../../../../jui-module.js";
+import JUIStackContainer from "../../../../containers/multi-containers/jui-stack-container.js";
+import { JUIRichEditableTextLeaf } from "../interfaces/jui-rich-editable-text-leaf.js";
+import JUIBasicTextField from "./jui-basic-text-field.js";
+import JUIAlignment from "../../../../../descriptors/jui-alignment.js";
+import JUITextualInputType from "../../../../../types/input-types/jui-textual-input-type.js";
 
 type Verification = {
 	
@@ -25,7 +30,7 @@ type Verification = {
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUITextFieldLeaf extends JUIEditableTextLeaf {
+class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, HTMLElement> implements JUIRichEditableTextLeaf {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -34,19 +39,19 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	 */
 	public readonly TYPE_IDENTITY: string = "jui-text-field-leaf";
 	
-	private inputElement: HTMLInputElement;
+	private inputElement: JUIBasicTextField;
 	
 	private inputMask: JUIInputMask;
 	
 	private verifiers: Map<string, Verification> = new Map();
 	
-	public constructor(isTextHidden: boolean = false) {
+	public constructor(type: JUITextualInputType = JUITextualInputType.PLAIN) {
 		
-		super(JUIControlLeafType.INPUT);
+		super(new JUIStackContainer<JUIBasicTextField>(JUIAlignment.CENTER));
 		this.addClasses(this.TYPE_IDENTITY);
 		
-		this.inputElement = JUIControlLeafType.INPUT.create();
-		// this.getWrapper().addStackedChild(this.inputElement);
+		this.inputElement = new JUIBasicTextField(type);
+		this.getModuleElement().addStackedChild(this.inputElement);
 		
 		this.setIsTextHidden(isTextHidden);
 		
@@ -67,9 +72,9 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	}
 	
 	/**
-	 * Sets the textual hint for this JUITextFieldLeaf.
+	 * Sets the textual hint for this JUIRichTextField.
 	 *
-	 * @param {string} hint The textual hint for this JUITextFieldLeaf.
+	 * @param {string} hint The textual hint for this JUIRichTextField.
 	 */
 	public setHint(hint: string): void {
 		
@@ -161,4 +166,4 @@ class JUITextFieldLeaf extends JUIEditableTextLeaf {
 	
 }
 
-export default JUITextFieldLeaf;
+export default JUIRichTextField;
