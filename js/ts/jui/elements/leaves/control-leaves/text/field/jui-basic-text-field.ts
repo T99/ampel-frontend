@@ -85,7 +85,7 @@ export class JUIBasicTextField extends JUIElement<HTMLInputElement> implements J
 		
 	}
 	
-	public getEventManager(): JUIBasicEditableTextLeaf.JUIBasicEditableTextLeafEvents {
+	public getEventManager(): JUIBasicTextField.JUIBasicTextFieldEvents {
 		
 		return this.events;
 		
@@ -95,7 +95,7 @@ export class JUIBasicTextField extends JUIElement<HTMLInputElement> implements J
 
 export namespace JUIBasicTextField {
 	
-	export class JUIBasicTextFieldEvents extends JUIBasicEditableTextLeaf.JUIBasicEditableTextLeafEvents {
+	export class JUIBasicTextFieldEvents extends JUIElement.JUIElementEvents implements JUIBasicEditableTextLeaf.JUIBasicEditableTextLeafEvents {
 		
 		public readonly ELEMENT_TEXT_EDITED: JUINotifier<string>;
 		

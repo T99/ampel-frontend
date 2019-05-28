@@ -4,7 +4,6 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import { JUIElement } from "../../../../jui-element.js";
 import JUINotifier from "../../../../../action/jui-notifier.js";
 import JUIKeyboardEvent from "../../../../../action/events/jui-keyboard-event.js";
 
@@ -35,21 +34,15 @@ export interface JUIBasicEditableTextLeaf {
 
 export namespace JUIBasicEditableTextLeaf {
 	
-	export abstract class JUIBasicEditableTextLeafEvents extends JUIElement.JUIElementEvents {
+	export interface JUIBasicEditableTextLeafEvents {
 		
-		public readonly abstract ELEMENT_TEXT_EDITED: JUINotifier<string>;
+		readonly ELEMENT_TEXT_EDITED: JUINotifier<string>;
 		
-		public readonly abstract KEY_PRESSED: JUINotifier<JUIKeyboardEvent>;
+		readonly KEY_PRESSED: JUINotifier<JUIKeyboardEvent>;
 		
-		public readonly abstract KEY_DOWN: JUINotifier<JUIKeyboardEvent>;
+		readonly KEY_DOWN: JUINotifier<JUIKeyboardEvent>;
 		
-		public readonly abstract KEY_UP: JUINotifier<JUIKeyboardEvent>;
-		
-		protected constructor(element: JUIElement) {
-			
-			super(element);
-			
-		}
+		readonly KEY_UP: JUINotifier<JUIKeyboardEvent>;
 		
 	}
 	

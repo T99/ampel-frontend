@@ -4,24 +4,17 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AlphanumericalGenerator from "../../../../../../helpers/alphanumerical-generator.js";
-import JUIInputMask from "../../../../../input-masks/jui-input-mask.js";
-import JUIControlLeafType from "../../../../../types/element-types/control-leaves/jui-control-leaf-type.js";
 import { JUIModule } from "../../../../../jui-module.js";
 import JUIStackContainer from "../../../../containers/multi-containers/jui-stack-container.js";
-import { JUIRichEditableTextLeaf } from "../interfaces/jui-rich-editable-text-leaf.js";
-import JUIBasicTextField from "./jui-basic-text-field.js";
 import JUIAlignment from "../../../../../descriptors/jui-alignment.js";
 import JUITextualInputType from "../../../../../types/input-types/jui-textual-input-type.js";
-
-type Verification = {
-	
-	id: string,
-	description?: string,
-	failureMessage: string,
-	test: (content: string) => boolean
-	
-};
+import { JUIBasicTextField } from "./jui-basic-text-field.js";
+import JUIInputMask from "../../../../../input-masks/jui-input-mask.js";
+import JUIInputType from "../../../../../types/input-types/jui-input-type.js";
+import { JUIRichEditableTextLeaf } from "../interfaces/jui-rich-editable-text-leaf.js";
+import JUINotifier from "../../../../../action/jui-notifier.js";
+import JUIKeyboardEvent from "../../../../../action/events/jui-keyboard-event.js";
+import JUIKeyboardEventType from "../../../../../action/events/types/jui-keyboard-event-type.js";
 
 /**
  * DOC-ME [5/19/19 @ 12:36 AM] - Documentation required!
@@ -30,7 +23,7 @@ type Verification = {
  * @version v0.1.0
  * @since v0.1.0
  */
-class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, HTMLElement> implements JUIRichEditableTextLeaf {
+export class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, HTMLElement> implements JUIRichEditableTextLeaf {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -43,7 +36,7 @@ class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, H
 	
 	private inputMask: JUIInputMask;
 	
-	private verifiers: Map<string, Verification> = new Map();
+	protected readonly events: JUIRichTextField.JUIRichTextFieldEvents;
 	
 	public constructor(type: JUITextualInputType = JUITextualInputType.PLAIN) {
 		
@@ -52,98 +45,70 @@ class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, H
 		
 		this.inputElement = new JUIBasicTextField(type);
 		this.getModuleElement().addStackedChild(this.inputElement);
-		
-		this.setIsTextHidden(isTextHidden);
+		this.events = new JUIRichTextField.JUIRichTextFieldEvents(this, this.inputElement, this.inputMask);
 		
 	}
 	
 	public getContent(): string {
 		
-		return this.inputElement.value;
+		return this.inputElement.getContent();
 		
 	}
 	
-	public setContent(content: string): string {
+	public getMaskContent(): string {
 		
-		let displaced: string = this.getContent();
-		this.inputElement.value = content;
-		return displaced;
+		return "";
 		
 	}
 	
-	/**
-	 * Sets the textual hint for this JUIRichTextField.
-	 *
-	 * @param {string} hint The textual hint for this JUIRichTextField.
-	 */
-	public setHint(hint: string): void {
+	public setContent(content: string): void {
 		
-		this.inputElement.placeholder = hint;
+		this.inputElement.setContent(content);
 		
 	}
 	
-	/**
-	 * Used to change whether the content of a JUITextField is readable (not hidden), or obscured (hidden, shown as '*'
-	 * or bullets depending on the browser).
-	 *
-	 * @param {boolean} isTextHidden If true, content will be hidden, else content will be shown.
-	 */
-	public setIsTextHidden(isTextHidden: boolean): void {
+	public hasContent(): boolean {
 		
-		if (isTextHidden) this.inputElement.type = "password";
-		else this.inputElement.type = "text";
+		return this.inputElement.hasContent();
 		
 	}
 	
-	public isTextHidden(): boolean {
+	public getPlaceholderText(): string {
 		
-		return (this.inputElement.type === "password");
-		
-	}
-	
-	public checkValidity(): boolean {
-		
-		for (let verification of this.verifiers.values()) {
-			
-			if (!verification.test(this.getContent())) return false;
-			
-		}
-		
-		return true;
+		// TODO [5/27/19 @ 4:07 PM] - Finish the 'getPlaceholderText' method.
+		return "";
 		
 	}
 	
-	public addVerification(test: (content: string) => boolean, failureMessage: string, description?: string):
-		string {
-		
-		let id: string = AlphanumericalGenerator.getIdFromOrderedPattern("6a");
-		
-		this.verifiers.set(id, {
-			
-			id,
-			description,
-			failureMessage,
-			test
+	public setPlaceholderText(placeholderText: string): void {
 	
-		});
+		// TODO [5/27/19 @ 4:07 PM] - Finish the 'setPlaceholderText' method.
+	
+	}
+	
+	public hasPlaceholderText(): boolean {
 		
-		return id;
+		// TODO [5/27/19 @ 4:07 PM] - Finish the 'hasPlaceholderText' method.
+		return false;
 		
 	}
 	
-	public setType(type: string): void {
+	public getInputType(): JUIInputType {
 		
-		this.inputElement.type = type;
+		return this.inputElement.getInputType();
+		
+	}
+	
+	public setInputType(type: JUITextualInputType): void {
+		
+		this.inputElement.setInputType(type);
 		
 	}
 	
 	public applyInputMask(mask: JUIInputMask): void {
 		
-		if (this.hasInputMask()) {
-			
-			throw new Error("ERR | Attempted to add a second input mask to an already masked input.");
-			
-		} else this.inputMask = mask.create(this);
+		this.removeInputMask();
+		this.inputMask = mask;
 		
 	}
 	
@@ -164,6 +129,38 @@ class JUIRichTextField extends JUIModule<JUIStackContainer<JUIBasicTextField>, H
 	
 	}
 	
+	public getEventManager(): JUIRichTextField.JUIRichTextFieldEvents {
+		
+		return this.events;
+		
+	}
+	
 }
 
-export default JUIRichTextField;
+export namespace JUIRichTextField {
+	
+	export class JUIRichTextFieldEvents extends JUIModule.JUIModuleEvents implements JUIRichEditableTextLeaf.JUIRichEditableTextLeafEvents {
+		
+		public readonly ELEMENT_TEXT_EDITED: JUINotifier<string>;
+		
+		public readonly KEY_PRESSED: JUINotifier<JUIKeyboardEvent>;
+		
+		public readonly KEY_DOWN: JUINotifier<JUIKeyboardEvent>;
+		
+		public readonly KEY_UP: JUINotifier<JUIKeyboardEvent>;
+		
+		public readonly ELEMENT_MASK_TEXT_UPDATED: JUINotifier<string>;
+		
+		public constructor(element: JUIRichTextField, inputElement: JUIBasicTextField, maskElement: JUIInputMask) {
+			
+			super(element);
+			
+			this.KEY_PRESSED = JUIKeyboardEventType.KEY_PRESS.getNotifierForEventType(inputElement);
+			this.KEY_DOWN = JUIKeyboardEventType.KEY_DOWN.getNotifierForEventType(inputElement);
+			this.KEY_UP = JUIKeyboardEventType.KEY_UP.getNotifierForEventType(inputElement);
+			
+		}
+		
+	}
+	
+}

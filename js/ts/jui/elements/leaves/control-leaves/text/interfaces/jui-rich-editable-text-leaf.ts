@@ -6,6 +6,7 @@
 
 import JUIInputMask from "../../../../../input-masks/jui-input-mask.js";
 import { JUIBasicEditableTextLeaf } from "./jui-basic-editable-text-leaf.js";
+import JUINotifier from "../../../../../action/jui-notifier.js";
 
 /**
  * An interface for rich editable text leaves.
@@ -14,7 +15,9 @@ import { JUIBasicEditableTextLeaf } from "./jui-basic-editable-text-leaf.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-interface JUIRichEditableTextLeaf extends JUIBasicEditableTextLeaf {
+export interface JUIRichEditableTextLeaf extends JUIBasicEditableTextLeaf {
+	
+	getMaskContent(): string;
 	
 	applyInputMask(mask: JUIInputMask): void;
 	
@@ -22,6 +25,16 @@ interface JUIRichEditableTextLeaf extends JUIBasicEditableTextLeaf {
 	
 	removeInputMask(): void;
 	
+	getEventManager(): JUIRichEditableTextLeaf.JUIRichEditableTextLeafEvents;
+	
 }
 
-export default JUIRichEditableTextLeaf;
+export namespace JUIRichEditableTextLeaf {
+	
+	export interface JUIRichEditableTextLeafEvents extends JUIBasicEditableTextLeaf.JUIBasicEditableTextLeafEvents {
+	
+		readonly ELEMENT_MASK_TEXT_UPDATED: JUINotifier<string>;
+	
+	}
+	
+}
