@@ -19,13 +19,10 @@ import TSLockingQueueNode from "./nodes/ts-locking-queue-node.js";
  */
 class TSLockingQueue implements TSStructure<TSLockingQueueNode> {
 	
-	private lock: TSLock;
-	
 	private dll: TSDoublyLinkedList<TSLockingQueueNode>;
 	
 	public constructor() {
 	
-		this.lock = new TSLock();
 		this.dll = new TSDoublyLinkedList<TSLockingQueueNode>();
 	
 	}

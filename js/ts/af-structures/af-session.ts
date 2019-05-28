@@ -48,6 +48,8 @@ class AFSession extends AFStructure<AFSession> {
 		this.developerMode = developerMode;
 		this.isAdmin = false;
 		
+		if (this.developerMode) console.log("Operating in developer mode...");
+		
 	}
 	
 	public async refresh(): Promise<AFSession> {

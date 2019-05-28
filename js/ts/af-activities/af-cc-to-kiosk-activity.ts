@@ -5,9 +5,6 @@
  */
 
 import AFActivity from "./af-activity.js";
-import AUIKioskThankYouPage from "../aui/pages/thank-you/aui-kiosk-thank-you-page.js";
-import AUIContactCapturePage from "../aui/pages/contact-capture/aui-contact-capture-page.js";
-import AUIKioskPage from "../aui/pages/kiosk/aui-kiosk-page.js";
 
 /**
  * An AUI activity that involves starting with contact capture and then providing optional feedback afterwards.
@@ -18,24 +15,24 @@ import AUIKioskPage from "../aui/pages/kiosk/aui-kiosk-page.js";
  */
 class AFCCToKioskActivity implements AFActivity {
 	
-	private currentPage: string;
-	
-	private contactCapturePage: AUIContactCapturePage;
-	
-	private kioskPage: AUIKioskPage;
-	
-	private thankYouPage: AUIKioskThankYouPage
-	
-	public constructor() {
-	
-	
-	
-	}
-	
+	// private currentPage: string;
+	//
+	// private contactCapturePage: AUIContactCapturePage;
+	//
+	// private kioskPage: AUIKioskPage;
+	//
+	// private thankYouPage: AUIKioskThankYouPage
+	//
+	// public constructor() {
+	//
+	//
+	//
+	// }
+	//
 	public start(): void {
-	
-	
-	
+
+
+
 	}
 	
 }

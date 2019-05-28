@@ -15,13 +15,6 @@ import AFQuestionResponseStructure from "../../net/response-structures/common/af
 import AFAPIQuestionAccessor from "../../net/accessors/af-api-question-accessor.js";
 import AFSession from "../af-session.js";
 
-type Option = {
-	
-	id: string;
-	value: string;
-	
-};
-
 /**
  *
  *
@@ -40,12 +33,6 @@ class AFQuestion extends AFStructure<AFQuestion> implements AFIDObject, AFClient
 	private options: Map<string, string>;
 	
 	private organization: AFOrganization;
-	
-	/**
-	 * Counts the number of folders that this question resides in. Used to determine whether or not this question has
-	 * been placed in any folder.
-	 */
-	private placed: number;
 	
 	protected constructor(organization: AFOrganization) {
 		

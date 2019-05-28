@@ -66,7 +66,7 @@ class TSDate {
 	public getYear(): number {
 		
 		let millisecondApproximation: number = this.getAdjustedEpochTime();
-		let yearApproximation: number = (1970 + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
+		let yearApproximation: number = (TSDate.EPOCH_YEAR + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
 		let leapYearBeingInspected: number;
 		
 		if (this.getAdjustedEpochTime() >= 0) {
@@ -78,7 +78,7 @@ class TSDate {
 				if (TSDateMath.isYearLeapYear(leapYearBeingInspected)) {
 					
 					millisecondApproximation -= TSTimeUnit.DAY.getMilliseconds();
-					yearApproximation = (1970 + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
+					yearApproximation = (TSDate.EPOCH_YEAR + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
 					
 				}
 				
@@ -95,7 +95,7 @@ class TSDate {
 				if (TSDateMath.isYearLeapYear(leapYearBeingInspected)) {
 					
 					millisecondApproximation += TSTimeUnit.DAY.getMilliseconds();
-					yearApproximation = (1970 + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
+					yearApproximation = (TSDate.EPOCH_YEAR + (millisecondApproximation / TSTimeUnit.YEAR.getMilliseconds()));
 					
 				}
 				

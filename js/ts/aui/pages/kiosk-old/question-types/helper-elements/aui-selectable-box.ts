@@ -5,14 +5,14 @@
  */
 
 import AFQuestionType from "../../../../../af-structures/descriptors/af-question-type.js";
-import JUIFlowContainer from "../../../../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "../../../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../../jui/descriptors/jui-alignment.js";
 import JUIFlexWrappingRule from "../../../../../jui/descriptors/jui-flex-wrapping-rule.js";
-import JUISingleSelectorLeaf from "../../../../../jui/elements/leaves/control-leaves/selectors/single-selectors/jui-single-selector-leaf.js";
-import JUICheckboxSingleSelectorLeaf from "../../../../../jui/elements/leaves/control-leaves/selectors/single-selectors/jui-checkbox-single-selector-leaf.js";
-import JUIRadioSingleSelectorLeaf from "../../../../../jui/elements/leaves/control-leaves/selectors/single-selectors/jui-radio-single-selector-leaf.js";
 import AUITextLabel from "../../../../global/aui-text-label.js";
+import { JUIToggleableCheckbox } from "../../../../../jui/elements/leaves/control-leaves/selectors/selection-element/jui-toggleable-checkbox.js";
+import { JUIToggleable } from "../../../../../jui/elements/leaves/control-leaves/selectors/selection-element/jui-toggleable.js";
+import { JUIContainerable } from "../../../../../jui/jui-containerable.js";
 
 /**
  * A checkbox or radio button box containing a piece of text.
@@ -32,7 +32,7 @@ class AUISelectableBox extends JUIFlowContainer {
 	
 	private textElement: AUITextLabel;
 	private responseID: string;
-	private selectable: JUISingleSelectorLeaf;
+	private toggleable: JUIToggleable & JUIContainerable;
 	
 	public constructor(text: string, responseID: string, type: AFQuestionType) {
 		
@@ -45,11 +45,13 @@ class AUISelectableBox extends JUIFlowContainer {
 		
 		this.textElement = new AUITextLabel(text);
 		
-		if (type === AFQuestionType.SELECT_ALL_THAT_APPLY) this.selectable = new JUICheckboxSingleSelectorLeaf();
-		else if (type === AFQuestionType.MULTIPLE_CHOICE) this.selectable = new JUIRadioSingleSelectorLeaf();
+		if (type === AFQuestionType.SELECT_ALL_THAT_APPLY) this.toggleable = new JUIToggleableCheckbox();
+		else if (type === AFQuestionType.MULTIPLE_CHOICE) this.toggleable = new JUIToggleableCheckbox();
 		else throw new TypeError("Attempted to create an AUISelectableBox for a invalid question type.");
 		
-		this.addChildren(this.textElement, this.selectable);
+		this.toggleable.addClasses("jui-toggleable");
+		
+		this.addChildren(this.textElement, this.toggleable);
 		
 	}
 	
@@ -73,13 +75,13 @@ class AUISelectableBox extends JUIFlowContainer {
 	
 	public isSelected(): boolean {
 		
-		return this.selectable.isSelected();
+		return this.toggleable.getState();
 		
 	}
 	
-	public setSelected(isSelected: boolean): boolean {
+	public setSelected(isSelected: boolean): void {
 		
-		return this.selectable.setSelected(isSelected);
+		return this.toggleable.setState(isSelected);
 		
 	}
 	

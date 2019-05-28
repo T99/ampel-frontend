@@ -4,37 +4,34 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIElement from "../elements/jui-element.js";
-import JUIBoxShadowStyleMutator from "./mutators/jui-box-shadow-style-mutator.js";
-
 /**
- * 
- * 
+ *
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
  */
 class JUIStyleCollection {
 	
-	private element: JUIElement;
-	
-	private boxShadowMutator: JUIBoxShadowStyleMutator;
-	
-	public constructor(element: JUIElement) {
-		
-		this.element = element;
-		
-	}
+	// private element: JUIElement;
+	//
+	// private boxShadowMutator: JUIBoxShadowStyleMutator;
+	//
+	// public constructor(element: JUIElement) {
+	//
+	// 	this.element = element;
+	//
+	// }
 	
 	// ? additiveSymbols
 	
-	public alignContent(value: "start" | "end" | "flex-start" | "flex-end" | "center" | "normal" | "baseline" |
-		"first baseline" | "last baseline" | "space-between" | "space-around" | "space-evenly" | "stretch" | "safe" |
-		"unsafe"): void {
-		
-		// TODO [12/19/18 @ 5:24 AM] - Fix this method, this is not yet correct.
-		
-	}
+	// public alignContent(value: "start" | "end" | "flex-start" | "flex-end" | "center" | "normal" | "baseline" |
+	// 	"first baseline" | "last baseline" | "space-between" | "space-around" | "space-evenly" | "stretch" | "safe" |
+	// 	"unsafe"): void {
+	//
+	// 	// TODO [12/19/18 @ 5:24 AM] - Fix this method, this is not yet correct.
+	//
+	// }
 	
 	// alignItems
 	
@@ -210,12 +207,12 @@ class JUIStyleCollection {
 	
 	// ? boxDecorationBreak
 	
-	public boxShadow(): JUIBoxShadowStyleMutator {
-		
-		if (!this.boxShadowMutator) this.boxShadowMutator = new JUIBoxShadowStyleMutator();
-		return this.boxShadowMutator;
-		
-	}
+	// public boxShadow(): JUIBoxShadowStyleMutator {
+	//
+	// 	if (!this.boxShadowMutator) this.boxShadowMutator = new JUIBoxShadowStyleMutator();
+	// 	return this.boxShadowMutator;
+	//
+	// }
 	
 	// boxSizing
 	

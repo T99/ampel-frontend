@@ -4,11 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIIdentityMap from "jui-identity-map.js";
-
 /**
  * An interface outlining classes that can maintain {@link JUIIdentityMap}s.
- * 
+ *
  * @see JUIIdentityMap
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0

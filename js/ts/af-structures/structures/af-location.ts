@@ -12,8 +12,6 @@ import AFOrganizationInformation from "../information-contexts/af-organization-i
 import AFStructure from "../af-structure.js";
 import AFLocationResponseStructure from "../../net/response-structures/common/af-location-response-structure.js";
 import AFDeviceListing from "./listings/af-device-listing.js";
-import AFQuestionResponseStructure from "../../net/response-structures/common/af-question-response-structure.js";
-import AFQuestionListing from "./listings/af-question-listing.js";
 import AFDeviceResponseStructure from "../../net/response-structures/common/af-device-response-structure.js";
 import AFAPILocationAccessor from "../../net/accessors/af-api-location-accessor.js";
 import AFDevice from "./af-device.js";

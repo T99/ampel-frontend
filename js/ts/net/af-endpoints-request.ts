@@ -5,8 +5,7 @@
  */
 
 import HTTPMethod from "../descriptors/http-method.js";
-import TSObjectIterator from "../structures/implementations/iterate/ts-object-iterator.js";
-import InvalidArgumentsError from "../errors/invalid-arguments-error.js";
+import TSObjectIterator from "../util/structures/implementations/iterate/ts-object-iterator.js";
 
 /**
  * Describes the most basic form of an request to an Ampel endpoint.

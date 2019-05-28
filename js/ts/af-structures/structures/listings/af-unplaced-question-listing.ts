@@ -13,7 +13,6 @@ import AFSessionInformation from "../../information-contexts/af-session-informat
 import AFClientInformation from "../../information-contexts/af-client-information.js";
 import AFOrganizationInformation from "../../information-contexts/af-organization-information.js";
 import AFSession from "../../af-session.js";
-import AFAPIQuestionAccessor from "../../../net/accessors/af-api-question-accessor.js";
 import AFAPIOrganizationAccessor from "../../../net/accessors/af-api-organization-accessor.js";
 
 /**
@@ -41,11 +40,11 @@ class AFUnplacedQuestionListing extends AFConcreteStructureListing<AFUnplacedQue
 		
 		let questionListing: AFUnplacedQuestionListing = new AFUnplacedQuestionListing(organization);
 		
-		for (let response of questionResponses) {
-			
-			// TODO [4/24/19 @ 6:11 PM] - Finish the 'createWithAPIResponse' method.
-			
-		}
+		// for (let response of questionResponses) {
+		//
+		// 	// TODO [4/24/19 @ 6:11 PM] - Finish the 'createWithAPIResponse' method.
+		//
+		// }
 		
 		return questionListing;
 		
@@ -59,11 +58,11 @@ class AFUnplacedQuestionListing extends AFConcreteStructureListing<AFUnplacedQue
 			
 		}
 		
-		for (let response of questionResponses) {
-			
-			// TODO [4/24/19 @ 6:11 PM] - Finish the 'refresh' method.
-			
-		}
+		// for (let response of questionResponses) {
+		//
+		// 	// TODO [4/24/19 @ 6:11 PM] - Finish the 'refresh' method.
+		//
+		// }
 		
 		return undefined;
 		

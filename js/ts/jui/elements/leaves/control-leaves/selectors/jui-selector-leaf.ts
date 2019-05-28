@@ -10,11 +10,6 @@ import JUIControlLeafType from "../../../../types/element-types/control-leaves/j
 // DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!
 abstract class JUISelectorLeaf extends JUIElement {
 	
-	/**
-	 * A String that represents the identity of this type.
-	 *
-	 * @type {string}
-	 */
 	public readonly TYPE_IDENTITY: string = "jui-selector-leaf";
 	
 	// DOC-ME [12/8/18 @ 4:52 PM] - Documentation required!

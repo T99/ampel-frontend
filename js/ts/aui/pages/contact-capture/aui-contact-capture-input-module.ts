@@ -5,11 +5,13 @@
  */
 
 import AUITextLabel from "../../global/aui-text-label.js";
-import JUIRichTextField from "../../../jui/elements/leaves/control-leaves/text/jui-rich-text-field.js";
 import { JUIModule } from "../../../jui/jui-module.js";
 import JUIFlowContainer from "../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../jui/descriptors/jui-alignment.js";
+import { JUIRichTextField } from "../../../jui/elements/leaves/control-leaves/text/field/jui-rich-text-field.js";
+import JUIInputType from "../../../jui/types/input-types/jui-input-type.js";
+import JUITextualInputType from "../../../jui/types/input-types/jui-textual-input-type.js";
 
 /**
  *
@@ -31,7 +33,7 @@ class AUIContactCaptureInputModule extends JUIModule<JUIFlowContainer, HTMLEleme
 	private input: JUIRichTextField;
 	private validator: (content: string) => boolean;
 	
-	public constructor(label: string, hint?: string, validator?: (content: string) => boolean) {
+	public constructor(label: string, placeholderText?: string, validator?: (content: string) => boolean) {
 	
 		super(new JUIFlowContainer(JUIDirection.TO_BOTTOM, JUIAlignment.CENTER));
 		
@@ -40,7 +42,7 @@ class AUIContactCaptureInputModule extends JUIModule<JUIFlowContainer, HTMLEleme
 		this.label = new AUITextLabel(label);
 		this.input = new JUIRichTextField();
 		
-		if (hint !== undefined) this.input.setHint(hint);
+		if (placeholderText !== undefined) this.input.setPlaceholderText(placeholderText);
 		if (validator !== undefined) {
 			
 			this.validator = validator;
@@ -58,9 +60,15 @@ class AUIContactCaptureInputModule extends JUIModule<JUIFlowContainer, HTMLEleme
 	
 	}
 	
-	public setType(type: string): void {
+	public getInputType(): JUIInputType {
 		
-		this.input.setType(type);
+		return this.input.getInputType();
+		
+	}
+	
+	public setInputType(type: JUITextualInputType): void {
+		
+		this.input.setInputType(type);
 		
 	}
 	

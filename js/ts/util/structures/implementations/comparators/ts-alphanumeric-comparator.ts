@@ -93,6 +93,7 @@ class TSAlphanumericComparator extends TSComparator<string> {
 			else if ((asciiCode >= 91) && (asciiCode <= 96))	return (85 + (asciiCode - 91));
 			else if ((asciiCode >= 97) && (asciiCode <= 122))	return (10 + (2 * (asciiCode - 97)));
 			else if ((asciiCode >= 123) && (asciiCode <= 126))	return (91 + (asciiCode - 123));
+			else throw new Error("ERR | Attempted to get the value of an out-of-range character.");
 			
 		} else throw new Error("Attempted to get the value of a zero-length string.");
 		

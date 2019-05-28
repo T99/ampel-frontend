@@ -68,7 +68,7 @@ abstract class TSADoublyLinkedList<E, N extends TSIDoublyLinkedListNode<E, N>> i
 		
 		let size: number = 0;
 		
-		for (let element of this.iterator()) size++;
+		this.iterator().forEachRemaining((): any => size++);
 		
 		return size;
 		
@@ -319,6 +319,9 @@ abstract class TSADoublyLinkedList<E, N extends TSIDoublyLinkedListNode<E, N>> i
 			}
 			
 		}
+		
+		return undefined;
+		
 	}
 	
 	public removeFirst(): E {

@@ -5,7 +5,6 @@
  */
 
 import TSDoublyLinkedListNode from "./nodes/ts-doubly-linked-list-node.js";
-import TSIList from "../../interfaces/list/ts-i-list.js";
 import TSComparator from "../../interfaces/ts-comparator.js";
 import TSSortingMethod from "../../interfaces/ts-sorting-method.js";
 import TSNaturalComparator from "../comparators/ts-natural-comparator.js";

@@ -496,7 +496,7 @@ class TSMultiPathDoublyLinkedList<T, E> implements TSIDoublyLinkedList<E, TSMult
 			
 			let size: number = 0;
 			
-			for (let element of this.iterator(tractID)) size++;
+			this.iterator(tractID).forEachRemaining((): any => size++);
 			
 			return size;
 			

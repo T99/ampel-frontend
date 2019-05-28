@@ -4,8 +4,6 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AFClient from "./structures/af-client.js";
-
 /**
  * The most generic possible form of a data structure that exists for use by and in the Ampel API.
  *

@@ -16,7 +16,6 @@ import AFQuestionResponseStructure from "../../net/response-structures/common/af
 import AFAPIFolderAccessor from "../../net/accessors/af-api-folder-accessor.js";
 import AFQuestionType from "../descriptors/af-question-type.js";
 import AFQuestion from "./af-question.js";
-import AFAPIOrganizationAccessor from "../../net/accessors/af-api-organization-accessor.js";
 import AFSession from "../af-session.js";
 
 /**

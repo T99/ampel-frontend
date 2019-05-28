@@ -21,7 +21,7 @@ class AlphanumericalGenerator {
 	
 	/**
 	 * Recursively validates a given pattern.
-	 * 
+	 *
 	 * @param pattern A string-based pattern to be validated.
 	 * @returns {Boolean} A boolean representing the validity of the pattern.
 	 */
@@ -183,7 +183,7 @@ class AlphanumericalGenerator {
 				index: finalIndex
 			};
 			
-		}
+		} else throw new Error("ERR | Attempted to use an unrecognized pattern character.");
 		
 	}
 	
@@ -191,7 +191,7 @@ class AlphanumericalGenerator {
 	 * Generates and returns a random alphanumerical string based on the pattern provided, in an unordered fashion.
 	 *
 	 * Patterns are specified as follows:
-	 * 	- 
+	 * 	-
 	 *
 	 * @param pattern A string-based pattern generated from the above specified format.
 	 * @returns {String} A string that was generated from the provided pattern.

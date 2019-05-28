@@ -5,7 +5,6 @@
  */
 
 import AFCollectiveStructureListing from "../../af-collective-structure-listing.js";
-import AFFolder from "../af-folder.js";
 import AFClientInformation from "../../information-contexts/af-client-information.js";
 import AFOrganizationInformation from "../../information-contexts/af-organization-information.js";
 import AFClient from "../af-client.js";

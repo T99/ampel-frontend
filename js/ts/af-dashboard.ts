@@ -7,8 +7,6 @@
 import JUIWorld from "./jui/jui-world.js";
 import AUISplashPage from "./aui/splash/aui-splash-page.js";
 
-type StartingPointEnumeration = { [ startingPoint: string ]: number };
-
 /**
  * The program entry-point for Ampel Feedback's online web-app.
  *

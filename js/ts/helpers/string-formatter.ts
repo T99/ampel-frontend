@@ -6,7 +6,7 @@
 
 /**
  * Provides a grab-bag of static string formatting methods.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -83,11 +83,11 @@ class StringFormatter {
 	
 	/**
 	 * Returns true if the provided string consists solely of a single lowercase character.
-	 * 
+	 *
 	 * @param {string} content The content to check.
 	 * @returns {boolean} true if the provided string consists solely of a single lowercase character.
 	 */
-	private static isLowercaseCharacter(content: string): boolean {
+	public static isLowercaseCharacter(content: string): boolean {
 		
 		return /^[a-z]$/.test(content);
 		
@@ -99,7 +99,7 @@ class StringFormatter {
 	 * @param {string} content The content to check.
 	 * @returns {boolean} true if the provided string consists solely of a single whitespace character.
 	 */
-	private static isWhitespaceCharacter(content: string): boolean {
+	public static isWhitespaceCharacter(content: string): boolean {
 		
 		return /^\s$/.test(content);
 		
@@ -140,9 +140,9 @@ class StringFormatter {
 		
 		while (hasNext) {
 			
-			let nextWhitespaceIndex: number = (this.content.includes(" ", lastWhitespaceIndex) ?
-				this.content.indexOf(" ", lastWhitespaceIndex) :
-				this.content.length);
+			// let nextWhitespaceIndex: number = (this.content.includes(" ", lastWhitespaceIndex) ?
+			// 	this.content.indexOf(" ", lastWhitespaceIndex) :
+			// 	this.content.length);
 			currentWord = this.content.substring(lastWhitespaceIndex, lastWhitespaceIndex);
 			lastWhitespaceIndex = this.content.indexOf(" ", lastWhitespaceIndex);
 			hasNext = (lastWhitespaceIndex < this.content.length - 1);

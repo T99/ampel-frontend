@@ -54,7 +54,7 @@ class TSTree<E> implements TSITree<E> {
 	
 	public size(): number {
 		
-		return 0;
+		return this.treeSize;
 		
 	}
 	
@@ -62,185 +62,187 @@ class TSTree<E> implements TSITree<E> {
 		
 		// TODO [3/13/19 @ 2:25 PM] - Finish the 'iterator' method.
 		
-		switch (traversalMethod) {
-			
-			case TSTreeTraversalMethod.INORDER: {
-				
-				return new class extends TSAIterator<E> {
-					
-					private firstNode: TSTreeNode<E>;
-					
-					private currentNode: TSTreeNode<E>;
-					
-					public constructor(firstNode: TSTreeNode<E>) {
-						
-						super();
-						
-						this.currentNode = firstNode;
-						
-					}
-					
-					public hasNext(): boolean {
-						
-						return false;
-						
-					}
-					
-					public next(): E {
-						
-						return undefined;
-						
-					}
-					
-					public remove(): E {
-						
-						return undefined;
-						
-					}
-					
-					public reset(): void {
-						
-						this.currentNode = this.firstNode;
-						
-					}
-					
-				}(this.getRootNode());
-				
-			}
-			
-			case TSTreeTraversalMethod.PREORDER: {
-				
-				return new class extends TSAIterator<E> {
-					
-					private firstNode: TSTreeNode<E>;
-					
-					private currentNode: TSTreeNode<E>;
-					
-					public constructor(firstNode: TSTreeNode<E>) {
-						
-						super();
-						
-						this.currentNode = firstNode;
-						
-					}
-					
-					public hasNext(): boolean {
-						
-						return false;
-						
-					}
-					
-					public next(): E {
-						
-						return undefined;
-						
-					}
-					
-					public remove(): E {
-						
-						return undefined;
-						
-					}
-					
-					public reset(): void {
-						
-						this.currentNode = this.firstNode;
-						
-					}
-					
-				}(this.getRootNode());
-				
-			}
-			
-			case TSTreeTraversalMethod.POSTORDER: {
-				
-				return new class extends TSAIterator<E> {
-					
-					private firstNode: TSTreeNode<E>;
-					
-					private currentNode: TSTreeNode<E>;
-					
-					public constructor(firstNode: TSTreeNode<E>) {
-						
-						super();
-						
-						this.currentNode = firstNode;
-						
-					}
-					
-					public hasNext(): boolean {
-						
-						return false;
-						
-					}
-					
-					public next(): E {
-						
-						return undefined;
-						
-					}
-					
-					public remove(): E {
-						
-						return undefined;
-						
-					}
-					
-					public reset(): void {
-						
-						this.currentNode = this.firstNode;
-						
-					}
-					
-				}(this.getRootNode());
-				
-			}
-			
-			case TSTreeTraversalMethod.LEVEL_ORDER: {
-				
-				return new class extends TSAIterator<E> {
-					
-					private firstNode: TSTreeNode<E>;
-					
-					private currentNode: TSTreeNode<E>;
-					
-					public constructor(firstNode: TSTreeNode<E>) {
-						
-						super();
-						
-						this.currentNode = firstNode;
-						
-					}
-					
-					public hasNext(): boolean {
-						
-						return false;
-						
-					}
-					
-					public next(): E {
-						
-						return undefined;
-						
-					}
-					
-					public remove(): E {
-						
-						return undefined;
-						
-					}
-					
-					public reset(): void {
-						
-						this.currentNode = this.firstNode;
-						
-					}
-					
-				}(this.getRootNode());
-				
-			}
-			
-		}
+		return undefined;
+		
+		// switch (traversalMethod) {
+		//
+		// 	case TSTreeTraversalMethod.INORDER: {
+		//
+		// 		return new class extends TSAIterator<E> {
+		//
+		// 			private firstNode: TSTreeNode<E>;
+		//
+		// 			private currentNode: TSTreeNode<E>;
+		//
+		// 			public constructor(firstNode: TSTreeNode<E>) {
+		//
+		// 				super();
+		//
+		// 				this.currentNode = firstNode;
+		//
+		// 			}
+		//
+		// 			public hasNext(): boolean {
+		//
+		// 				return false;
+		//
+		// 			}
+		//
+		// 			public next(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public remove(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public reset(): void {
+		//
+		// 				this.currentNode = this.firstNode;
+		//
+		// 			}
+		//
+		// 		}(this.getRootNode());
+		//
+		// 	}
+		//
+		// 	case TSTreeTraversalMethod.PREORDER: {
+		//
+		// 		return new class extends TSAIterator<E> {
+		//
+		// 			private firstNode: TSTreeNode<E>;
+		//
+		// 			private currentNode: TSTreeNode<E>;
+		//
+		// 			public constructor(firstNode: TSTreeNode<E>) {
+		//
+		// 				super();
+		//
+		// 				this.currentNode = firstNode;
+		//
+		// 			}
+		//
+		// 			public hasNext(): boolean {
+		//
+		// 				return false;
+		//
+		// 			}
+		//
+		// 			public next(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public remove(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public reset(): void {
+		//
+		// 				this.currentNode = this.firstNode;
+		//
+		// 			}
+		//
+		// 		}(this.getRootNode());
+		//
+		// 	}
+		//
+		// 	case TSTreeTraversalMethod.POSTORDER: {
+		//
+		// 		return new class extends TSAIterator<E> {
+		//
+		// 			private firstNode: TSTreeNode<E>;
+		//
+		// 			private currentNode: TSTreeNode<E>;
+		//
+		// 			public constructor(firstNode: TSTreeNode<E>) {
+		//
+		// 				super();
+		//
+		// 				this.currentNode = firstNode;
+		//
+		// 			}
+		//
+		// 			public hasNext(): boolean {
+		//
+		// 				return false;
+		//
+		// 			}
+		//
+		// 			public next(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public remove(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public reset(): void {
+		//
+		// 				this.currentNode = this.firstNode;
+		//
+		// 			}
+		//
+		// 		}(this.getRootNode());
+		//
+		// 	}
+		//
+		// 	case TSTreeTraversalMethod.LEVEL_ORDER: {
+		//
+		// 		return new class extends TSAIterator<E> {
+		//
+		// 			private firstNode: TSTreeNode<E>;
+		//
+		// 			private currentNode: TSTreeNode<E>;
+		//
+		// 			public constructor(firstNode: TSTreeNode<E>) {
+		//
+		// 				super();
+		//
+		// 				this.currentNode = firstNode;
+		//
+		// 			}
+		//
+		// 			public hasNext(): boolean {
+		//
+		// 				return false;
+		//
+		// 			}
+		//
+		// 			public next(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public remove(): E {
+		//
+		// 				return undefined;
+		//
+		// 			}
+		//
+		// 			public reset(): void {
+		//
+		// 				this.currentNode = this.firstNode;
+		//
+		// 			}
+		//
+		// 		}(this.getRootNode());
+		//
+		// 	}
+		//
+		// }
 		
 	}
 	

@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSPoint from "./constructs/ts-point.js";
+import TSPoint from "./geometric-constructs/ts-point.js";
 
 /**
  *
@@ -39,10 +39,10 @@ class TSGeometry {
 			lowerY: undefined
 		};
 		
-		let k: number = TSGeometry.lengthBetween(x1, y1, x2, y2);
-		let p: number = k / 2;
-		let q: number = Math.sqrt(Math.pow(r, 2) - Math.pow(p, 2));
-		let h: number = Math.acos((Math.pow(p, 2) + Math.pow(r, 2) - Math.pow(q, 2)) / (2 * p * r));
+		// let k: number = TSGeometry.lengthBetween(x1, y1, x2, y2);
+		// let p: number = k / 2;
+		// let q: number = Math.sqrt(Math.pow(r, 2) - Math.pow(p, 2));
+		// let h: number = Math.acos((Math.pow(p, 2) + Math.pow(r, 2) - Math.pow(q, 2)) / (2 * p * r));
 		
 		return result;
 		

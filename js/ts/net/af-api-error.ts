@@ -6,10 +6,11 @@
 
 import JUIValidator from "../helpers/jui-validator.js";
 import MalformedJSONError from "../errors/malformed-json-error.js";
+import TSDate from "../descriptors/time/ts-date.js";
 
 /**
  * An error originating from the Ampel API.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -31,7 +32,7 @@ class AFAPIError extends Error {
 	private readonly typeValue: number;
 	
 	// TODO [1/31/19 @ 7:12 PM] - Make this a TSDate rather than a Date.
-	private readonly timestamp: Date;
+	private readonly timestamp: TSDate;
 	
 	public constructor(status: number, statusText: string, body: any) {
 		
@@ -73,7 +74,7 @@ class AFAPIError extends Error {
 		this.originValue = body["origin"]["value"];
 		this.typeMessage = body["type"]["readable"];
 		this.typeValue = body["type"]["value"];
-		this.timestamp = new Date(body["timeStamp"]);
+		this.timestamp = TSDate.fromEpochTime(body["timeStamp"]);
 		
 	}
 	
@@ -104,6 +105,12 @@ class AFAPIError extends Error {
 	public getTypeValue(): number {
 		
 		return this.typeValue;
+		
+	}
+	
+	public getTimestamp(): TSDate {
+		
+		return this.timestamp;
 		
 	}
 	

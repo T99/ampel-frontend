@@ -5,7 +5,7 @@
  */
 
 import TSDate from "../../descriptors/time/ts-date.js";
-import TSDoublyLinkedList from "../../structures/implementations/list/ts-doubly-linked-list.js";
+import TSDoublyLinkedList from "../../util/structures/implementations/list/ts-doubly-linked-list.js";
 import AFResponse from "./af-response.js";
 import AFResponseSessionStructure from "./af-response-session-structure.js";
 import AFCustomerStructure from "./af-customer-structure.js";
@@ -21,8 +21,6 @@ import AFFolder from "../structures/af-folder.js";
  */
 class AFFeedbackSession {
 	
-	private folder: AFFolder;
-	
 	private initialStartTime: TSDate;
 	
 	private latitude: number;
@@ -35,9 +33,7 @@ class AFFeedbackSession {
 	
 	public constructor(folder: AFFolder, startTime: TSDate) {
 		
-		this.folder = folder;
 		this.initialStartTime = startTime;
-		
 		this.responseDLL = new TSDoublyLinkedList<AFResponse>();
 		
 	}
@@ -85,13 +81,12 @@ class AFFeedbackSession {
 	
 	public toJSON(): AFResponseSessionStructure {
 		
-		if (this.responseDLL.isEmpty()) throw new Error("Attempted to build an empty session response object.");
+		if (this.responseDLL.isEmpty() && (this.customer === undefined)) throw new Error("Attempted to build an empty session response object.");
 		
 		let response: AFResponseSessionStructure = {
 			
 			startTimestamp: this.initialStartTime.getAdjustedEpochTime(),
-			endTimestamp: this.responseDLL.getLastNode().getElement().getSubmittedAtTime().getAdjustedEpochTime(),
-			responses: []
+			endTimestamp: this.responseDLL.getLastNode().getElement().getSubmittedAtTime().getAdjustedEpochTime()
 			
 		};
 		
@@ -104,20 +99,16 @@ class AFFeedbackSession {
 		
 		if (this.customer !== undefined) response.customer = this.customer;
 		
-		let previousStartTime: TSDate = this.initialStartTime;
+		if (!this.responseDLL.isEmpty()) response.responses = [];
+		
+		let previousDate: TSDate = this.initialStartTime;
 		
 		for (let individualResponse of this.responseDLL.iterator()) {
 			
-			response.responses.push({
-				
-				startTimestamp: previousStartTime.getAdjustedEpochTime(),
-				endTimestamp: individualResponse.getSubmittedAtTime().getAdjustedEpochTime(),
-				questionId: individualResponse.getQuestion().getID(),
-				answer: individualResponse.getResponse()
-				
-			});
-			
-			previousStartTime = individualResponse.getSubmittedAtTime();
+			let rspns: any = individualResponse.toJSON();
+			rspns.startTimestamp = previousDate;
+			rspns.responses.push(rspns);
+			previousDate = rspns.endTimestamp;
 			
 		}
 		

@@ -130,6 +130,8 @@ class TSMonth {
 			
 		}
 		
+		return undefined;
+		
 	}
 	
 	public static getRelativeMonth(relativeIndex: number): TSMonth {

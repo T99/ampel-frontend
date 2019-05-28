@@ -37,7 +37,7 @@ class TSCircle {
 		
 		let resultTuple: [ TSCircle, TSCircle ] = [ undefined, undefined ];
 		
-		let connection: TSLineSegment = new TSLineSegment(point1, point2);
+		// let connection: TSLineSegment = new TSLineSegment(point1, point2);
 		
 		return resultTuple;
 		

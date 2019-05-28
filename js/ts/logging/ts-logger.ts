@@ -25,7 +25,7 @@ class TSLogger {
 	
 	public logToChannel(channel: string, loggable: string | TSLoggable): void {
 		
-		console.log("Logging to: '" + channel + "'...");
+		if (this.developerMode) console.log("Logging to: '" + channel + "'...");
 		
 		if (typeof loggable === "string") console.info(loggable);
 		else loggable.log(true);
