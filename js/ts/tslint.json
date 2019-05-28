@@ -18,7 +18,7 @@
 		
 		"comment-format": [true, "check-space"],
 		
-		"completed-docs": [true,
+		"completed-docs": [false,
 			"classes",
 			"enums",
 			"enum-members",
@@ -43,7 +43,7 @@
 		
 		"interface-over-type-literal": false,
 		
-		"max-classes-per-file": [true, 1, "exclude-class-expressions"],
+		"max-classes-per-file": false,
 		
 		"max-line-length": false,
 		
@@ -56,6 +56,8 @@
 		"no-console": false,
 		
 		"no-empty-interface": false,
+		
+		"no-namespace": false,
 		
 		"no-parameter-properties": true,
 		
@@ -111,7 +113,7 @@
 				"call-signature": "onespace",
 				"index-signature": "onespace",
 				"parameter": "onespace",
-				"property-declaration": "onespace",
+				"property-declaration": "space",
 				"variable-declaration": "onespace"
 			}
 		],

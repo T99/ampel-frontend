@@ -10,8 +10,7 @@
     "jsdoc": "latest"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
