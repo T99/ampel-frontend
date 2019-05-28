@@ -179,16 +179,29 @@
 		color: #A0C064;
 		background: white;
 		
+		// Animation
+		transition: 1s opacity, 1s color;
+		
 		// Font
 		font-family: 'Avenir Next', sans-serif;
 		font-size: 1.35em;
 		font-weight: bold;
 		
+		&.greyed-out {
+		
+			// Display & Box Model
+			opacity: 0.5;
+			
+			// Coloring
+			color: rgba(0, 0, 0, 0.4);
+		
+		}
+		
 	}
 	
 // Questions
 
-	.aui-question-element {
+	.aui-question {
 		
 		// Display & Box Model
 		height: 100%;
@@ -202,29 +215,12 @@
 		> .jui-flow-container {
 			
 			// Display & Box Model
-			// height: 90%; <-- Looks better.
-			height: 100%;
-			width: 50%;
+			height: 90%;
+			width: 65vmin;
 			border-radius: 10px;
 			
-			@media (orientation: portrait) {
-				
-				// width: 75%; <-- Looks better.
-				width: 90%;
-				
-			}
-			
-			$padding: 25px;
-			
 			// Positioning
-			padding: {
-				
-				top: $padding;
-				bottom: $padding;
-				left: $padding;
-				right: $padding;
-				
-			};
+			padding: 25px;
 			
 			// Coloring
 			background: white;
@@ -307,174 +303,253 @@
 	}
 	
 	.aui-multiple-choice-question, .aui-sata-question {
-	
-		.jui-scroll-container {
+		
+		> .jui-flow-container {
 			
 			// Display & Box Model
 			width: 100%;
-		
-			.jui-flow-container {
+			
+			.aui-selectable-box {
 				
 				// Display & Box Model
-				width: 100%;
+				width: 80vmin;
+				border-radius: 5px;
+				justify-content: space-between;
 				
-				.aui-selectable-box {
+				// Positioning
+				padding: {
+					
+					left: 15px;
+					right: 15px;
+					top: 25px;
+					bottom: 25px;
+					
+				};
+				margin: 15px;
+				
+				// Coloring
+				// background: rgba(255, 255, 255, 0.2); <-- Looks better.
+				background: white;
+				
+				// Animation
+				//transition:	box-shadow 0.5s ease-out,
+				//			transform 0.5s ease-out,
+				//			border-color 0.5s ease-out;
+				
+				// Misc.
+				cursor: pointer;
+				
+				//&:hover, &:focus, &.selected {
+				//
+				//	outline: none;
+				//	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+				//	transform: scale(1.01);
+				//	border-color: rgba(0, 0, 0, 0.66);
+				//
+				//}
+				
+				&::-moz-focus-inner {
 					
 					// Display & Box Model
-					width: 50%;
-					//max-width: 550px;
-					border-radius: 5px;
-					justify-content: space-between;
+					border: none;
 					
-					@media (orientation: portrait) {
-						
-						// width: 75%; <-- Looks better.
-						width: 90%;
-						
-					}
-					
-					// Positioning
-					padding: {
-					
-						left: 15px;
-						right: 15px;
-						top: 25px;
-						bottom: 25px;
-					
-					};
-					margin: 15px;
+				}
+				
+				.aui-text-label {
 					
 					// Coloring
-					// background: rgba(255, 255, 255, 0.2); <-- Looks better.
-					background: white;
+					color: black;
 					
-					// Animation
-					//transition:	box-shadow 0.5s ease-out,
-					//			transform 0.5s ease-out,
-					//			border-color 0.5s ease-out;
+					// Font
+					font-size: 1.5em;
+					font-weight: 500;
 					
-					// Misc.
-					cursor: pointer;
+				}
+				
+				.jui-toggleable-element {
 					
-					//&:hover, &:focus, &.selected {
-					//
-					//	outline: none;
-					//	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
-					//	transform: scale(1.01);
-					//	border-color: rgba(0, 0, 0, 0.66);
-					//
-					//}
+					// Display & Box Model
+					pointer-events: none;
+					border: 2px solid rgba(0, 0, 0, 0.1);
 					
-					&::-moz-focus-inner {
-						
-						// Display & Box Model
-						border: none;
-						
-					}
+					// Coloring
+					background: rgba(0, 0, 0, 0.05);
 					
-					.aui-text-label {
+					.jui-active-state-element {
 					
-						// Coloring
-						color: black;
-						
-						// Font
-						font-size: 1.5em;
-						font-weight: 500;
-						
-					}
-					
-					.jui-single-selector-leaf {
-						
-						// Display & Box Model
-						height: 20px;
-						width: 20px;
-						border: 2px solid $ampelGreen;
-						border-radius: 4px;
-						
-						pointer-events: none;
-						
-						&:checked {
-							
-							background: grey;
-							
-						}
+						border-color: $ampelGreen;
 					
 					}
 					
 				}
-			
+				
 			}
-		
+			
 		}
+		
+		//.jui-scroll-container {
+		//
+		//	// Display & Box Model
+		//	width: 100%;
+		//
+		//	.jui-flow-container {
+		//
+		//		// Display & Box Model
+		//		width: 100%;
+		//
+		//		.aui-selectable-box {
+		//
+		//			// Display & Box Model
+		//			width: 50%;
+		//			//max-width: 550px;
+		//			border-radius: 5px;
+		//			justify-content: space-between;
+		//
+		//			@media (orientation: portrait) {
+		//
+		//				// width: 75%; <-- Looks better.
+		//				width: 90%;
+		//
+		//			}
+		//
+		//			// Positioning
+		//			padding: {
+		//
+		//				left: 15px;
+		//				right: 15px;
+		//				top: 25px;
+		//				bottom: 25px;
+		//
+		//			};
+		//			margin: 15px;
+		//
+		//			// Coloring
+		//			// background: rgba(255, 255, 255, 0.2); <-- Looks better.
+		//			background: white;
+		//
+		//			// Animation
+		//			//transition:	box-shadow 0.5s ease-out,
+		//			//			transform 0.5s ease-out,
+		//			//			border-color 0.5s ease-out;
+		//
+		//			// Misc.
+		//			cursor: pointer;
+		//
+		//			//&:hover, &:focus, &.selected {
+		//			//
+		//			//	outline: none;
+		//			//	box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.66);
+		//			//	transform: scale(1.01);
+		//			//	border-color: rgba(0, 0, 0, 0.66);
+		//			//
+		//			//}
+		//
+		//			&::-moz-focus-inner {
+		//
+		//				// Display & Box Model
+		//				border: none;
+		//
+		//			}
+		//
+		//			.aui-text-label {
+		//
+		//				// Coloring
+		//				color: black;
+		//
+		//				// Font
+		//				font-size: 1.5em;
+		//				font-weight: 500;
+		//
+		//			}
+		//
+		//			.jui-single-selector-leaf {
+		//
+		//				// Display & Box Model
+		//				height: 20px;
+		//				width: 20px;
+		//				border: 2px solid $ampelGreen;
+		//				border-radius: 4px;
+		//
+		//				pointer-events: none;
+		//
+		//				&:checked {
+		//
+		//					background: grey;
+		//
+		//				}
+		//
+		//			}
+		//
+		//		}
+		//
+		//	}
+		//
+		//}
 	
 	}
 	
 	.aui-slider-question, .aui-nps-question {
 		
-		.jui-stack-container {
+		// Display & Box Model
+		height: 100%;
+		width: 100%;
+		
+		.jui-alignment-container {
 			
 			// Display & Box Model
 			height: 100%;
-			width: 100%;
 			
-			.jui-alignment-container {
-			
+			.jui-image-leaf {
+				
 				// Display & Box Model
-				height: 100%;
+				max-height: 100%;
 				
-				.jui-image-leaf {
+			}
+			
+			.jui-slider-leaf {
 				
-					// Display & Box Model
-					max-height: 100%;
+				// Display & Box Model
+				width: 71vh;
+				transform: rotate(-90deg);
 				
-				}
+				// Coloring
+				background: transparent;
 				
-				.jui-slider-leaf {
+				$sliderHeight: 50px;
+				
+				&::-moz-range-thumb {
 					
 					// Display & Box Model
-					width: 71vh;
-					transform: rotate(-90deg);
+					height: $sliderHeight;
+					width: $sliderHeight;
+					border-radius: $sliderHeight;
 					
 					// Coloring
-					background: transparent;
+					background: url("/img/question-types/slider/knob-rasterized.png");
+					background-size: contain;
 					
-					$sliderHeight: 50px;
-					
-					&::-moz-range-thumb {
-						
-						// Display & Box Model
-						height: $sliderHeight;
-						width: $sliderHeight;
-						border-radius: $sliderHeight;
-						
-						// Coloring
-						background: url("/img/question-types/slider/knob-rasterized.png");
-						background-size: contain;
-						
-						// Misc.
-						cursor: pointer;
-					
-					}
-					
-					&::-webkit-slider-thumb {
-						
-						// Display & Box Model
-						height: $sliderHeight;
-						width: $sliderHeight;
-						border-radius: $sliderHeight;
-						
-						// Coloring
-						background: url("/img/question-types/slider/knob-rasterized.png");
-						background-size: contain;
-						
-						// Misc.
-						cursor: pointer;
-						-webkit-appearance: none;
-					
-					}
+					// Misc.
+					cursor: pointer;
 					
 				}
-			
+				
+				&::-webkit-slider-thumb {
+					
+					// Display & Box Model
+					height: $sliderHeight;
+					width: $sliderHeight;
+					border-radius: $sliderHeight;
+					
+					// Coloring
+					background: url("/img/question-types/slider/knob-rasterized.png");
+					background-size: contain;
+					
+					// Misc.
+					cursor: pointer;
+					-webkit-appearance: none;
+					
+				}
+				
 			}
 			
 		}
@@ -482,15 +557,33 @@
 	}
 	
 	.aui-stoplight-question {
-	
-		.jui-svg-leaf {
 		
+		.jui-image-leaf {
+			
 			// Display & Box Model
 			height: 100%;
-			width: auto;
+		
+			&.over {
+				
+				// Display & Box Model
+				z-index: 100;
 			
-			// Positioning
-			padding: 2%;
+			}
+			
+			&.under {
+			
+				// Display & Box Model
+				z-index: 99;
+			
+			}
+		
+		}
+	
+		.jui-svg-leaf {
+			
+			// Display & Box Model
+			height: 100%;
+			z-index: 101;
 			
 		}
 	
@@ -569,7 +662,7 @@
 			
 		}
 		
-		& > .jui-text-field-leaf {
+		& > .jui-raw-text-field {
 			
 			// Display & Box Model
 			width: 90%;
@@ -624,6 +717,8 @@
 		.jui-text-field-leaf {
 			
 			// Display & Box Model
+			width: 100%;
+			box-sizing: border-box;
 			border: none;
 			border-radius: 2px;
 			
@@ -825,23 +920,30 @@
 			// Display & Box Model
 			height: 100%;
 			width: 100%;
-			align-items: stretch !important;
 			
-			$textContainerAmount:		2;
-			$questionContainerAmount:	9;
-			$buttonContainerAmount:		1;
-			$totalAmount: $textContainerAmount + $questionContainerAmount + $buttonContainerAmount;
+			$textContainerAmount:		4;
+			$questionContainerAmount:	17;
+			$buttonContainerAmount:		3;
+			$totalMainFlowAmount: $textContainerAmount + $questionContainerAmount + $buttonContainerAmount;
 			
 			.inquiry-text-container {
 				
 				// Display & Box Model
-				height: fractionalPercentage($textContainerAmount, $totalAmount);
+				height: fractionalPercentage($textContainerAmount, $totalMainFlowAmount);
+				width: 100vmin;
 				
-				.aui-kiosk-text-label {
-				
-					// Display & Box Model
-					height: 100%;
-				
+				.inquiry-text-wrapper {
+					
+					// Positioning
+					padding: 1% 5%;
+					
+					.aui-kiosk-text-label {
+						
+						// Display & Box Model
+						height: 100%;
+						
+					}
+					
 				}
 				
 			}
@@ -849,14 +951,146 @@
 			.question-container {
 				
 				// Display & Box Model
-				height: fractionalPercentage($questionContainerAmount, $totalAmount);
+				height: fractionalPercentage($questionContainerAmount, $totalMainFlowAmount);
+				width: 100%;
 			
 			}
 			
 			.button-container {
 				
 				// Display & Box Model
-				height: fractionalPercentage($buttonContainerAmount, $totalAmount);
+				height: fractionalPercentage($buttonContainerAmount, $totalMainFlowAmount);
+				width: 100vmin;
+				
+				$backButtonAmount:	1;
+				$skipButtonAmount:	1;
+				$progressBarAmount:	2;
+				$doneButtonAmount:	2;
+				$totalButtonAmount:	$backButtonAmount + $skipButtonAmount + $progressBarAmount + $doneButtonAmount;
+				$childPadding: 10px;
+				
+				.jui-alignment-container {
+				
+					// Display & Box Model
+					height: 100%;
+					box-sizing: border-box;
+					
+					// Positioning
+					padding: {
+						
+						left: $childPadding;
+						right: $childPadding;
+						top: 1.5 * $childPadding;
+						bottom: 1.5 * $childPadding;
+					}
+					
+					.aui-kiosk-button {
+					
+						// Display & Box Model
+						width: 100%;
+					
+					}
+					
+					$progressBorderRadius: 15px;
+					
+					.jui-stack-container {
+						
+						// Display & Box Model
+						height: 100%;
+						width: 100%;
+						
+						.aui-kiosk-text-label {
+							
+							// Coloring
+							color: #A0C064;
+							
+							// Font
+							font-size: 1.5em;
+							font-weight: bold;
+							
+						}
+						
+						.jui-progress-leaf {
+							
+							// Display & Box Model
+							width: 100%;
+							height: 3em;
+							border-radius: $progressBorderRadius;
+							
+							// Coloring
+							background-color: rgba(255, 255, 255, 0.6);
+							
+							&::-moz-progress-bar {
+								
+								// Display & Box Model
+								border-radius: $progressBorderRadius;
+								
+								// Coloring
+								background-color: rgba(255, 255, 255, 1);
+								
+							}
+							
+							&::-webkit-progress-value {
+								
+								// Display & Box Model
+								border-radius: $progressBorderRadius;
+								
+								// Coloring
+								background-color: rgba(255, 255, 255, 1);
+								
+							}
+							
+						}
+						
+						.jui-progress-leaf::-webkit-progress-bar {
+							
+							// Display & Box Model
+							width: 100%;
+							height: 3em;
+							border-radius: $progressBorderRadius;
+							
+							// Coloring
+							background-color: rgba(255, 255, 255, 0.45);
+							
+						}
+						
+					}
+					
+				}
+				
+				.back-button-wrapper {
+				
+					// Display & Box Model
+					width: fractionalPercentage($backButtonAmount, $totalButtonAmount);
+					
+					// Positioning
+					padding-left: 2 * $childPadding;
+				
+				}
+				
+				.skip-button-wrapper {
+					
+					// Display & Box Model
+					width: fractionalPercentage($skipButtonAmount, $totalButtonAmount);
+					
+				}
+				
+				.progress-bar-wrapper {
+					
+					// Display & Box Model
+					width: fractionalPercentage($progressBarAmount, $totalButtonAmount);
+					
+				}
+				
+				.done-button-wrapper {
+					
+					// Display & Box Model
+					width: fractionalPercentage($doneButtonAmount, $totalButtonAmount);
+					
+					// Positioning
+					padding-right: 2 * $childPadding;
+					
+				}
 			
 			}
 		
@@ -927,7 +1161,7 @@
 				
 				// Display & Box Model
 				width: 100%;
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: 1fr;
 				grid-template-rows: repeat(3, auto);
 				grid-gap: 20px;
 				
@@ -936,18 +1170,10 @@
 					// Display & Box Model
 					align-items: stretch;
 					
-					&.cc-first-name {
+					&.cc-name {
 						
 						// Display & Box Model
 						grid-column-start: 1;
-						grid-column-end: 2;
-						
-					}
-					
-					&.cc-last-name {
-						
-						// Display & Box Model
-						grid-column-start: 2;
 						grid-column-end: 3;
 						
 					}
@@ -968,27 +1194,22 @@
 						
 					}
 					
-					@media (orientation: portrait) {
+					&.cc-zipcode {
 						
-						&.cc-first-name {
-							
-							// Display & Box Model
-							grid-column-start: 1;
-							grid-column-end: 3;
-						
-						}
-						
-						&.cc-last-name {
-							
-							// Display & Box Model
-							grid-column-start: 1;
-							grid-column-end: 3;
-						
-						}
-						
+						// Display & Box Model
+						grid-column-start: 1;
+						grid-column-end: 3;
+					
 					}
 					
 				}
+				
+			}
+			
+			> .aui-kiosk-button {
+				
+				// Positioning
+				margin-top: 1.5em;
 				
 			}
 			

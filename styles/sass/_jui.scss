@@ -40,9 +40,105 @@ html, body {
 
 }
 
+.jui-toggleable-element {
+	
+	// Display & Box Model
+	height: 30px;
+	width: 30px;
+	
+	// Coloring
+	background: grey;
+	
+	.jui-active-state-element {
+	
+		// Display & Box Model
+		height: 50%;
+		width: 50%;
+		opacity: 0;
+		
+		// Animation
+		transition: opacity 0.3s;
+		
+		&.jui-toggleable-active {
+			
+			// Display & Box Model
+			opacity: 1;
+			
+		}
+	
+	}
+	
+	&.jui-toggleable-checkbox {
+		
+		// Display & Box Model
+		border-radius: 2px;
+		
+		.jui-active-state-element {
+			
+			// Display & Box Model
+			height: 60%;
+			width: 30%;
+			box-sizing: border-box;
+			border: {
+				
+				right-color: white;
+				right-style: solid;
+				right-width: 3px;
+				bottom-color: white;
+				bottom-style: solid;
+				bottom-width: 3px;
+				
+			};
+			transform: rotate(45deg);
+			
+		}
+		
+	}
+	
+	&.jui-toggleable-radio-button {
+		
+		// Display & Box Model
+		border-radius: 50%;
+		
+		.jui-active-state-element {
+			
+			// Display & Box Model
+			height: 75%;
+			width: 75%;
+			border-radius: 50%;
+			
+			// Coloring
+			background: radial-gradient(black, gray);
+			
+		}
+		
+	}
+
+}
+
 .jui-button-leaf {
 
+	&::-moz-focus-inner {
+	
+		border: none;
+	
+	}
 
+}
+
+.jui-progress-leaf {
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	
+	&::-webkit-progress-inner-element,
+	&::-webkit-progress-value,
+	&::-webkit-progress-bar,
+	&::-moz-progress-bar {
+	
+	
+	
+	}
 
 }
 
