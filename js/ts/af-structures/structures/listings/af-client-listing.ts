@@ -11,7 +11,7 @@ import AFOrganization from "../af-organization.js";
 import AFClientResponseStructure from "../../../net/response-structures/common/af-client-response-structure.js";
 import AFConcreteStructureListing from "../../af-concrete-structure-listing.js";
 import AFAPIOrganizationAccessor from "../../../net/accessors/af-api-organization-accessor.js";
-import TSArrayList from "../../../structures/implementations/list/ts-array-list.js";
+import TSArrayList from "../../../util/structures/implementations/list/ts-array-list.js";
 import AFSession from "../../af-session.js";
 
 /**

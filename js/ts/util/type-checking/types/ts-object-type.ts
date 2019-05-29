@@ -6,7 +6,7 @@
 
 import TSType from "./ts-type.js";
 import TSObjectTypeDefinition from "./ts-object-type-definition.js";
-import TSObjectIterator from "../../structures/implementations/iterate/ts-object-iterator.js";
+import TSObjectIterator from "../../misc/iterate/ts-object-iterator.js";
 
 /**
  *

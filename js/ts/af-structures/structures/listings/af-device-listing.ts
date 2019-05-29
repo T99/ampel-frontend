@@ -13,7 +13,7 @@ import AFConcreteStructureListing from "../../af-concrete-structure-listing.js";
 import AfLocationInformation from "../../information-contexts/af-location-information.js";
 import AFLocation from "../af-location.js";
 import AFDeviceResponseStructure from "../../../net/response-structures/common/af-device-response-structure.js";
-import TSArrayList from "../../../structures/implementations/list/ts-array-list.js";
+import TSArrayList from "../../../util/structures/implementations/list/ts-array-list.js";
 import AFAPILocationAccessor from "../../../net/accessors/af-api-location-accessor.js";
 import AFSession from "../../af-session.js";
 

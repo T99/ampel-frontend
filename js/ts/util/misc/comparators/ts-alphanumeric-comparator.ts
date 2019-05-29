@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSComparator from "../../interfaces/ts-comparator.js";
+import TSComparator from "../../structures/interfaces/ts-comparator.js";
 import TSNumericComparator from "./ts-numeric-comparator.js";
 
 /**

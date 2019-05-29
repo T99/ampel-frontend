@@ -12,9 +12,9 @@ import AFFolder from "../af-folder.js";
 import AFFolderResponseStructure from "../../../net/response-structures/common/af-folder-response-structure.js";
 import AFConcreteStructureListing from "../../af-concrete-structure-listing.js";
 import AFQuestionResponseStructure from "../../../net/response-structures/common/af-question-response-structure.js";
-import TSObjectIterator from "../../../structures/implementations/iterate/ts-object-iterator.js";
+import TSObjectIterator from "../../../util/misc/iterate/ts-object-iterator.js";
 import AFAPIOrganizationAccessor from "../../../net/accessors/af-api-organization-accessor.js";
-import TSArrayList from "../../../structures/implementations/list/ts-array-list.js";
+import TSArrayList from "../../../util/structures/implementations/list/ts-array-list.js";
 import AFSession from "../../af-session.js";
 
 /**

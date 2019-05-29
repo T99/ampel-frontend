@@ -7,7 +7,7 @@
 import TSIList from "../../interfaces/list/ts-i-list.js";
 import TSComparator from "../../interfaces/ts-comparator.js";
 import TSSortingMethod from "../../interfaces/ts-sorting-method.js";
-import TSNaturalComparator from "../comparators/ts-natural-comparator.js";
+import TSNaturalComparator from "../../../misc/comparators/ts-natural-comparator.js";
 import TSBubbleSort from "../sorting-methods/ts-bubble-sort.js";
 import TSAIterator from "../../partials/iterate/ts-a-iterator.js";
 

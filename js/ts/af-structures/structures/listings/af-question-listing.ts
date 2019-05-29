@@ -11,7 +11,7 @@ import AFClient from "../af-client.js";
 import AFOrganization from "../af-organization.js";
 import AFConcreteStructureListing from "../../af-concrete-structure-listing.js";
 import AFQuestionResponseStructure from "../../../net/response-structures/common/af-question-response-structure.js";
-import TSArrayList from "../../../structures/implementations/list/ts-array-list.js";
+import TSArrayList from "../../../util/structures/implementations/list/ts-array-list.js";
 import AFAPIFolderAccessor from "../../../net/accessors/af-api-folder-accessor.js";
 import AFFolder from "../af-folder.js";
 import AFSession from "../../af-session.js";

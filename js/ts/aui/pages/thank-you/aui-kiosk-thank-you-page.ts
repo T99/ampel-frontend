@@ -9,7 +9,7 @@ import JUIAlignment from "../../../jui/descriptors/jui-alignment.js";
 import JUIStackContainer from "../../../jui/elements/containers/multi-containers/jui-stack-container.js";
 import JUIImageLeaf from "../../../jui/elements/leaves/content-leaves/jui-image-leaf.js";
 import AUIKioskTextLabel from "../kiosk-old/aui-kiosk-text-label.js";
-import TSAwaitUtils from "../../../util/structures/implementations/ts-await-utils.js";
+import TSAwaitUtils from "../../../util/misc/ts-await-utils.js";
 import JUIWorld from "../../../jui/jui-world.js";
 
 /**

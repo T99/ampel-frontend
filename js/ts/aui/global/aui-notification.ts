@@ -9,7 +9,7 @@ import JUIOverlay from "../../jui/overlays/jui-overlay.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import AUITextLabel from "./aui-text-label.js";
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
 
 class AUINotification extends JUIOverlay {
 	

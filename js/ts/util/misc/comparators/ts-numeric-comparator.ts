@@ -4,11 +4,11 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSComparator from "../../interfaces/ts-comparator.js";
+import TSComparator from "../../structures/interfaces/ts-comparator.js";
 
 /**
  * A class that can relatively order numeric values.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0

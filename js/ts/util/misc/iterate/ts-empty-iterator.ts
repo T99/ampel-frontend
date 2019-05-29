@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSAIterator from "../../partials/iterate/ts-a-iterator.js";
+import TSAIterator from "../../structures/partials/iterate/ts-a-iterator.js";
 
 /**
  * An empty iterator.

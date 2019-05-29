@@ -10,7 +10,7 @@ import JUIDirection from "../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
 import AUITextLabel from "../../../global/aui-text-label.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
-import JUITextAreaLeaf from "../../../../jui/elements/leaves/control-leaves/text/jui-text-area-leaf.js";
+import JUITextAreaLeaf from "../../../../jui/elements/leaves/control-leaves/text/area/jui-text-area-leaf.js";
 import JUIDrawingCanvasLeaf from "../../../../jui/elements/leaves/control-leaves/jui-drawing-canvas-leaf.js";
 import JUINamedColor from "../../../../jui/descriptors/colors/jui-named-color.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
