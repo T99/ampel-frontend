@@ -7,15 +7,16 @@
 import GlobalModificationImplementations from "./declaration/global-modification-implementations.js";
 import AFAPI from "./net/af-api.js";
 import AFEndpointRequestBuilder from "./net/af-endpoint-request-builder.js";
-import AFSession from "./af-structures/af-session.js";
 import HTTPMethod from "./descriptors/http-method.js";
 import TSBrowserSession from "./ts-browser-session.js";
-import TSMultiPathDoublyLinkedList from "./structures/implementations/list/ts-multi-path-doubly-linked-list.js";
-import AFAPISessionAccessor from "./net/accessors/af-api-session-accessor.js";
-import TSLoggableError from "./logging/loggables/ts-loggable-error.js";
-import AFQuestionType from "./af-structures/descriptors/af-question-type.js";
-import JUIWorld from "./jui/jui-world.js";
-import AUIKioskPage from "./aui/pages/kiosk/aui-kiosk-page.js";
+import TSTypechecker from "./util/type-checking/ts-typechecker.js";
+import TSStandardType from "./util/type-checking/types/ts-standard-type.js";
+import TSArrayType from "./util/type-checking/types/ts-array-type.js";
+import TSObjectType from "./util/type-checking/types/ts-object-type.js";
+import TSObjectIterator from "./util/misc/iterate/ts-object-iterator.js";
+import AFOrganizationEverythingResponseStructureType from "./net/response-structure-types/organization/af-organization-everything-response-structure-type.js";
+import TSTimeoutHandler from "./util/misc/ts-timeout-handler.js";
+import AFDashboard from "./af-dashboard.js";
 
 declare global { var session: TSBrowserSession; }
 
@@ -29,20 +30,20 @@ const main: () => Promise<void> = async (): Promise<void> => {
 	window["session"] = session;
 	
 	// Initialize the dashboard.
-	// let dashboard: AFDashboard = await AFDashboard.go();
-	// (new AUIKioskConfiguration()).make();
-	// (new AUIContactCaptureConfiguration()).make();
-	JUIWorld.getInstance().setPage(new AUIKioskPage());
+	AFDashboard.go();
+	// (new AUIDashboardConfiguration()).make();
 	
 	// Attach helpers to the window object.
 	window["AFAPI"] = AFAPI;
 	window["AFEndpointRequestBuilder"] = AFEndpointRequestBuilder;
 	window["HTTPMethod"] = HTTPMethod;
-	window["AFSession"] = AFSession;
-	window["TSMultiPathDoublyLinkedList"] = TSMultiPathDoublyLinkedList;
-	window["AFAPISessionAccessor"] = AFAPISessionAccessor;
-	window["TSLoggableError"] = TSLoggableError;
-	window["AFQuestionType"] = AFQuestionType;
+	window["TSTypechecker"] = TSTypechecker;
+	window["TSStandardType"] = TSStandardType;
+	window["TSArrayType"] = TSArrayType;
+	window["TSObjectType"] = TSObjectType;
+	window["TSObjectIterator"] = TSObjectIterator;
+	window["AFOrganizationEverythingResponseStructureType"] = AFOrganizationEverythingResponseStructureType;
+	window["TSTimeoutHandler"] = TSTimeoutHandler;
 
 };
 

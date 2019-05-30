@@ -23,10 +23,8 @@ import AFLocationListing from "../../af-structures/structures/listings/af-locati
 import AFLocation from "../../af-structures/structures/af-location.js";
 import AFDeviceListing from "../../af-structures/structures/listings/af-device-listing.js";
 import AFDevice from "../../af-structures/structures/af-device.js";
-import AUIActivitySelectorModule from "./aui-activity-selector-module.js";
-import AUIUserActivity from "../global/aui-user-activity.js";
-import AUINotification from "../global/aui-notification.js";
-import AFKioskActivity from "../../af-activities/af-kiosk-activity.js";
+import AUIDashboardPage from "../dashboard/aui-dashboard-page.js";
+import JUIWorld from "../../jui/jui-world.js";
 
 type SplashViewEnumeration = { [ splashView: string ]: SplashView };
 type SplashView = {
@@ -45,11 +43,6 @@ type SplashView = {
  */
 class AUISplashPage extends JUIPage {
 	
-	/**
-	 * A String that represents the identity of the type that is being identified.
-	 *
-	 * @type {string}
-	 */
 	public readonly TYPE_IDENTITY: string = "aui-splash-page";
 	
 	private static readonly VIEW_ENUMERATION: SplashViewEnumeration = {
@@ -126,8 +119,6 @@ class AUISplashPage extends JUIPage {
 	private activeOrganizationListing: AFOrganizationListing;
 	
 	private activeLocationListing: AFLocationListing;
-	
-	private activeDeviceListing: AFDeviceListing;
 	
 	public constructor() {
 		
@@ -325,34 +316,9 @@ class AUISplashPage extends JUIPage {
 		await session.getAmpelSession().setDevice(device.getID());
 		
 		// JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(signedInDevice.getDefaultFolder()));
-		await this.goToActivitySelector();
+		// await this.goToActivitySelector();
+		JUIWorld.getInstance().goToPageRight(new AUIDashboardPage());
 	
-	}
-	
-	private async proceedFromActivity(activity: AUIUserActivity): Promise<void> {
-		
-		switch (activity) {
-			
-			case AUIUserActivity.KIOSK:
-				// JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(session.getAmpelSession().getDevice().getDefaultFolder()));
-				await AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder());
-				break;
-			
-			case AUIUserActivity.CONTACT_CAPTURE:
-				new AUINotification("Attempted to start contact capture mode, but this mode is not yet available...");
-				break;
-			
-			case AUIUserActivity.KIOSK_THEN_CONTACT_CAPTURE:
-				// new AUINotification("Attempted to start kiosk with contact capture mode, but this mode is not yet available...");
-				await AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder());
-				break;
-			
-			case AUIUserActivity.CONTACT_CAPTURE_THEN_KIOSK:
-				new AUINotification("Attempted to start contact capture with kiosk mode, but this mode is not yet available...");
-				break;
-			
-		}
-		
 	}
 	
 	private async goToOrganizationSelector(organizationListing: AFOrganizationListing): Promise<void> {
@@ -414,8 +380,6 @@ class AUISplashPage extends JUIPage {
 	
 	private async goToDeviceSelector(deviceListing: AFDeviceListing): Promise<void> {
 		
-		this.activeDeviceListing = deviceListing;
-		
 		let deviceSelector: AUIStructureSelectorModule<AFDevice, AFDeviceListing>
 			= new AUIStructureSelectorModule<AFDevice, AFDeviceListing>(
 			deviceListing,
@@ -437,54 +401,6 @@ class AUISplashPage extends JUIPage {
 		
 		await transition.getTransitionPromise();
 		
-	}
-	
-	// private async goToFolderSelector(folderListing: AFFolderListing): Promise<void> {
-	//
-	// 	return new Promise<void>((resolve: () => void, reject: () => void): void => {
-	//
-	// 		let folderSelector: AUIStructureSelectorModule<AFFolder, AFFolderListing>
-	// 			= new AUIStructureSelectorModule<AFFolder, AFFolderListing>(
-	// 			folderListing,
-	// 			"folder",
-	// 			"Whoops! Looks like this organization doesn't have any folders! Try adding one, then head back here!"
-	// 		);
-	//
-	// 		this.backButtonSubscription = folderSelector.subscribeToBackButtonNotifier(
-	// 			(): any => this.goToDeviceSelector(this.activeDeviceListing)
-	// 		);
-	//
-	// 		this.folderSelectionSubscription = folderSelector.subscribeToSelectionNotifier(
-	// 			(folder: AFFolder): any => JUIWorld.getInstance().goToPageRight(new AUIKioskPageOld(folder))
-	// 		);
-	//
-	// 		let transition: JUITransition = this.transitionTo(folderSelector, AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR);
-	// 		this.cleanUpFromView(this.currentView);
-	// 		this.currentView = AUISplashPage.VIEW_ENUMERATION.FOLDER_SELECTOR;
-	// 		transition.getTransitionPromise().then((): any => resolve());
-	//
-	// 	});
-	//
-	// }
-	
-	private async goToActivitySelector(): Promise<void> {
-	
-		let activitySelector: AUIActivitySelectorModule = new AUIActivitySelectorModule();
-		
-		this.backButtonSubscription = activitySelector.subscribeToBackButtonNotifier(
-			(): any => this.goToDeviceSelector(this.activeDeviceListing)
-		);
-		
-		activitySelector.subscribeToSelectionNotifier(
-			(activity: AUIUserActivity): any => this.proceedFromActivity(activity)
-		);
-		
-		let transition: JUITransition = this.transitionTo(activitySelector, AUISplashPage.VIEW_ENUMERATION.ACTIVITY_SELECTOR);
-		this.cleanUpFromView(this.currentView);
-		this.currentView = AUISplashPage.VIEW_ENUMERATION.ACTIVITY_SELECTOR;
-		
-		await transition.getTransitionPromise();
-	
 	}
 	
 }

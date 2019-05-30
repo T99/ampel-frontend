@@ -6,6 +6,12 @@
 
 @import "resources";
 
+$ampelGreen:	#A1C06C;
+$ampelTeal:		#94B9AF;
+$ampelWhite:	#F4F2F3;
+$ampelNavy:		#4D5061;
+$ampelBrown:	#605B56;
+
 // General Rules
 
 	input::-moz-focus-outer {
@@ -833,6 +839,163 @@
 		}
 		
 	}
+	
+	.aui-activity-drawer {
+		
+		// Misc.
+		cursor: pointer;
+		
+		.aui-activity-drawer-header {
+			
+			// Display & Box Model
+			width: 100%;
+			border-radius: 3px;
+			box-sizing: border-box;
+			justify-content: space-between !important;
+			z-index: 2;
+			
+			// Positioning
+			padding: 10px;
+			
+			// Coloring
+			background: $ampelGreen;
+			
+			.aui-text-label {
+			
+				// Font
+				font-size: 1.2em;
+			
+			}
+			
+			.jui-toggleable-dropdown-arrow {
+				
+				// Display & Box Model
+				height: 20px;
+				width: 20px;
+				
+				// Coloring
+				background: transparent;
+				
+				// Misc.
+				pointer-events: none;
+				
+				.jui-active-state-element {
+					
+					// Coloring
+					border-top-color: black;
+					
+				}
+				
+			}
+			
+		}
+		
+		.aui-activity-drawer-content-wrapper {
+			
+			// Display & Box Model
+			width: 95%;
+			z-index: 1;
+			max-height: 0;
+			overflow: hidden;
+			
+			// Animation
+			transition: max-height 0.5s ease-in-out;
+			
+			.aui-activity-drawer-content {
+				
+				$drawerBorder: 4px solid $ampelGreen;
+				$drawerBorderRadius: 5px;
+				
+				// Display & Box Model
+				width: 100%;
+				z-index: 1;
+				box-sizing: border-box;
+				border: {
+					
+					left: $drawerBorder;
+					right: $drawerBorder;
+					bottom: $drawerBorder;
+					bottom-left-radius: $drawerBorderRadius;
+					bottom-right-radius: $drawerBorderRadius;
+					
+				}
+				
+				// Coloring
+				background: $ampelGreen;
+				
+				.jui-flow-container {
+					
+					// Display & Box Model
+					width: 100%;
+					box-sizing: border-box;
+					justify-content: space-between;
+					
+					// Positioning
+					padding: 10px;
+					
+					// Coloring
+					background: rgba(255, 255, 255, 0.25);
+					
+					&:nth-child(2n - 1) {
+						
+						// Coloring
+						background: rgba(255, 255, 255, 0.45);
+						
+					}
+					
+					.aui-text-label {
+					
+					
+					
+					}
+					
+					.jui-svg-leaf {
+					
+						// Display & Box Model
+						opacity: 0;
+						
+						// SVG
+						stroke: white;
+						stroke-width: 3px;
+						
+						// Animation
+						transition: opacity 0.5s;
+						
+						&.loading {
+							
+							// Display & Box Model
+							opacity: 1;
+							
+							// Animation
+							animation: rotation 1.5s infinite cubic-bezier(.5,0,.5,1);
+						
+							@keyframes rotation {
+							
+								from {
+								
+									transform: rotate(0deg);
+								
+								}
+								
+								to {
+								
+									transform: rotate(360deg);
+									
+								}
+							
+							}
+						
+						}
+					
+					}
+				
+				}
+				
+			}
+		
+		}
+	
+	}
 
 // Pages
 
@@ -841,6 +1004,128 @@
 		// Coloring
 		background: linear-gradient(-45deg, #547EB4, #7194C1);
 		
+	}
+	
+	.aui-dashboard-page {
+		
+		// Coloring
+		background: $ampelWhite;
+		
+		> .jui-flow-container {
+		
+			// Display & Box Model
+			height: 100%;
+			width: 100%;
+			
+			$headerAmount:	7;
+			$mainAmount:	88;
+			$footerAmount:	5;
+			$totalPageAmount: $headerAmount + $mainAmount + $footerAmount;
+			
+			header.jui-flow-container {
+				
+				// Display & Box Model
+				height: fractionalPercentage($headerAmount, $totalPageAmount);
+				width: 100%;
+				justify-content: space-between;
+				
+				// Coloring
+				background: $ampelGreen;
+				
+				.left-header {
+					
+					// Display & Box Model
+					height: 100%;
+					
+					.jui-image-leaf {
+						
+						// Display & Box Model
+						height: 50%;
+						
+						// Positioning
+						margin: 0px 15px;
+						
+					}
+					
+					.aui-text-label {
+					
+						// Font
+						font-size: 1.5em;
+						white-space: nowrap;
+					
+					}
+					
+				}
+				
+				.right-header {
+				
+					// Display & Box Model
+					height: 100%;
+				
+				}
+			
+			}
+			
+			main.jui-flow-container {
+				
+				// Display & Box Model
+				height: fractionalPercentage($mainAmount, $totalPageAmount);
+				width: ($mainAmount / $totalPageAmount) * 100vmin;
+				
+				> .jui-scroll-container {
+					
+					// Display & Box Model
+					width: 100%;
+					scrollbar-width: none;
+					
+					&::-webkit-scrollbar {
+					
+						// Display & Box Model
+						display: none;
+					
+					}
+				
+					> .jui-vertical-container {
+						
+						// Display & Box Model
+						width: 100%;
+						
+						// Positioning
+						margin: 25px 0px;
+						
+						.aui-activity-drawer {
+							
+							// Display & Box Model
+							width: 100%;
+							
+							&:not(:last-child) {
+								
+								// Positioning
+								margin-bottom: 25px;
+								
+							}
+							
+						}
+						
+					}
+				
+				}
+			
+			}
+			
+			footer.jui-flow-container {
+				
+				// Display & Box Model
+				height: fractionalPercentage($footerAmount, $totalPageAmount);
+				width: 100%;
+				
+				// Coloring
+				background: $ampelGreen;
+				
+			}
+		
+		}
+	
 	}
 	
 	.aui-kiosk-page-old {
@@ -941,6 +1226,9 @@
 						
 						// Display & Box Model
 						height: 100%;
+						
+						// Misc.
+						@include disable-text-selection();
 						
 					}
 					

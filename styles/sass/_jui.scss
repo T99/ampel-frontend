@@ -113,6 +113,38 @@ html, body {
 		}
 		
 	}
+	
+	&.jui-toggleable-dropdown-arrow {
+	
+		// Display & Box Model
+		border-radius: 2px;
+		
+		.jui-active-state-element {
+			
+			$size: 8px;
+			
+			// Display & Box Model
+			height: 0;
+			width: 0;
+			box-sizing: border-box;
+			border: $size solid transparent;
+			border-top-color: white;
+			transform: translateY($size / 2);
+			opacity: 1;
+			
+			// Animation
+			transition: transform 0.3s;
+			
+			&.jui-toggleable-active {
+				
+				// Display & Box Model
+				transform: translateY(-($size / 2)) rotate(180deg);
+				
+			}
+			
+		}
+	
+	}
 
 }
 
@@ -128,6 +160,9 @@ html, body {
 
 .jui-progress-leaf {
 
+	// Display & Box Model
+	border: none;
+	
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	

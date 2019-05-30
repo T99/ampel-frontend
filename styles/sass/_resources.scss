@@ -13,29 +13,29 @@
 
 	// Base Colors
 		
-		$plainWhite:					#FFFFFF;
-		$plainBlack:					#000000;
-		$ampelGreen:					#A1C06C;
-		$ampelDarkGrey:					#808080;
+		//$plainWhite:					#FFFFFF;
+		//$plainBlack:					#000000;
+		//$ampelGreen:					#A1C06C;
+		//$ampelDarkGrey:					#808080;
 
 	// Gradients
 
-		$ampelStandardGradient: linear-gradient(45deg, $ampelGreen, #6CC0AB);
-		$ampelHeaderGradient: linear-gradient(15deg, $ampelGreen, #7AC06C);
-		$ampelFooterGradient: linear-gradient(165deg, $ampelGreen, #7AC06C);
+		//$ampelStandardGradient: linear-gradient(45deg, $ampelGreen, #6CC0AB);
+		//$ampelHeaderGradient: linear-gradient(15deg, $ampelGreen, #7AC06C);
+		//$ampelFooterGradient: linear-gradient(165deg, $ampelGreen, #7AC06C);
 
 	// Login Modal Colors
 
 		// Input Colors
 			
-			$inputBackgroundInactive:	#F0F0F080;
-			$inputBackgroundActive:		#F0F0F0;
-			$signinInactiveColor:		#AAAAAA;
-			$signinActiveColor:			#353535;
+			//$inputBackgroundInactive:	#F0F0F080;
+			//$inputBackgroundActive:		#F0F0F0;
+			//$signinInactiveColor:		#AAAAAA;
+			//$signinActiveColor:			#353535;
 
 	// Popup Modal Colors
 
-		$popupModalHeaderBackground: #EAEAEA;
+		//$popupModalHeaderBackground: #EAEAEA;
 
 // Misc. Variables
 	
@@ -184,7 +184,7 @@
 		
 	}
 
-	@mixin disable-selection() {
+	@mixin disable-text-selection() {
 		
 		user-select: none;
 		-moz-user-select: none;
@@ -196,7 +196,7 @@
 	
 	@mixin disable-selection-and-drag() {
 		
-		@include disable-selection;
+		@include disable-text-selection;
 		pointer-events: none;
 		
 	}
