@@ -21,7 +21,7 @@ import { JUIContainerable } from "../jui-containerable.js";
  * @version v0.1.0
  * @since v0.1.0
  */
-export abstract class JUIElement<E extends Element = Element> implements JUIContainerable<E> {
+export class JUIElement<E extends Element = Element> implements JUIContainerable<E> {
 	
 	/**
 	 * A String that represents the identity of this type.
@@ -47,7 +47,7 @@ export abstract class JUIElement<E extends Element = Element> implements JUICont
 	// private styleCollection: JUIStyleCollection = new JUIStyleCollection(this);
 	
 	// DOC-ME [12/8/18 @ 4:35 PM] - Documentation required!
-	protected constructor(elementType: JUIElementType) {
+	public constructor(elementType: JUIElementType) {
 		
 		if (elementType === undefined) console.trace("elementType was undefined");
 		
@@ -322,6 +322,11 @@ export namespace JUIElement {
 			this.ELEMENT_MOUSE_ENTER = JUIMouseEventType.MOUSE_ENTER.getNotifierForEventType(element);
 			this.ELEMENT_MOUSE_LEAVE = JUIMouseEventType.MOUSE_LEAVE.getNotifierForEventType(element);
 			this.ELEMENT_MOUSE_MOVE = JUIMouseEventType.MOUSE_MOVE.getNotifierForEventType(element);
+			
+			this.ELEMENT_ADDED_TO_PAGE = new JUINotifier<void>();
+			this.ELEMENT_REMOVED_FROM_PAGE = new JUINotifier<void>();
+			this.ELEMENT_ADDED_TO_CONTAINER = new JUINotifier<JUIContainer>();
+			this.ELEMENT_REMOVED_FROM_CONTAINER = new JUINotifier<JUIContainer>();
 		
 		}
 		

@@ -37,6 +37,7 @@ export class JUIModule<T extends JUIContainerable<E>, E extends Element = Elemen
 		
 		this.element = element;
 		element.addClasses(this.TYPE_IDENTITY);
+		this.events = new JUIModule.JUIModuleEvents(this);
 		
 	}
 	
@@ -216,6 +217,11 @@ export namespace JUIModule {
 			this.ELEMENT_MOUSE_ENTER = JUIMouseEventType.MOUSE_ENTER.getNotifierForEventType(element);
 			this.ELEMENT_MOUSE_LEAVE = JUIMouseEventType.MOUSE_LEAVE.getNotifierForEventType(element);
 			this.ELEMENT_MOUSE_MOVE = JUIMouseEventType.MOUSE_MOVE.getNotifierForEventType(element);
+			
+			this.ELEMENT_ADDED_TO_PAGE = new JUINotifier<void>();
+			this.ELEMENT_REMOVED_FROM_PAGE = new JUINotifier<void>();
+			this.ELEMENT_ADDED_TO_CONTAINER = new JUINotifier<JUIContainer>();
+			this.ELEMENT_REMOVED_FROM_CONTAINER = new JUINotifier<JUIContainer>();
 			
 		}
 	

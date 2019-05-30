@@ -82,6 +82,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 			// Adopt the page as a new child.
 			this.adoptChild(page);
 			
+			page.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
+			
 		}
 		
 	}
@@ -124,6 +126,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					this.setAlignment(JUIAlignment.RIGHT);
 					
 					this.addChild(page);
+					
+					page.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
 					
 				});
 				
@@ -179,6 +183,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					
 					this.addChild(page);
 					
+					page.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
+					
 				});
 				
 				transition.addPostAction(() => {
@@ -233,6 +239,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					
 					this.addChild(page);
 					
+					page.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
+					
 				});
 				
 				transition.addPostAction(() => {
@@ -286,6 +294,8 @@ class JUIWorld extends JUIFlowContainer<JUIPage> {
 					this.setAlignment(JUIAlignment.TOP);
 					
 					this.addChild(page);
+					
+					page.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
 					
 				});
 				

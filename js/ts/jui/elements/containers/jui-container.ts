@@ -157,6 +157,12 @@ export abstract class JUIContainer<T extends JUIContainerable = JUIContainerable
 		
 	}
 	
+	public getAllChildren(): T[] {
+		
+		return this.children.valueSet();
+		
+	}
+	
 	/**
 	 * Returns true if this JUIContainer has no children.
 	 *
@@ -190,6 +196,12 @@ export namespace JUIContainer {
 			
 			this.CHILD_ADDED_TO_CONTAINER = new JUINotifier<T>();
 			this.CHILD_REMOVED_FROM_CONTAINER = new JUINotifier<T>();
+			
+			this.ELEMENT_ADDED_TO_PAGE.subscribe(() => {
+				
+				for (let child of element.getAllChildren()) child.getEventManager().ELEMENT_ADDED_TO_PAGE.notify();
+				
+			});
 			
 		}
 		
