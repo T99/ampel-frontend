@@ -7,7 +7,7 @@
 import JUIEventType from "./jui-event-type.js";
 import JUIKeyboardEvent from "../jui-keyboard-event.js";
 import JUINotifier from "../../jui-notifier.js";
-import JUIRawTextField from "../../../elements/leaves/control-leaves/text/jui-raw-text-field.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  *
@@ -32,7 +32,7 @@ class JUIKeyboardEventType extends JUIEventType {
 		
 	}
 	
-	public getNotifierForEventType(eventSource: JUIRawTextField): JUINotifier<JUIKeyboardEvent> {
+	public getNotifierForEventType(eventSource: JUIContainerable<HTMLInputElement>): JUINotifier<JUIKeyboardEvent> {
 
 		let notifier: JUINotifier<JUIKeyboardEvent> = new JUINotifier<JUIKeyboardEvent>();
 

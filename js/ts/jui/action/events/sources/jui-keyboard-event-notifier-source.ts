@@ -7,12 +7,12 @@
 import JUIEventNotifierSource from "./jui-event-notifier-source.js";
 import JUIKeyboardEventType from "../types/jui-keyboard-event-type.js";
 import JUIKeyboardEvent from "../jui-keyboard-event.js";
-import JUITextFieldLeaf from "../../../elements/leaves/control-leaves/jui-text-field-leaf.js";
 import JUINotifier from "../../jui-notifier.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  * Serves as a standardized point-of-instantiation for {@link JUINotifier}s of {@link JUIKeyboardEvent}s.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -22,7 +22,7 @@ class JUIKeyboardEventNotifierSource<
 	T extends JUIKeyboardEventType = JUIKeyboardEventType,
 	O extends KeyboardEvent = KeyboardEvent> extends JUIEventNotifierSource<E, T, O> {
 	
-	public constructor(notifier: JUINotifier<E>, eventSource: JUITextFieldLeaf, eventType: T) {
+	public constructor(notifier: JUINotifier<E>, eventSource: JUIContainerable, eventType: T) {
 		
 		super(notifier, eventSource, eventType);
 		

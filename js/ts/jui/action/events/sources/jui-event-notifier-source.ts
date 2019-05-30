@@ -7,8 +7,8 @@
 import JUINotifierSource from "./jui-notifier-source.js";
 import JUIEvent from "../jui-event.js";
 import JUINotifier from "../../jui-notifier.js";
-import { JUIElement } from "../../../elements/jui-element.js";
 import JUIEventType from "../types/jui-event-type.js";
+import { JUIContainerable } from "../../../jui-containerable.js";
 
 /**
  * Serves as a standardized point-of-instantiation for {@link JUINotifier}s of {@link JUIEvent}s.
@@ -22,11 +22,11 @@ class JUIEventNotifierSource<
 	T extends JUIEventType = JUIEventType,
 	O extends Event = Event> extends JUINotifierSource<JUIEvent> {
 	
-	protected eventSource: JUIElement;
+	protected eventSource: JUIContainerable;
 	
 	protected eventType: T;
 	
-	public constructor(notifier: JUINotifier<E>, eventSource: JUIElement, eventType: T) {
+	public constructor(notifier: JUINotifier<E>, eventSource: JUIContainerable, eventType: T) {
 		
 		super(notifier);
 		
