@@ -45,7 +45,14 @@ export abstract class JUIToggleableElement<E extends HTMLElement = HTMLElement, 
 		
 	}
 	
-	public abstract setState(state: boolean): void;
+	public setState(state: boolean): void {
+		
+		this.handleStateChange(state);
+		this.getEventManager().TOGGLEABLE_STATE_CHANGE.notify(state);
+		
+	}
+	
+	protected abstract handleStateChange(state: boolean): void;
 	
 	public abstract getState(): boolean;
 	
@@ -78,6 +85,10 @@ export namespace JUIToggleableElement {
 			this.ELEMENT_MOUSE_CLICKED.subscribe(() => {
 				
 				this.TOGGLEABLE_STATE_CHANGE.notify(element.getState());
+				
+			});
+			
+			this.TOGGLEABLE_STATE_CHANGE.subscribe(() => {
 				
 				if (element.getState()) this.TOGGLEABLE_BECAME_ACTIVE.notify();
 				else this.TOGGLEABLE_BECAME_INACTIVE.notify();

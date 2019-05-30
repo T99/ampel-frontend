@@ -37,7 +37,7 @@ class JUIToggleableCheckbox extends JUIToggleableElement<HTMLElement, JUIAlignme
 	
 	}
 	
-	public setState(state: boolean): void {
+	protected handleStateChange(state: boolean): void {
 	
 		if (state) this.checkmarkElement.addClasses(JUIToggleableElement.ACTIVE_STATE_CLASS);
 		else this.checkmarkElement.removeClasses(JUIToggleableElement.ACTIVE_STATE_CLASS);

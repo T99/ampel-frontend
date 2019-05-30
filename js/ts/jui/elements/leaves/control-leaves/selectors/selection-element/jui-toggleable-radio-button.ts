@@ -37,7 +37,7 @@ class JUIToggleableRadioButton extends JUIToggleableElement<HTMLElement, JUIAlig
 		
 	}
 	
-	public setState(state: boolean): void {
+	protected handleStateChange(state: boolean): void {
 		
 		if (state) this.onActiveElement.addClasses(JUIToggleableElement.ACTIVE_STATE_CLASS);
 		else this.onActiveElement.removeClasses(JUIToggleableElement.ACTIVE_STATE_CLASS);
