@@ -11,7 +11,7 @@ import JUIFlowContainer from "../../../../jui/elements/containers/multi-containe
 import JUIDirection from "../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../jui/descriptors/jui-alignment.js";
 import AUISelectableBox from "../../kiosk-old/question-types/helper-elements/aui-selectable-box.js";
-import AFQuestionType from "../../../../af-structures/descriptors/af-question-type.js";
+import AFQuestionTypes from "../../../../af-structures/descriptors/af-question-types.js";
 import AFResponse from "../../../../af-structures/feedback-session/af-response.js";
 import { AUIQuestion } from "./aui-question.js";
 import JUINotifier from "../../../../jui/action/jui-notifier.js";
@@ -56,7 +56,7 @@ export class AUIMultipleChoiceQuestion extends AUIQuestion<JUIScrollContainer<JU
 			let optionID: string = option[0];
 			let optionText: string = option[1];
 			
-			let selectable: AUISelectableBox = new AUISelectableBox(optionText, optionID, AFQuestionType.MULTIPLE_CHOICE);
+			let selectable: AUISelectableBox = new AUISelectableBox(optionText, optionID, AFQuestionTypes.MULTIPLE_CHOICE);
 			
 			selectable.setFocusability(true);
 			

@@ -14,7 +14,7 @@ import AFFolderResponseStructure from "../../net/response-structures/common/af-f
 import AFQuestionListing from "./listings/af-question-listing.js";
 import AFQuestionResponseStructure from "../../net/response-structures/common/af-question-response-structure.js";
 import AFAPIFolderAccessor from "../../net/accessors/af-api-folder-accessor.js";
-import AFQuestionType from "../descriptors/af-question-type.js";
+import AFQuestionTypes from "../descriptors/af-question-types.js";
 import AFQuestion from "./af-question.js";
 import AFSession from "../af-session.js";
 
@@ -77,7 +77,7 @@ class AFFolder extends AFStructure<AFFolder> implements AFIDObject, AFClientInfo
 		
 	}
 	
-	public async createQuestion(inquiry: string, type: number | AFQuestionType): Promise<AFQuestion> {
+	public async createQuestion(inquiry: string, type: number | AFQuestionTypes): Promise<AFQuestion> {
 		
 		return this.getOrganization().createQuestion(inquiry, type, this.getID());
 		

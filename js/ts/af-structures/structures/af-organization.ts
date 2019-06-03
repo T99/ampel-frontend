@@ -19,7 +19,7 @@ import AFAPIOrganizationAccessor from "../../net/accessors/af-api-organization-a
 import AFFolder from "./af-folder.js";
 import AFLocation from "./af-location.js";
 import AFQuestion from "./af-question.js";
-import AFQuestionType from "../descriptors/af-question-type.js";
+import AFQuestionTypes from "../descriptors/af-question-types.js";
 import AFQuestionResponseStructure from "../../net/response-structures/common/af-question-response-structure.js";
 import AFSession from "../af-session.js";
 import AFSessionInformation from "../information-contexts/af-session-information.js";
@@ -201,14 +201,14 @@ class AFOrganization extends AFStructure<AFOrganization>
 		
 	}
 	
-	public async createQuestion(inquiry: string, type: number | AFQuestionType, folder?: string | AFFolder): Promise<AFQuestion> {
+	public async createQuestion(inquiry: string, type: number | AFQuestionTypes, folder?: string | AFFolder): Promise<AFQuestion> {
 		
 		let typeNumber: number;
 		let folderID: string;
 		
 		if (typeof type === "number") {
 			
-			let typeResult: AFQuestionType = AFQuestionType.getQuestionTypeForTypeNumber(type);
+			let typeResult: AFQuestionTypes = AFQuestionTypes.getQuestionTypeForTypeNumber(type);
 			
 			if (typeResult === undefined) throw new Error("ERR | Attempted to create a question with an invalid type number.");
 			else typeNumber = type;

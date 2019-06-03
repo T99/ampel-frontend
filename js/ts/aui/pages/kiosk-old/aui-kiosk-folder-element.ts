@@ -71,7 +71,7 @@ class AUIKioskFolderElement extends JUIModule<JUIFlowContainer<AUIQuestionElemen
 		this.questionList = new TSArrayList<AFQuestion>(...folder.getQuestionListing().getAll());
 		if (this.folder.isShuffled()) this.questionList.shuffle();
 		
-		// this.currentQuestionElement = AFQuestionType.createQuestionElementFromQuestion(this.getCurrentQuestion());
+		// this.currentQuestionElement = AFQuestionTypes.createQuestionElementFromQuestion(this.getCurrentQuestion());
 		
 		this.feedbackSession = new AFFeedbackSession(folder, TSDate.fromNow());
 		
@@ -162,7 +162,7 @@ class AUIKioskFolderElement extends JUIModule<JUIFlowContainer<AUIQuestionElemen
 		if (this.questionList.size() > (this.questionIndex + 1)) {
 			
 			let oldQuestionElement: AUIQuestionElement = this.currentQuestionElement;
-			// this.currentQuestionElement = AFQuestionType.createQuestionElementFromQuestion(this.questionList.get(++this.questionIndex), this);
+			// this.currentQuestionElement = AFQuestionTypes.createQuestionElementFromQuestion(this.questionList.get(++this.questionIndex), this);
 			this.currentResponseSubscription.unsubscribe();
 			
 			let transition: JUITransition = new JUITransition(
@@ -216,7 +216,7 @@ class AUIKioskFolderElement extends JUIModule<JUIFlowContainer<AUIQuestionElemen
 		if (0 <= (this.questionIndex - 1)) {
 			
 			let oldQuestionElement: AUIQuestionElement = this.currentQuestionElement;
-			// this.currentQuestionElement = AFQuestionType.createQuestionElementFromQuestion(this.questionList.get(--this.questionIndex), this);
+			// this.currentQuestionElement = AFQuestionTypes.createQuestionElementFromQuestion(this.questionList.get(--this.questionIndex), this);
 			this.currentResponseSubscription.unsubscribe();
 			
 			let transition: JUITransition = new JUITransition(

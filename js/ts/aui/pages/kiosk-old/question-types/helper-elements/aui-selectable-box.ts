@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AFQuestionType from "../../../../../af-structures/descriptors/af-question-type.js";
+import AFQuestionTypes from "../../../../../af-structures/descriptors/af-question-types.js";
 import JUIFlowContainer from "../../../../../jui/elements/containers/multi-containers/jui-flow-container.js";
 import JUIDirection from "../../../../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../../../../jui/descriptors/jui-alignment.js";
@@ -34,7 +34,7 @@ class AUISelectableBox extends JUIFlowContainer {
 	private responseID: string;
 	private toggleable: JUIToggleableElement;
 	
-	public constructor(text: string, responseID: string, type: AFQuestionType) {
+	public constructor(text: string, responseID: string, type: AFQuestionTypes) {
 		
 		super(JUIDirection.TO_RIGHT, JUIAlignment.CENTER, JUIFlexWrappingRule.NO_WRAP);
 		this.addClasses(this.TYPE_IDENTITY);
@@ -45,8 +45,8 @@ class AUISelectableBox extends JUIFlowContainer {
 		
 		this.textElement = new AUITextLabel(text);
 		
-		if (type === AFQuestionType.SELECT_ALL_THAT_APPLY) this.toggleable = new JUIToggleableCheckbox();
-		else if (type === AFQuestionType.MULTIPLE_CHOICE) this.toggleable = new JUIToggleableRadioButton();
+		if (type === AFQuestionTypes.SELECT_ALL_THAT_APPLY) this.toggleable = new JUIToggleableCheckbox();
+		else if (type === AFQuestionTypes.MULTIPLE_CHOICE) this.toggleable = new JUIToggleableRadioButton();
 		else throw new TypeError("Attempted to create an AUISelectableBox for a invalid question type.");
 		
 		this.addChildren(this.textElement, this.toggleable);

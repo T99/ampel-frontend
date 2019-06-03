@@ -21,9 +21,9 @@ import { AUISliderQuestion } from "../../aui/pages/kiosk/questions/aui-slider-qu
  * @version v0.1.0
  * @since v0.1.0
  */
-class AFQuestionType {
+class AFQuestionTypes {
 	
-	public static readonly STOPLIGHT: AFQuestionType = new AFQuestionType(
+	public static readonly STOPLIGHT: AFQuestionTypes = new AFQuestionTypes(
 		0, "StopLight", 2000,
 		(question: AFQuestion): AUIQuestion => new AUIStoplightQuestion(question),
 		(response: any): boolean => {
@@ -40,7 +40,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly SLIDER: AFQuestionType = new AFQuestionType(
+	public static readonly SLIDER: AFQuestionTypes = new AFQuestionTypes(
 		1, "Slider", 2500,
 		(question: AFQuestion): AUIQuestion => new AUISliderQuestion(question),
 		(response: any): boolean => {
@@ -56,7 +56,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly NPS: AFQuestionType = new AFQuestionType(
+	public static readonly NPS: AFQuestionTypes = new AFQuestionTypes(
 		2, "NPS", 2500,
 		(question: AFQuestion): AUIQuestion => new AUINPSQuestion(question),
 		(response: any): boolean => {
@@ -72,7 +72,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly TRUE_FALSE: AFQuestionType = new AFQuestionType(
+	public static readonly TRUE_FALSE: AFQuestionTypes = new AFQuestionTypes(
 		3, "TrueFalse", 2000,
 		(question: AFQuestion): AUIQuestion => new AUITrueFalseQuestion(question),
 		(response: any): boolean => {
@@ -85,7 +85,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly SELECT_ALL_THAT_APPLY: AFQuestionType = new AFQuestionType(
+	public static readonly SELECT_ALL_THAT_APPLY: AFQuestionTypes = new AFQuestionTypes(
 		4, "SelectAllThatApply", 3000,
 		(question: AFQuestion): AUIQuestion => new AUISATAQuestion(question),
 		(response: any): boolean => {
@@ -101,7 +101,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly MULTIPLE_CHOICE: AFQuestionType = new AFQuestionType(
+	public static readonly MULTIPLE_CHOICE: AFQuestionTypes = new AFQuestionTypes(
 		5, "MultipleChoice", 3000,
 		(question: AFQuestion): AUIQuestion => new AUIMultipleChoiceQuestion(question),
 		(response: any): boolean => {
@@ -114,7 +114,7 @@ class AFQuestionType {
 		
 	});
 	
-	public static readonly FREE_RESPONSE: AFQuestionType = new AFQuestionType(
+	public static readonly FREE_RESPONSE: AFQuestionTypes = new AFQuestionTypes(
 		6, "FreeResponse", 4000,
 		(question: AFQuestion): AUIQuestion => new AUIFreeResponseQuestion(question),
 		(response: any): boolean => {
@@ -128,9 +128,9 @@ class AFQuestionType {
 		
 	});
 	
-	private static typeNumberMap: Map<number, AFQuestionType>;
+	private static typeNumberMap: Map<number, AFQuestionTypes>;
 	
-	private static typeStringMap: Map<string, AFQuestionType>;
+	private static typeStringMap: Map<string, AFQuestionTypes>;
 	
 	private typeNumber: number;
 	
@@ -154,34 +154,34 @@ class AFQuestionType {
 		this.constructorProxy = constructorProxy;
 		this.validator = validator;
 		
-		AFQuestionType.addTypeNumberMapping(typeNumber, this);
-		AFQuestionType.addTypeStringMapping(typeString, this);
+		AFQuestionTypes.addTypeNumberMapping(typeNumber, this);
+		AFQuestionTypes.addTypeStringMapping(typeString, this);
 		
 	}
 	
-	private static addTypeNumberMapping(typeNumber: number, questionType: AFQuestionType): void {
+	private static addTypeNumberMapping(typeNumber: number, questionType: AFQuestionTypes): void {
 		
-		if (AFQuestionType.typeNumberMap === undefined) AFQuestionType.typeNumberMap = new Map<number, AFQuestionType>();
-		AFQuestionType.typeNumberMap.set(typeNumber, questionType);
-		
-	}
-	
-	private static addTypeStringMapping(typeString: string, questionType: AFQuestionType): void {
-		
-		if (AFQuestionType.typeStringMap === undefined) AFQuestionType.typeStringMap = new Map<string, AFQuestionType>();
-		AFQuestionType.typeStringMap.set(typeString, questionType);
+		if (AFQuestionTypes.typeNumberMap === undefined) AFQuestionTypes.typeNumberMap = new Map<number, AFQuestionTypes>();
+		AFQuestionTypes.typeNumberMap.set(typeNumber, questionType);
 		
 	}
 	
-	public static getQuestionTypeForTypeNumber(typeNumber: number): AFQuestionType {
+	private static addTypeStringMapping(typeString: string, questionType: AFQuestionTypes): void {
 		
-		return AFQuestionType.typeNumberMap.get(typeNumber);
+		if (AFQuestionTypes.typeStringMap === undefined) AFQuestionTypes.typeStringMap = new Map<string, AFQuestionTypes>();
+		AFQuestionTypes.typeStringMap.set(typeString, questionType);
 		
 	}
 	
-	public static getQuestionTypeForTypeString(typeString: string): AFQuestionType {
+	public static getQuestionTypeForTypeNumber(typeNumber: number): AFQuestionTypes {
 		
-		return AFQuestionType.typeStringMap.get(typeString);
+		return AFQuestionTypes.typeNumberMap.get(typeNumber);
+		
+	}
+	
+	public static getQuestionTypeForTypeString(typeString: string): AFQuestionTypes {
+		
+		return AFQuestionTypes.typeStringMap.get(typeString);
 		
 	}
 	
@@ -224,4 +224,4 @@ class AFQuestionType {
 	
 }
 
-export default AFQuestionType;
+export default AFQuestionTypes;

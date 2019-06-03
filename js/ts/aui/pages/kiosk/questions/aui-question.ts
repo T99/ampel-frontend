@@ -6,7 +6,7 @@
 
 import { JUIModule } from "../../../../jui/jui-module.js";
 import AFQuestion from "../../../../af-structures/structures/af-question.js";
-import AFQuestionType from "../../../../af-structures/descriptors/af-question-type.js";
+import AFQuestionTypes from "../../../../af-structures/descriptors/af-question-types.js";
 import JUINotifier from "../../../../jui/action/jui-notifier.js";
 import { JUIElement } from "../../../../jui/elements/jui-element.js";
 import AUIKioskButton from "../../kiosk-old/context-buttons/aui-kiosk-button.js";
@@ -40,7 +40,7 @@ export abstract class AUIQuestion<T extends JUIElement = JUIElement> extends JUI
 	
 	public static createForQuestion(question: AFQuestion): AUIQuestion {
 		
-		return AFQuestionType.createQuestionElementFromQuestion(question);
+		return AFQuestionTypes.createQuestionElementFromQuestion(question);
 		
 	}
 	
@@ -50,7 +50,7 @@ export abstract class AUIQuestion<T extends JUIElement = JUIElement> extends JUI
 		
 	}
 	
-	public getQuestionType(): AFQuestionType {
+	public getQuestionType(): AFQuestionTypes {
 		
 		return this.question.getType();
 		

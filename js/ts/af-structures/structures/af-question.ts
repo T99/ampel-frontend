@@ -4,7 +4,7 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import AFQuestionType from "../descriptors/af-question-type.js";
+import AFQuestionTypes from "../descriptors/af-question-types.js";
 import AFStructure from "../af-structure.js";
 import AFIDObject from "../af-id-object.js";
 import AFClientInformation from "../information-contexts/af-client-information.js";
@@ -28,7 +28,7 @@ class AFQuestion extends AFStructure<AFQuestion> implements AFIDObject, AFClient
 	
 	private inquiry: string;
 	
-	private type: AFQuestionType;
+	private type: AFQuestionTypes;
 	
 	private options: Map<string, string>;
 	
@@ -62,9 +62,9 @@ class AFQuestion extends AFStructure<AFQuestion> implements AFIDObject, AFClient
 		else response = questionResponse;
 		
 		this.inquiry = response.inquiry;
-		this.type = AFQuestionType.getQuestionTypeForTypeNumber(response.type.value);
+		this.type = AFQuestionTypes.getQuestionTypeForTypeNumber(response.type.value);
 		
-		if ((this.getType() === AFQuestionType.MULTIPLE_CHOICE) || (this.getType() === AFQuestionType.SELECT_ALL_THAT_APPLY)) {
+		if ((this.getType() === AFQuestionTypes.MULTIPLE_CHOICE) || (this.getType() === AFQuestionTypes.SELECT_ALL_THAT_APPLY)) {
 			
 			for (let id in response.options) {
 				
@@ -96,7 +96,7 @@ class AFQuestion extends AFStructure<AFQuestion> implements AFIDObject, AFClient
 		
 	}
 	
-	public getType(): AFQuestionType {
+	public getType(): AFQuestionTypes {
 		
 		return this.type;
 		
@@ -152,7 +152,7 @@ class AFQuestion extends AFStructure<AFQuestion> implements AFIDObject, AFClient
 		console.info("Inquiry:\t" + this.getInquiry());
 		console.info("Type:\t\t" + this.getType().getTypeString());
 		
-		if ((this.type === AFQuestionType.MULTIPLE_CHOICE) || (this.type === AFQuestionType.SELECT_ALL_THAT_APPLY)) {
+		if ((this.type === AFQuestionTypes.MULTIPLE_CHOICE) || (this.type === AFQuestionTypes.SELECT_ALL_THAT_APPLY)) {
 			
 			console.groupCollapsed("Options");
 			for (let id of this.getOptions().keys()) console.info(id + ": '" + this.getOptions().get(id) + "'");
