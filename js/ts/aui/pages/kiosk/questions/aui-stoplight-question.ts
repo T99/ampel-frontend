@@ -69,23 +69,23 @@ export class AUIStoplightQuestion extends AUIQuestion<JUIStackContainer> {
 		this.events = new AUIStoplightQuestion.AUIStoplightQuestionEvents(this);
 		
 		builder
-			.withDiameter(117)
-			.withXOrigin(170)
+			.withRadius("13%")
+			.withXOrigin("53.5%")
 			.withFillColor(JUINamedColor.TRANSPARENT)
 			.withStrokeWidth(3);
 		
 		this.redSelectionRing = builder
-			.withYOrigin(163)
+			.withYOrigin("25%")
 			.withStrokeColor(JUINamedColor.TRANSPARENT)
 			.build();
 		
 		this.yellowSelectionRing = builder
-			.withYOrigin(322)
+			.withYOrigin("50%")
 			.withStrokeColor(JUINamedColor.TRANSPARENT)
 			.build();
 		
 		this.greenSelectionRing = builder
-			.withYOrigin(482)
+			.withYOrigin("75%")
 			.withStrokeColor(JUINamedColor.TRANSPARENT)
 			.build();
 		

@@ -41,9 +41,9 @@ class JUISVGCircle extends JUISVGGeometry<SVGCircleElement> {
 		
 	}
 	
-	public setRadius(radius: number): void {
+	public setRadius(radius: any): void {
 		
-		this.element.setAttribute("r", radius.toString());
+		this.element.setAttribute("r", radius);
 		
 	}
 	
@@ -53,25 +53,25 @@ class JUISVGCircle extends JUISVGGeometry<SVGCircleElement> {
 		
 	}
 	
-	public setXOrigin(xOrigin: number): void {
+	public setXOrigin(xOrigin: any): void {
 		
-		this.element.setAttribute("cx", xOrigin.toString());
-		
-	}
-	
-	public setYOrigin(yOrigin: number): void {
-		
-		this.element.setAttribute("cy", yOrigin.toString());
+		this.element.setAttribute("cx", xOrigin);
 		
 	}
 	
-	public move(xDelta: number, yDelta: number): void {
+	public setYOrigin(yOrigin: any): void {
+		
+		this.element.setAttribute("cy", yOrigin);
+		
+	}
+	
+	public move(xDelta: any, yDelta: any): void {
 		
 		return;
 		
 	}
 	
-	public scale(factor: number, origin?: JUIAlignment): void {
+	public scale(factor: any, origin?: JUIAlignment): void {
 		
 		return;
 		

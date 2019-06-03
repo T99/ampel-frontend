@@ -45,10 +45,10 @@ abstract class JUISVGGeometry<E extends SVGGraphicsElement> extends JUIElement<E
 	
 	public abstract scale(factor: number, origin?: JUIAlignment): void;
 	
-	public setStrokeWidth(strokeWidth: number): void {
+	public setStrokeWidth(strokeWidth: any): void {
 		
 		this.strokeWidth = strokeWidth;
-		this.element.setAttribute("stroke-width", strokeWidth.toString());
+		this.element.setAttribute("stroke-width", strokeWidth);
 		
 	}
 	

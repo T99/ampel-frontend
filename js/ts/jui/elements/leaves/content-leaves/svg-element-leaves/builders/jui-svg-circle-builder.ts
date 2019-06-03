@@ -9,8 +9,8 @@ import JUISVGGeometryBuilder from "./jui-svg-geometry-builder.js";
 import InvalidArgumentsError from "../../../../../../errors/invalid-arguments-error.js";
 
 /**
- * 
- * 
+ *
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -29,7 +29,7 @@ class JUISVGCircleBuilder extends JUISVGGeometryBuilder<JUISVGCircle> {
 		
 	}
 	
-	public withRadius(radius: number): JUISVGCircleBuilder {
+	public withRadius(radius: any): JUISVGCircleBuilder {
 		
 		this.fulfillRequirement("radius", radius);
 		
@@ -37,7 +37,7 @@ class JUISVGCircleBuilder extends JUISVGGeometryBuilder<JUISVGCircle> {
 		
 	}
 	
-	public withDiameter(diameter: number): JUISVGCircleBuilder {
+	public withDiameter(diameter: any): JUISVGCircleBuilder {
 		
 		this.fulfillRequirement("radius", diameter / 2);
 		
@@ -45,7 +45,7 @@ class JUISVGCircleBuilder extends JUISVGGeometryBuilder<JUISVGCircle> {
 		
 	}
 	
-	public withXOrigin(xOrigin: number): JUISVGCircleBuilder {
+	public withXOrigin(xOrigin: any): JUISVGCircleBuilder {
 		
 		this.fulfillRequirement("xOrigin", xOrigin);
 		
@@ -53,7 +53,7 @@ class JUISVGCircleBuilder extends JUISVGGeometryBuilder<JUISVGCircle> {
 		
 	}
 	
-	public withYOrigin(yOrigin: number): JUISVGCircleBuilder {
+	public withYOrigin(yOrigin: any): JUISVGCircleBuilder {
 		
 		this.fulfillRequirement("yOrigin", yOrigin);
 		
