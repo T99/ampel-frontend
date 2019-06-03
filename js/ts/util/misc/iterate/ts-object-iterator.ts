@@ -4,9 +4,8 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSAIterator from "../../partials/iterate/ts-a-iterator.js";
-
-type KeyValuePair<K, V> = { key: K, value: V };
+import TSAIterator from "../../structures/partials/iterate/ts-a-iterator.js";
+import TSKeyValuePair from "../../structures/interfaces/ts-key-value-pair.js";
 
 /**
  * A TSAIterator that iterates over the keys of an object.
@@ -15,7 +14,7 @@ type KeyValuePair<K, V> = { key: K, value: V };
  * @version v0.1.0
  * @since v0.1.0
  */
-class TSObjectIterator<E = any> extends TSAIterator<KeyValuePair<string, E>> {
+class TSObjectIterator<E = any> extends TSAIterator<TSKeyValuePair<string, E>> {
 	
 	private content: any;
 	private keys: string[];
@@ -41,21 +40,37 @@ class TSObjectIterator<E = any> extends TSAIterator<KeyValuePair<string, E>> {
 		
 	}
 	
-	public next(): KeyValuePair<string, E> {
+	public next(): TSKeyValuePair<string, E> {
 		
-		return {
-			
-			key: this.keys[this.index],
-			value: this.content[this.keys[this.index++]]
-			
-		};
+		let key: string = this.keys[this.index++];
+		let value: E = this.content[key];
+		
+		return { key, value };
 		
 	}
 	
-	public remove(): KeyValuePair<string, E> {
+	public remove(): TSKeyValuePair<string, E> {
 		
-		throw new Error("Unsupported operation.");
-		// TODO [3/17/19 @ 9:40 PM] - Can this be done?
+		if (this.index > 0) {
+			
+			let key: string = this.keys[--this.index];
+			let value: E = this.content[key];
+			let result: TSKeyValuePair<string, E> = { key, value };
+			
+			delete this.content[key];
+			
+			return result;
+			
+		} else {
+			
+			return {
+				
+				key: undefined,
+				value: undefined
+				
+			};
+			
+		}
 		
 	}
 	
