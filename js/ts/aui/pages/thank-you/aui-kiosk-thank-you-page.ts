@@ -40,7 +40,7 @@ class AUIKioskThankYouPage extends JUIPage {
 		this.stackContainer = new JUIStackContainer(JUIAlignment.CENTER);
 		
 		this.stackContainer.addStackedChild(new JUIImageLeaf("/img/main-icon.png"));
-		this.stackContainer.addStackedChild(new AUIKioskTextLabel("Thanks for helping!"));
+		this.stackContainer.addStackedChild(new AUIKioskTextLabel("Thanks for \n helping!"));
 		
 		this.setChild(this.stackContainer);
 	
