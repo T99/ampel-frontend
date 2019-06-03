@@ -4,8 +4,9 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import TSStructure from "../../interfaces/ts-structure.js";
 import TSISet from "../../interfaces/set/ts-i-set.js";
+import TSArrayList from "../list/ts-array-list.js";
+import TSAIterator from "../../partials/iterate/ts-a-iterator.js";
 
 /**
  * A set of elements. This {@link TSStructure} serves as an representative model for mathematical sets.
@@ -16,33 +17,68 @@ import TSISet from "../../interfaces/set/ts-i-set.js";
  */
 class TSSet<E = any> implements TSISet<E> {
 	
+	private internalStructure: TSArrayList<E>;
+	
 	public constructor(...elements: E[]) {
 	
+		this.internalStructure = new TSArrayList<E>();
+		
+		this.addAll(elements);
 	
+	}
 	
+	public add(element: E): void {
+	
+		if (!this.internalStructure.contains(element)) this.internalStructure.add(element);
+	
+	}
+	
+	public addAll(elements: E[]): void {
+		
+		for (let element of elements) this.add(element);
+		
+	}
+	
+	public clear(): void {
+		
+		this.internalStructure.clear();
+		
 	}
 	
 	public contains(element: E): boolean {
 		
-		return false;
+		return this.internalStructure.contains(element);
 		
 	}
 	
 	public isEmpty(): boolean {
 		
-		return false;
+		return this.internalStructure.isEmpty();
+		
+	}
+	
+	public iterator(): TSAIterator<E> {
+		
+		return this.internalStructure.iterator();
+		
+	}
+	
+	public remove(element: E): E {
+		
+		this.internalStructure.remove(element);
+		return element;
 		
 	}
 	
 	public size(): number {
 		
-		return 0;
+		return this.internalStructure.size();
 		
 	}
 	
 	public toArray(): E[] {
 		
-		return [];
+		return this.internalStructure.toArray();
 		
 	}
 	
