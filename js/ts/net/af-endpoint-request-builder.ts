@@ -8,6 +8,7 @@ import BuilderBase from "../helpers/builder-base.js";
 import InvalidArgumentsError from "../errors/invalid-arguments-error.js";
 import HTTPMethod from "../descriptors/http-method.js";
 import AFEndpointRequest from "./af-endpoints-request.js";
+import AFAPIContentType from "./af-api-content-type.js";
 
 /**
  * A builder for {@link AFEndpointRequest}s.
@@ -29,7 +30,8 @@ class AFEndpointRequestBuilder extends BuilderBase<AFEndpointRequest> {
 		
 		this.addOptionals(
 			"token",
-			"requestBody"
+			"requestBody",
+			"expectedContentType"
 		);
 		
 	}
@@ -66,6 +68,14 @@ class AFEndpointRequestBuilder extends BuilderBase<AFEndpointRequest> {
 		
 	}
 	
+	public withExpectedContentType(contentType: AFAPIContentType): AFEndpointRequestBuilder {
+		
+		this.fulfillRequirement("expectedContentType", contentType);
+		
+		return this;
+		
+	}
+	
 	public build(): AFEndpointRequest {
 		
 		if (this.checkFulfillment()) {
@@ -77,6 +87,7 @@ class AFEndpointRequestBuilder extends BuilderBase<AFEndpointRequest> {
 			
 			if (this.checkFulfillment("requestBody")) result.setRequestBody(this.getValueOfRequirement("requestBody"));
 			if (this.checkFulfillment("token")) result.setToken(this.getValueOfRequirement("token"));
+			if (this.checkFulfillment("expectedContentType")) result.setResponseContentType(this.getValueOfRequirement("expectedContentType"));
 			
 			return result;
 			

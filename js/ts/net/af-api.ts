@@ -9,7 +9,7 @@ import AFAPIError from "./af-api-error.js";
 
 /**
  * A grab-bag of methods for accessing the Ampel API.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -51,7 +51,7 @@ class AFAPI {
 				
 				if (xhr.readyState === XMLHttpRequest.DONE) {
 					
-					if (xhr.status === 200) resolve(JSON.parse(xhr.responseText));
+					if (xhr.status === 200) resolve(endpointRequest.getResponseContentType().process(xhr));
 					else {
 						
 						let error: AFAPIError = new AFAPIError(

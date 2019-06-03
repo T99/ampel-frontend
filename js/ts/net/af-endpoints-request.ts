@@ -6,6 +6,7 @@
 
 import HTTPMethod from "../descriptors/http-method.js";
 import TSObjectIterator from "../util/misc/iterate/ts-object-iterator.js";
+import AFAPIContentType from "./af-api-content-type.js";
 
 /**
  * Describes the most basic form of an request to an Ampel endpoint.
@@ -20,11 +21,13 @@ class AFEndpointRequest {
 	protected path: string = "https://api.ampelfeedback.xyz";
 	protected requestBody: any;
 	protected token: string;
+	protected responseContentType: AFAPIContentType;
 	
 	public constructor(method: HTTPMethod, endpointPath: string) {
 		
 		this.method = method;
 		this.path += endpointPath;
+		this.responseContentType = AFAPIContentType.JSON;
 		
 	}
 	
@@ -131,6 +134,18 @@ class AFEndpointRequest {
 	public getToken(): string {
 		
 		return this.token;
+		
+	}
+	
+	public setResponseContentType(contentType: AFAPIContentType): void {
+		
+		this.responseContentType = contentType;
+		
+	}
+	
+	public getResponseContentType(): AFAPIContentType {
+		
+		return this.responseContentType;
 		
 	}
 	
