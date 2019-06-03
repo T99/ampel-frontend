@@ -4,10 +4,22 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-@import "minification";
 @import "resources";
 
 $headers: h1, h2, h3, h4, h5, h6;
+
+* {
+	
+	// Positioning
+	margin: 0;
+	padding: 0;
+	
+	// Remove various browser stylings.
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+	
+}
 
 html, body {
 	
