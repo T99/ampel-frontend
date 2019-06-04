@@ -7,6 +7,7 @@
 import TSDate from "./descriptors/time/ts-date.js";
 import AFSession from "./af-structures/af-session.js";
 import TSLogger from "./logging/ts-logger.js";
+import TSDeveloperSettings from "./ts-developer-settings.js";
 
 /**
  * Holds a number of managers and misc. objects related to a singular session.
@@ -27,13 +28,16 @@ class TSBrowserSession {
 	
 	private developerMode: boolean;
 	
+	private developerSettings: TSDeveloperSettings;
+	
 	public constructor(developerMode: boolean = false) {
 		
 		this.developerMode = developerMode;
 		
 		this.startTime = TSDate.fromNow();
-		this.ampelSession = new AFSession(developerMode);
-		this.logger = new TSLogger(developerMode);
+		this.ampelSession = new AFSession(this.developerMode);
+		this.logger = new TSLogger(this.developerMode);
+		this.developerSettings = new TSDeveloperSettings(this.developerMode);
 	
 	}
 	
@@ -58,6 +62,12 @@ class TSBrowserSession {
 	public getLogger(): TSLogger {
 		
 		return this.logger;
+		
+	}
+	
+	public getDeveloperSettings(): TSDeveloperSettings {
+		
+		return this.developerSettings;
 		
 	}
 	

@@ -33,6 +33,10 @@ class AFKioskActivity {
 	
 	private timeoutID: number;
 	
+	private isTransitioningQuestions: boolean;
+	
+	private hasFinished: boolean;
+	
 	private constructor(folder: AFFolder) {
 		
 		this.currentFolder = folder;
@@ -69,9 +73,25 @@ class AFKioskActivity {
 		);
 		
 		initialQuestion.getEventManager().QUESTION_INTERACTION_OCCURRED.subscribe(() => activity.interact());
-		initialQuestion.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => activity.goToNextQuestion());
-		kioskPage.subscribeToDoneButton((): any => activity.goToNextQuestion());
-		kioskPage.subscribeToBackButton((): any => activity.goToPreviousQuestion());
+		initialQuestion.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => {
+			
+			if (session.getDeveloperSettings().getQuestionAutoDoneBehavior()) activity.goToNextQuestion();
+			
+		});
+		
+		kioskPage.subscribeToDoneButton((): any => {
+			
+			activity.interact();
+			activity.goToNextQuestion();
+			
+		});
+		
+		kioskPage.subscribeToBackButton((): any => {
+			
+			activity.interact();
+			activity.goToPreviousQuestion();
+			
+		});
 		
 		return kioskPage;
 		
@@ -83,11 +103,15 @@ class AFKioskActivity {
 		
 		this.timeoutID = setTimeout((): void => {
 			
-			AUIKioskThankYouPage.sayThankYou().then(() => {
+			if (!this.hasFinished) {
 				
-				this.renew();
+				if (session.getDeveloperSettings().getFeedbackSessionAutoDoneBehavior()) {
+					
+					AUIKioskThankYouPage.sayThankYou().then((): any => this.renew());
+					
+				}
 				
-			});
+			}
 			
 		}, 7000);
 		
@@ -95,25 +119,39 @@ class AFKioskActivity {
 	
 	private async goToNextQuestion(): Promise<void> {
 		
-		if (this.questionList.size() - 1 > this.currentQuestionIndex) {
+		if (!this.isTransitioningQuestions) {
 			
-			let question: AUIQuestion = AUIQuestion.createForQuestion(this.questionList.get(++this.currentQuestionIndex));
-			let folderProgress: number = this.currentQuestionIndex + 1;
+			this.isTransitioningQuestions = true;
 			
-			question.getEventManager().QUESTION_INTERACTION_OCCURRED.subscribe(() => this.interact());
-			question.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => this.goToNextQuestion());
-			
-			await this.kioskPage.nextQuestion(question, folderProgress);
-			
-		} else {
-			
-			// JUIWorld.getInstance().goToPageRight(new AUIContactCapturePage());
-			
-			AUIKioskThankYouPage.sayThankYou().then(() => {
+			if (this.questionList.size() - 1 > this.currentQuestionIndex) {
 				
-				this.renew();
+				console.log("Currently on question #" + this.currentQuestionIndex + ", going to question #" + (this.currentQuestionIndex + 1) + "...");
 				
-			});
+				let question: AUIQuestion = AUIQuestion.createForQuestion(this.questionList.get(++this.currentQuestionIndex));
+				let folderProgress: number = this.currentQuestionIndex + 1;
+				
+				question.getEventManager().QUESTION_INTERACTION_OCCURRED.subscribe(() => this.interact());
+				question.getEventManager().QUESTION_INTERACTION_TIMED_OUT.subscribe(() => {
+					
+					if (session.getDeveloperSettings().getQuestionAutoDoneBehavior()) this.goToNextQuestion();
+					
+				});
+				
+				await this.kioskPage.nextQuestion(question, folderProgress);
+				
+				this.isTransitioningQuestions = false;
+				
+			} else {
+				
+				// JUIWorld.getInstance().goToPageRight(new AUIContactCapturePage());
+				
+				if (!this.hasFinished) {
+					
+					AUIKioskThankYouPage.sayThankYou().then((): any => this.renew());
+					
+				}
+				
+			}
 			
 		}
 		
@@ -121,18 +159,28 @@ class AFKioskActivity {
 	
 	private async goToPreviousQuestion(): Promise<void> {
 		
-		if (this.currentQuestionIndex > 0) {
+		if (!this.isTransitioningQuestions) {
 			
-			await this.kioskPage.previousQuestion(
-				AUIQuestion.createForQuestion(this.questionList.get(--this.currentQuestionIndex)),
-				this.currentQuestionIndex + 1
-			);
+			if (this.currentQuestionIndex > 0) {
+				
+				this.isTransitioningQuestions = true;
+				
+				await this.kioskPage.previousQuestion(
+					AUIQuestion.createForQuestion(this.questionList.get(--this.currentQuestionIndex)),
+					this.currentQuestionIndex + 1
+				);
+				
+				this.isTransitioningQuestions = false;
+				
+			}
 			
 		}
 		
 	}
 	
 	private async renew(): Promise<void> {
+		
+		if (this.timeoutID !== undefined) clearTimeout(this.timeoutID);
 		
 		await this.reinitializeQuestionList();
 		
@@ -141,6 +189,9 @@ class AFKioskActivity {
 		await JUIWorld.getInstance().goToPageRight(this.kioskPage);
 		
 		this.kioskPage.resizeInquiryText();
+		
+		this.isTransitioningQuestions = false;
+		this.hasFinished = false;
 		
 	}
 	
