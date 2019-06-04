@@ -29,6 +29,13 @@ class AUIKioskButton extends JUIButtonLeaf {
 		
 	}
 	
+	public setIsGreyedOut(isGreyedOut: boolean): void {
+		
+		if (isGreyedOut) this.addClasses("greyed-out");
+		else this.removeClasses("greyed-out");
+		
+	}
+	
 }
 
 export default AUIKioskButton;
