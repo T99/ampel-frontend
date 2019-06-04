@@ -6,7 +6,7 @@
 
 /**
  * An enumeration of possible time zones.
- * 
+ *
  * @author Trevor Sears <trevorsears.main@gmail.com>
  * @version v0.1.0
  * @since v0.1.0
@@ -85,10 +85,46 @@ class TSTimeZone {
 	
 	private names: string[];
 	
+	private static offsetMap: Map<number, TSTimeZone>;
+	
 	private constructor(offset: number, primaryName: string, ...names: string[]) {
 		
 		this.offset = offset;
 		this.names = [primaryName, ...names];
+		
+		TSTimeZone.addOffsetMapping(offset, this);
+		
+	}
+	
+	private static addOffsetMapping(offset: number, timezone: TSTimeZone): void {
+		
+		if (TSTimeZone.offsetMap === undefined) TSTimeZone.offsetMap = new Map<number, TSTimeZone>();
+		
+		TSTimeZone.offsetMap.set(offset, timezone);
+		
+	}
+	
+	public static getTimezoneForOffset(offset: number): TSTimeZone {
+		
+		return TSTimeZone.offsetMap.get(offset);
+		
+	}
+	
+	public getOffset(): number {
+		
+		return this.offset;
+		
+	}
+	
+	public getPrimaryName(): string {
+		
+		return this.names[0];
+		
+	}
+	
+	public getAllNames(): string[] {
+		
+		return this.names;
 		
 	}
 	
