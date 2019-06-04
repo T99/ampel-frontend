@@ -321,7 +321,7 @@ class AUISplashPage extends JUIPage {
 	
 	}
 	
-	private async goToOrganizationSelector(organizationListing: AFOrganizationListing): Promise<void> {
+	public async goToOrganizationSelector(organizationListing: AFOrganizationListing): Promise<void> {
 		
 		this.activeOrganizationListing = organizationListing;
 		
@@ -345,7 +345,7 @@ class AUISplashPage extends JUIPage {
 		
 	}
 	
-	private async goToLocationSelector(locationListing: AFLocationListing): Promise<void> {
+	public async goToLocationSelector(locationListing: AFLocationListing): Promise<void> {
 		
 		this.activeLocationListing = locationListing;
 		
@@ -378,7 +378,7 @@ class AUISplashPage extends JUIPage {
 		
 	}
 	
-	private async goToDeviceSelector(deviceListing: AFDeviceListing): Promise<void> {
+	public async goToDeviceSelector(deviceListing: AFDeviceListing): Promise<void> {
 		
 		let deviceSelector: AUIStructureSelectorModule<AFDevice, AFDeviceListing>
 			= new AUIStructureSelectorModule<AFDevice, AFDeviceListing>(

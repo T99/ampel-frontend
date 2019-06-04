@@ -17,6 +17,9 @@ import AFKioskActivity from "../../af-activities/af-kiosk-activity.js";
 import JUIScrollContainer from "../../jui/elements/containers/single-containers/jui-scroll-container.js";
 import JUIVerticalContainer from "../../jui/elements/containers/multi-containers/jui-vertical-container.js";
 import AUINotification from "../global/aui-notification.js";
+import TSBrowserSession from "../../ts-browser-session.js";
+import JUIWorld from "../../jui/jui-world.js";
+import AUISplashPage from "../splash/aui-splash-page.js";
 
 /**
  *
@@ -83,22 +86,26 @@ class AUIDashboardPage extends JUIPage {
 					activity: (): Promise<any> => AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder())
 				},
 				{
-					name: "Kiosk to contact capture.",
+					name: "Kiosk to contact capture",
 					activity: (): Promise<any> => AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder())
 				},
 				{
-					name: "Contact capture to kiosk.",
+					name: "Contact capture to kiosk",
 					activity: (): Promise<any> => AFKioskActivity.create(session.getAmpelSession().getDevice().getDefaultFolder())
 				}
 			]),
 			new AUIActivityDrawer("Reporting", false, [
 				{
-					name: "Access my reports.",
+					name: "Access my reports",
 					activity: (): any => new AUINotification("This feature is not yet live.")
 				},
 				{
 					name: "Live Feedback",
 					activity: (): any => new AUINotification("This feature is not yet live.")
+				},
+				{
+					name: "Export data to CSV",
+					activity: (): any => window.location.href = "https://api.ampelfeedback.xyz/reporting/csv?token=" + session.getAmpelSession().getToken()
 				}
 			]),
 			new AUIActivityDrawer("My Account", false, [
@@ -107,29 +114,33 @@ class AUIDashboardPage extends JUIPage {
 					activity: (): any => new AUINotification("This feature is not yet live.")
 				},
 				{
-					name: "Switch organization",
+					name: "Sign-out",
+					activity: (): Promise<void> => {
+						
+						window["session"] = new TSBrowserSession(true);
+						return JUIWorld.getInstance().goToPageLeft(new AUISplashPage());
+						
+					}
+				}
+			]),
+			new AUIActivityDrawer("My Organization", false, [
+				{
+					name: "Organization Settings",
 					activity: (): any => new AUINotification("This feature is not yet live.")
 				},
 				{
-					name: "Sign-out",
-					activity: (): any => location.reload()
+					name: "Switch Organization",
+					activity: async (): Promise<any> => {
+						
+						let page: AUISplashPage = new AUISplashPage();
+						await page.goToOrganizationSelector(session.getAmpelSession().getClient().getOrganizationListing());
+						
+						return JUIWorld.getInstance().goToPageLeft(page);
+						
+					}
 				}
 			]),
 			new AUIActivityDrawer("Extra drawer...", false, [
-				{
-					name: "Misc drawer item #1",
-					activity: (): any => new AUINotification("This doesn't do anything!")
-				},
-				{
-					name: "Misc drawer item #2",
-					activity: (): any => new AUINotification("This doesn't do anything!")
-				},
-				{
-					name: "Misc drawer item #3",
-					activity: (): any => new AUINotification("This doesn't do anything!")
-				}
-			]),
-			new AUIActivityDrawer("Another extra drawer...", false, [
 				{
 					name: "Misc drawer item #1",
 					activity: (): any => new AUINotification("This doesn't do anything!")
