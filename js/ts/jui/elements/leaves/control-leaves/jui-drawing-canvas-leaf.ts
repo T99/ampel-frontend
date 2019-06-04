@@ -44,16 +44,16 @@ class JUIDrawingCanvasLeaf extends JUICanvasLeaf {
 			
 			if ((!this.brushDown) || (this.previousX === undefined) || (this.previousY === undefined)) {
 				
-				this.previousX = notification.getPageX() - this.getHTMLElement().getBoundingClientRect().left;
-				this.previousY = notification.getPageY() - this.getHTMLElement().getBoundingClientRect().top;
+				this.previousX = notification.getPageX() - this.getElement().getBoundingClientRect().left;
+				this.previousY = notification.getPageY() - this.getElement().getBoundingClientRect().top;
 				
 			} else if (this.brushDown) {
 				
 				this.context.beginPath();
 				this.context.moveTo(this.previousX, this.previousY);
 				
-				this.previousX = notification.getPageX() - this.getHTMLElement().getBoundingClientRect().left;
-				this.previousY = notification.getPageY() - this.getHTMLElement().getBoundingClientRect().top;
+				this.previousX = notification.getPageX() - this.getElement().getBoundingClientRect().left;
+				this.previousY = notification.getPageY() - this.getElement().getBoundingClientRect().top;
 				
 				this.context.lineTo(this.previousX, this.previousY);
 				this.context.stroke();
@@ -98,7 +98,7 @@ class JUIDrawingCanvasLeaf extends JUICanvasLeaf {
 	
 	public clear(): void {
 	
-		this.context.clearRect(0, 0, this.getHTMLElement().width, this.getHTMLElement().height);
+		this.context.clearRect(0, 0, this.getElement().width, this.getElement().height);
 		
 	}
 	

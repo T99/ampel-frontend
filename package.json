@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "description": "Client-facing webapp dashboard for Ampel Feedback.",
   "main": "./js/main.js",
-  "dependencies": {},
-  "devDependencies": {
-    "typescript": "latest",
-    "tslint": "latest",
-    "jsdoc": "latest"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

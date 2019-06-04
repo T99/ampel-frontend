@@ -99,12 +99,7 @@ class AUIKioskPage extends JUIPage {
 		this.setChild(this.mainFlowContainer);
 		
 		this.inquiryText.getEventManager().ELEMENT_ADDED_TO_PAGE.subscribe(() => this.setInquiryText(initialQuestion.getInquiryText()));
-		window.addEventListener("resize", () => {
-			
-			console.log("window resize fired");
-			this.resizeInquiryText();
-			
-		});
+		window.addEventListener("resize", () => this.resizeInquiryText());
 		
 	}
 	

@@ -4,11 +4,11 @@
  *	Website: dashboard.ampelfeedback.com
  */
 
-import JUIFlowContainer from "../../jui/elements/multi-containers/jui-flow-container.js";
-import JUIContainerable from "../../jui/jui-containerable.js";
+import JUIFlowContainer from "../../jui/elements/containers/multi-containers/jui-flow-container.js";
+import { JUIContainerable } from "../../jui/jui-containerable.js";
 import JUIDirection from "../../jui/descriptors/jui-direction.js";
 import JUIAlignment from "../../jui/descriptors/jui-alignment.js";
-import JUIModule from "../../jui/jui-module.js";
+import { JUIModule } from "../../jui/jui-module.js";
 import JUITransition from "../../jui/animations/jui-transition.js";
 import JUINamedTransitionFunction from "../../jui/animations/transition-functions/jui-named-transition-function.js";
 
@@ -29,7 +29,9 @@ class AUISideScroller<T extends JUIContainerable = JUIContainerable> extends JUI
 	
 		super(new JUIFlowContainer(JUIDirection.TO_RIGHT, JUIAlignment.CENTER));
 		
-		this.element.addChildren(startingElement);
+		this.currentElement = startingElement;
+		
+		this.getModuleElement().addChildren(this.currentElement);
 	
 	}
 	
@@ -41,7 +43,7 @@ class AUISideScroller<T extends JUIContainerable = JUIContainerable> extends JUI
 	
 	public async transitionToRight(element: T): Promise<void> {
 		
-		let oldElement: T = this.currentElement;
+		let oldElement: T = this.getCurrentElement();
 		this.currentElement = element;
 		
 		let transition: JUITransition = new JUITransition(
@@ -49,27 +51,27 @@ class AUISideScroller<T extends JUIContainerable = JUIContainerable> extends JUI
 			JUINamedTransitionFunction.EASE_IN_OUT,
 			(progress: number): void => {
 				
-				this.element.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+				this.getModuleElement().getElement().style.transform = "translateX(" + progress + "vw)";
 				
 			},
-			[this.element],
+			[this.getModuleElement()],
 			0,
 			-100
 		);
 		
 		transition.addPreAction(() => {
 			
-			this.element.setAlignment(JUIAlignment.LEFT);
-			this.element.addChildren(this.currentElement);
+			this.getModuleElement().setAlignment(JUIAlignment.LEFT);
+			this.getModuleElement().addChildren(this.currentElement);
 			
 		});
 		
 		transition.addPostAction(() => {
 			
-			this.element.setAlignment(JUIAlignment.RIGHT);
-			this.element.removeChild(oldElement.getID());
-			this.element.setAlignment(JUIAlignment.CENTER);
-			this.element.getHTMLElement().style.transform = "";
+			this.getModuleElement().setAlignment(JUIAlignment.RIGHT);
+			this.getModuleElement().removeChild(oldElement.getID());
+			this.getModuleElement().setAlignment(JUIAlignment.CENTER);
+			this.getModuleElement().getElement().style.transform = "";
 			
 		});
 		
@@ -87,27 +89,27 @@ class AUISideScroller<T extends JUIContainerable = JUIContainerable> extends JUI
 			JUINamedTransitionFunction.EASE_IN_OUT,
 			(progress: number): void => {
 				
-				this.element.getHTMLElement().style.transform = "translateX(" + progress + "vw)";
+				this.getModuleElement().getElement().style.transform = "translateX(" + progress + "vw)";
 				
 			},
-			[this.element],
+			[this.getModuleElement()],
 			0,
 			100
 		);
 		
 		transition.addPreAction(() => {
 			
-			this.element.setAlignment(JUIAlignment.RIGHT);
-			this.element.addChildren(this.currentElement);
+			this.getModuleElement().setAlignment(JUIAlignment.RIGHT);
+			this.getModuleElement().addBefore(this.currentElement, oldElement);
 			
 		});
 		
 		transition.addPostAction(() => {
 			
-			this.element.setAlignment(JUIAlignment.LEFT);
-			this.element.removeChild(oldElement.getID());
-			this.element.setAlignment(JUIAlignment.CENTER);
-			this.element.getHTMLElement().style.transform = "";
+			this.getModuleElement().setAlignment(JUIAlignment.LEFT);
+			this.getModuleElement().removeChild(oldElement.getID());
+			this.getModuleElement().setAlignment(JUIAlignment.CENTER);
+			this.getModuleElement().getElement().style.transform = "";
 			
 		});
 		
