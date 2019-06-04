@@ -12,7 +12,7 @@ import JUISVGLeaf from "../../jui/elements/leaves/content-leaves/jui-svg-leaf.js
 import JUINotifier from "../../jui/action/jui-notifier.js";
 import JUIKeyboardEvent from "../../jui/action/events/jui-keyboard-event.js";
 import JUIKeyboardEventType from "../../jui/action/events/types/jui-keyboard-event-type.js";
-import JUIRawTextField from "../../jui/elements/leaves/control-leaves/text/jui-raw-text-field.js";
+import { JUIBasicTextField } from "../../jui/elements/leaves/control-leaves/text/field/jui-basic-text-field.js";
 import JUITextualInputType from "../../jui/types/input-types/jui-textual-input-type.js";
 
 /**
@@ -31,17 +31,17 @@ export class AUITextInputModule extends JUIModule<JUIFlowContainer, HTMLElement>
 	 */
 	public readonly TYPE_IDENTITY: string = "aui-text-input-module";
 	
-	private textField: JUIRawTextField;
+	private textField: JUIBasicTextField;
 	
 	private icon: JUISVGLeaf;
 	
 	protected readonly events: AUITextInputModule.AUITextInputModuleEvents;
 	
-	public constructor(hint: string, icon: JUISVGLeaf, isTextHidden?: boolean) {
+	public constructor(hint: string, icon: JUISVGLeaf, type: JUITextualInputType = JUITextualInputType.PLAIN) {
 		
 		super(new JUIFlowContainer(JUIDirection.TO_LEFT, JUIAlignment.CENTER));
 		
-		this.textField = new JUIRawTextField((isTextHidden ? JUITextualInputType.PASSWORD : JUITextualInputType.PLAIN));
+		this.textField = new JUIBasicTextField(type);
 		
 		this.events = new AUITextInputModule.AUITextInputModuleEvents(this);
 		
@@ -72,7 +72,7 @@ export class AUITextInputModule extends JUIModule<JUIFlowContainer, HTMLElement>
 		
 	}
 	
-	public getTextField(): JUIRawTextField {
+	public getTextField(): JUIBasicTextField {
 		
 		return this.textField;
 		

@@ -19,6 +19,7 @@ import AFSession from "../../af-structures/af-session.js";
 import JUILeftRightShakeAnimation from "../../jui/animations/animations/jui-left-right-shake-animation.js";
 import JUIKeyboardEvent from "../../jui/action/events/jui-keyboard-event.js";
 import JUINotificationFilter from "../../jui/action/jui-notification-filter.js";
+import JUITextualInputType from "../../jui/types/input-types/jui-textual-input-type.js";
 
 /**
  * A sign-in modal with an email and password field as well as a submission button.
@@ -67,8 +68,17 @@ class AUISignInModule extends JUIModule<AUISplashContainer> {
 		
 		// Text input box creations.
 		
-		this.emailInput = new AUITextInputModule("Your email address...", new JUISVGLeaf("img/icons/letter.svg"));
-		this.passInput = new AUITextInputModule("Your password...", new JUISVGLeaf("img/icons/lock.svg"), true);
+		this.emailInput = new AUITextInputModule(
+			"Your email address...",
+			new JUISVGLeaf("img/icons/letter.svg"),
+			JUITextualInputType.EMAIL
+		);
+		
+		this.passInput = new AUITextInputModule(
+			"Your password...",
+			new JUISVGLeaf("img/icons/lock.svg"),
+			JUITextualInputType.PASSWORD
+		);
 		
 		// Button creation.
 		
