@@ -98,7 +98,28 @@ class AUIKioskPage extends JUIPage {
 		this.mainFlowContainer.addChildren(this.inquiryTextContainer, this.questionContainer, this.buttonContainer);
 		this.setChild(this.mainFlowContainer);
 		
-		this.inquiryText.getEventManager().ELEMENT_ADDED_TO_PAGE.subscribe(() => this.setInquiryText(initialQuestion.getInquiryText()));
+		this.setInquiryText(initialQuestion.getInquiryText());
+		
+		let hasIntervalStarted: boolean = false;
+		
+		this.inquiryText.getEventManager().ELEMENT_ADDED_TO_PAGE.subscribe(async (): Promise<void> => {
+
+			if (!hasIntervalStarted) {
+				
+				hasIntervalStarted = true;
+				
+				let intervalID: number = setInterval((): void => {
+					
+					this.resizeInquiryText();
+					
+					if (this.isInquiryTextProperlySized()) clearInterval(intervalID);
+					
+				}, 10);
+				
+			}
+
+		});
+		
 		window.addEventListener("resize", () => this.resizeInquiryText());
 		
 	}
